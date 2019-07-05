@@ -123,10 +123,5 @@
       }
     }
   },
-  "defaultProject": "todo-list",
-  "schematics": {
-	  "@schematics/angular:component": {
-		  "styleext": "scss"
-	  }
-  }
+  "defaultProject": "todo-list"
 }
