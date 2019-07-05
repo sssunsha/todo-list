@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AppService } from '../../app.service';
-import { pageState } from '../../app.model';
+import { EPageState } from '../../app.model';
 
 
 @Component({

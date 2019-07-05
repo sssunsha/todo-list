@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { pageState } from './app.model';
+import { EPageState } from './app.model';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class AppService {
-	currentPage: pageState;
+	currentPage: EPageState;
 
   constructor() {
-	  this.currentPage = pageState.today;
+	  this.currentPage = EPageState.today;
    }
 }
