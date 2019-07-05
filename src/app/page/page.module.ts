@@ -9,6 +9,7 @@ import { WorkComponent } from './work/work.component';
 import { LifeComponent } from './life/life.component';
 import { OthersComponent } from './others/others.component';
 import { AngularMaterialModule } from '../core/angular-material.module';
+import { StatisticsComponent } from './statistics/statistics.component';
 
 
 @NgModule({
@@ -16,7 +17,27 @@ import { AngularMaterialModule } from '../core/angular-material.module';
 	CommonModule,
 	AngularMaterialModule
   ],
-  declarations: [InboxComponent, TodayComponent, WeekComponent, MonthComponent, FutureComponent, WorkComponent, LifeComponent, OthersComponent],
-  exports: [InboxComponent, TodayComponent, WeekComponent, MonthComponent, FutureComponent, WorkComponent, LifeComponent, OthersComponent],
+  declarations: [
+	  InboxComponent,
+	  TodayComponent,
+	  WeekComponent,
+	  MonthComponent,
+	  FutureComponent,
+	  WorkComponent,
+	  LifeComponent,
+	  OthersComponent,
+	  StatisticsComponent
+	],
+  exports: [
+	InboxComponent,
+	TodayComponent,
+	WeekComponent,
+	MonthComponent,
+	FutureComponent,
+	WorkComponent,
+	LifeComponent,
+	OthersComponent,
+	StatisticsComponent
+  ]
 })
 export class PageModule { }

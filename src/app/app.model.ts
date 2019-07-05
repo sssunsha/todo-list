@@ -7,4 +7,5 @@ export enum pageState {
 	work = 'work',
 	life = 'life',
 	others = 'others',
+	statistics = 'statistics',
 }

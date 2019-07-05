@@ -61,5 +61,14 @@
 				Others
 			</div>		
 		</mat-list-item>
+		<mat-divider></mat-divider>
+		<mat-list-item>
+			<div [ngClass]="{'opened': service.currentPage === 'statistics'}" (click)="onClick('statistics')">
+				<button mat-icon-button>
+					<mat-icon>grid_on</mat-icon>
+				</button>
+				statistics
+			</div>		
+		</mat-list-item>
 	</mat-list>
 </div>
