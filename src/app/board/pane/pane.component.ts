@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AppService } from '../../app.service';
+import { pageState } from '../../app.model';
+
 
 @Component({
   selector: 'app-pane',
@@ -7,9 +10,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PaneComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+	  private service: AppService
+  ) { }
 
   ngOnInit() {
   }
+
+  onClick(event): void {
+	this.service.currentPage = event;
+}
 
 }

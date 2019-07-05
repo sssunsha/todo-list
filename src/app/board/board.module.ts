@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
 import { PaneComponent } from './pane/pane.component';
 import { AngularMaterialModule } from '../core/angular-material.module';
+import { AppService } from '../app.service';
+
 
 @NgModule({
   imports: [
@@ -17,5 +19,6 @@ import { AngularMaterialModule } from '../core/angular-material.module';
 	  HeaderComponent,
 	  PaneComponent,
 	],
+	providers: [AppService]
 })
 export class BoardModule { }

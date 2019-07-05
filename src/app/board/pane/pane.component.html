@@ -1,1 +1,65 @@
-<label>Pane</label>
+<div class='pane'>
+	<div>
+		<img src="assets/img/logo.png" alt="image" class="logo">
+	</div>
+	<mat-list>
+		<mat-list-item>
+			<div [ngClass]="{'opened': service.currentPage === 'inbox'}" (click)="onClick('inbox')">
+				<button mat-icon-button>
+					<mat-icon>mail</mat-icon>
+				</button>
+				Inbox
+			</div>
+		</mat-list-item>
+		<mat-divider></mat-divider>
+		<mat-list-item>
+			<div [ngClass]="{'opened': service.currentPage === 'today'}" (click)="onClick('today')">
+				<button mat-icon-button>
+					<mat-icon>home</mat-icon>
+				</button>
+				Today
+			</div>
+		</mat-list-item>
+		<mat-list-item>
+			<div [ngClass]="{'opened': service.currentPage === 'week'}" (click)="onClick('week')">
+				<button mat-icon-button>
+					<mat-icon>next_week</mat-icon>
+				</button>
+				This week
+			</div>
+		</mat-list-item>
+		<mat-list-item>
+			<div [ngClass]="{'opened': service.currentPage === 'month'}" (click)="onClick('month')">
+				<button mat-icon-button>
+					<mat-icon>mail</mat-icon>
+				</button>
+				This month
+			</div>	
+		</mat-list-item>
+		<mat-list-item>
+			<div [ngClass]="{'opened': service.currentPage === 'future'}" (click)="onClick('future')">
+				<button mat-icon-button>
+					<mat-icon>cloud_queue</mat-icon>
+				</button>
+				Future
+			</div>
+		</mat-list-item>
+		<mat-divider></mat-divider>
+		<mat-list-item>
+			<div [ngClass]="{'opened': service.currentPage === 'work'}" (click)="onClick('work')">
+				<button mat-icon-button>
+					<mat-icon>keyboard</mat-icon>
+				</button>
+				Work
+			</div>
+		</mat-list-item>
+		<mat-list-item>
+			<div [ngClass]="{'opened': service.currentPage === 'others'}" (click)="onClick('others')">
+				<button mat-icon-button>
+					<mat-icon>timeline</mat-icon>
+				</button>
+				Others
+			</div>		
+		</mat-list-item>
+	</mat-list>
+</div>
