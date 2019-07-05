@@ -6,5 +6,15 @@
 		<mat-toolbar class="app-header">
 			<app-header></app-header>
 		</mat-toolbar>
+		<div class="detail-page">
+			<app-inbox *ngIf="service.currentPage === 'inbox'"></app-inbox>
+			<app-today *ngIf="service.currentPage === 'today'"></app-today>
+			<app-week *ngIf="service.currentPage === 'week'"></app-week>
+			<app-month *ngIf="service.currentPage === 'month'"></app-month>
+			<app-future *ngIf="service.currentPage === 'future'"></app-future>
+			<app-work *ngIf="service.currentPage === 'work'"></app-work>
+			<app-life *ngIf="service.currentPage === 'life'"></app-life>
+			<app-others *ngIf="service.currentPage === 'others'"></app-others>
+		</div>
 	</mat-sidenav-container>
 </div>
