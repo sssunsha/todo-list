@@ -2,10 +2,17 @@
     <div>
         <label>todo List</label>
     </div>
-    <div>
-        <input matInput placeholder="Search" [(ngModel)]="query">
-        <button mat-icon-button (click)="onSearch()">
-            <mat-icon>search</mat-icon>
-        </button>
+    <div class="action-button">
+        <div>
+            <button mat-icon-button (click)="onNewTicket()">
+                <mat-icon>add</mat-icon>
+            </button>
+        </div>
+        <div>
+            <input matInput placeholder="Search" [(ngModel)]="query">
+            <button mat-icon-button (click)="onSearch()">
+                <mat-icon>search</mat-icon>
+            </button>
+        </div>
     </div>
 </div>

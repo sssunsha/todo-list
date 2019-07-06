@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
+import * as fromRoot from '../../reducers/ticket-reducer';
+import * as TicketActions from '../../actions/ticket-action';
 
 @Component({
   selector: 'app-header',
@@ -15,6 +17,10 @@ export class HeaderComponent implements OnInit {
 
   onSearch() {
     
+  }
+
+  onNewTicket() {
+    this.store.dispatch(new TicketActions.TicketCreateAction());
   }
 
 }

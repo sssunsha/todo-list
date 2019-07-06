@@ -14,7 +14,6 @@ export enum ETicketActionType {
 
 export class TicketCreateAction implements Action {
     readonly type = ETicketActionType.create;
-    constructor(public payload: Ticket) { }
 }
 
 export class TicketCreatedAction implements Action {
