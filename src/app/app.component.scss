@@ -1,21 +1,20 @@
 @import '../resource/base.scss';
-
 .app-container {
-	position: absolute;
-	top: 0;
-	bottom: 0;
-	left: 0;
-	right: 0;
-	background: #eee;
-
-	.app-pane {
-		min-width: 100px;
-		background-color: $black-background;
-	}
-
-	.app-header {
-		background-color: $black-background;
-	}
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: #eee;
+    .app-pane {
+        min-width: 100px;
+        background-color: $black-background;
+    }
+    .app-header {
+        background-color: $black-background;
+        width: 100%;
+        app-header {
+            width: 100%;
+        }
+    }
 }
-
-  

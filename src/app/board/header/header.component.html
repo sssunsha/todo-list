@@ -1,1 +1,11 @@
-<label>todo List</label>
+<div class="header">
+    <div>
+        <label>todo List</label>
+    </div>
+    <div>
+        <input matInput placeholder="Search" [(ngModel)]="query">
+        <button mat-icon-button (click)="onSearch()">
+            <mat-icon>search</mat-icon>
+        </button>
+    </div>
+</div>
