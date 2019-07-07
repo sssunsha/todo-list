@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../reducers/ticket';
 import * as TicketActions from '../../actions/ticket';
+import { Ticket } from '../../app.model';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +11,7 @@ import * as TicketActions from '../../actions/ticket';
 })
 export class HeaderComponent implements OnInit {
   query: string;
-  constructor(private store: Store<fromRoot.State>) { }
+  constructor(private store: Store<Ticket>) { }
 
   ngOnInit() {
   }

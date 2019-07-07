@@ -11,7 +11,7 @@ export enum EPageState {
 }
 
 export enum EPriority {
-	hight = 'high',
+	high = 'high',
 	medium = 'medium',
 	low = 'low',
 	null = 'null',
@@ -29,9 +29,10 @@ export class Ticket {
 	summary: string;
 	description: string;
 	priority: EPriority;
-	createdAt: Date;
-	modifiedAt: Date;
+	createdAt: string;
+	modifiedAt: string;
 	ticketType: ETicketType;
+	inPages: Array<EPageState>;
 	constructor(data: Partial<Ticket>) {
 		this.id = data.id;
 		this.summary = data.summary;
@@ -40,6 +41,7 @@ export class Ticket {
 		this.createdAt = data.createdAt;
 		this.modifiedAt = data.modifiedAt;
 		this.ticketType = data.ticketType;
+		this.inPages = data.inPages;
 	}
 }
 
@@ -62,4 +64,15 @@ export class Reminder extends Ticket {
 		super(data);
 		this.ticketType = ETicketType.reminder;
 	}
+}
+
+export const defaultTicket:Ticket = {
+	id: '',
+	summary: '',
+	description: '',
+	priority: EPriority.high,
+	createdAt: '',
+	modifiedAt: '',
+	ticketType: ETicketType.task,
+	inPages: [],
 }

@@ -1,19 +1,22 @@
-import { Ticket, EPageState } from "../app.model";
+import { Ticket, EPageState, defaultTicket } from "../app.model";
 import * as TicketActions from '../actions/ticket';
-export interface State {
-    ticket: Ticket;
-    state: EPageState;
-}
-
-export const initTicketState: State = {
-    ticket: null,
-    state: null,
-};
+import {
+    generateCreatedAt,
+    generateMd5Hash,
+} from '../utils';
 
 
-export function reducer(state = initTicketState, action: TicketActions.Actions ): State {
+
+export function reducer(ticket = defaultTicket, action: TicketActions.Actions ): Ticket {
     switch(action.type) {
         case TicketActions.ETicketActionType.create:
-        return Object.assign({}, initTicketState);
+        return handleTicketCreateAction(ticket, action);
     }
+}
+
+function handleTicketCreateAction(ticket: Ticket, action: TicketActions.Actions): Ticket {
+    let newTicket = Object.assign({}, ticket);
+        newTicket.createdAt = generateCreatedAt();
+        newTicket.id = generateMd5Hash(newTicket.createdAt);
+        return newTicket;
 }
