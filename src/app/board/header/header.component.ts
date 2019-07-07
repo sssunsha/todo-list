@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import * as fromRoot from '../../reducers/ticket-reducer';
-import * as TicketActions from '../../actions/ticket-action';
+import * as fromRoot from '../../reducers/ticket';
+import * as TicketActions from '../../actions/ticket';
 
 @Component({
   selector: 'app-header',

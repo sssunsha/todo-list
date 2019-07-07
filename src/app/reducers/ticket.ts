@@ -1,5 +1,5 @@
 import { Ticket, EPageState } from "../app.model";
-import * as TicketActions from '../actions/ticket-action';
+import * as TicketActions from '../actions/ticket';
 export interface State {
     ticket: Ticket;
     state: EPageState;

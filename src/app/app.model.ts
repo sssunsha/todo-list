@@ -25,6 +25,7 @@ export enum ETicketType {
 
 
 export class Ticket {
+	id?: string;
 	summary: string;
 	description: string;
 	priority: EPriority;
@@ -32,6 +33,7 @@ export class Ticket {
 	modifiedAt: Date;
 	ticketType: ETicketType;
 	constructor(data: Partial<Ticket>) {
+		this.id = data.id;
 		this.summary = data.summary;
 		this.description = data.description;
 		this.priority = data.priority;
