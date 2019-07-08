@@ -1,0 +1,27 @@
+<div>
+	<div>
+		<mat-icon *ngIf="effort > 0">star</mat-icon>
+		<mat-icon *ngIf="effort == 0">star_half</mat-icon>
+		<mat-icon *ngIf="!effort">star_border</mat-icon>
+	</div>
+	<div>
+		<mat-icon *ngIf="effort > 2">star</mat-icon>
+		<mat-icon *ngIf="effort == 2">star_half</mat-icon>
+		<mat-icon *ngIf="effort == 1">star_border</mat-icon>
+	</div>
+	<div>
+		<mat-icon *ngIf="effort > 4">star</mat-icon>
+		<mat-icon *ngIf="effort == 4">star_half</mat-icon>
+		<mat-icon *ngIf="effort == 3">star_border</mat-icon>
+	</div>
+	<div>
+		<mat-icon *ngIf="effort > 6">star</mat-icon>
+		<mat-icon *ngIf="effort == 6">star_half</mat-icon>
+		<mat-icon *ngIf="effort == 5">star_border</mat-icon>
+	</div>
+	<div>
+		<mat-icon *ngIf="effort > 8">star</mat-icon>
+		<mat-icon *ngIf="effort == 8">star_half</mat-icon>
+		<mat-icon *ngIf="effort == 7">star_border</mat-icon>
+	</div>
+</div>

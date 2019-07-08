@@ -24,14 +24,16 @@ export enum ETicketType {
 }
 
 export enum ETicketEffort {
-	half_hour = 'half_hour',
-	one_hour = 'one_hour',
-	half_day = 'half_day',
-	one_day = 'one_day',
-	half_week = 'half_week',
-	one_week = 'one_week',
-	half_month = 'half_month',
-	one_month = 'one_month',
+	half_hour = 0,
+	one_hour = 1,
+	half_day = 2,
+	one_day = 3,
+	half_week = 4,
+	one_week = 5,
+	half_month = 6,
+	one_month = 7,
+	three_month = 8,
+	half_year = 9,
 }
 
 
