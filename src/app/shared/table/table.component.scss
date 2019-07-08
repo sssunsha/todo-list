@@ -1,74 +1,72 @@
 @import '../../../resource/base.scss';
-
 table {
-	width: 100%;
-	th {
-		font-size: 16px;
-		font-weight: bold;
-		padding: 0 20px;
-	}
-	.mat-column-ticketType {
-		width: 10px;
-		padding-left: 10px;
-		padding-right: 0;
-	}
-	.mat-column-summary, .mat-column-description {
-		width: 35%;
-	}
+    width: 100%;
+    th {
+        font-size: 16px;
+        font-weight: bold;
+        padding: 0 20px;
+    }
+    .mat-column-ticketType {
+        width: 10px;
+        padding-left: 10px;
+        padding-right: 0;
+    }
+    .mat-column-summary,
+    .mat-column-description {
+        width: 35%;
+    }
+    td {
+        padding: 10px 20px;
+    }
+}
 
-	td {
-		padding: 10px 20px;
-	}
-  }
-  
-  tr.example-detail-row {
-	height: 0;
-  }
-  
-  tr.example-element-row:not(.example-expanded-row):hover {
-	background: #777;
-  }
-  
-  tr.example-element-row:not(.example-expanded-row):active {
-	background: #efefef;
-  }
-  
-  .example-element-row td {
-	border-bottom-width: 0;
-  }
-  
-  .example-element-detail {
-	overflow: hidden;
-	display: flex;
-  }
-  
-  .example-element-diagram {
-	min-width: 80px;
-	border: 2px solid black;
-	padding: 8px;
-	font-weight: lighter;
-	margin: 8px 0;
-	height: 104px;
-  }
-  
-  .example-element-symbol {
-	font-weight: bold;
-	font-size: 40px;
-	line-height: normal;
-  }
-  
-  .example-element-description {
-	padding: 16px;
-  }
-  
-  .example-element-description-attribution {
-	opacity: 0.5;
-  }
+tr.example-detail-row {
+    height: 0;
+}
 
-  .high {
-	  background-color: $high-light;
-  }
+tr.example-element-row:not(.example-expanded-row):hover {
+    background: #777;
+}
 
-  .low {
-	  background-color: $low-light;
-  }
+tr.example-element-row:not(.example-expanded-row):active {
+    background: #efefef;
+}
+
+.example-element-row td {
+    border-bottom-width: 0;
+}
+
+.example-element-detail {
+    overflow: hidden;
+    display: flex;
+}
+
+.example-element-diagram {
+    width: 400px;
+    border: 2px solid black;
+    padding: 8px;
+    font-weight: lighter;
+    margin: 8px 0;
+    height: 104px;
+    display: flex;
+    flex-direction: column;
+    .expand-text {
+        color: $high-light;
+    }
+}
+
+.example-element-description {
+    padding: 16px;
+}
+
+.example-element-description-attribution {
+    opacity: 0.5;
+}
+
+.high {
+    background-color: $high-light;
+}
+
+.low {
+    background-color: $low-light;
+}
