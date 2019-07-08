@@ -1,9 +1,14 @@
 <table mat-table
        [dataSource]="dataSource" multiTemplateDataRows
-       class="mat-elevation-z8">
+	   class="mat-elevation-z8">
   <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
     <th mat-header-cell *matHeaderCellDef> {{column}} </th>
-    <td mat-cell *matCellDef="let element" [ngClass]="{'high': element.priority === 'high', 'low': element.priority === 'low'}"> {{element[column]}} </td>
+	<td mat-cell *matCellDef="let element" [ngClass]="{'high': element.priority === 'high', 'low': element.priority === 'low'}">
+		<mat-icon *ngIf="column === 'ticketType' && element.ticketType === 'reminder'">access_alarms</mat-icon>
+		<mat-icon *ngIf="column === 'ticketType' && element.ticketType === 'note'">comment</mat-icon>
+		<mat-icon *ngIf="column === 'ticketType' && element.ticketType === 'task'">work</mat-icon>
+		<span *ngIf="column !== 'ticketType'">{{element[column]}}</span>
+	</td>
   </ng-container>
 
   <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
