@@ -1,6 +1,7 @@
 export const LISTCONFIG = [
-	'summary',
-	'priority',
 	'ticketType',
+	'summary',
+	'description',
+	'priority',
 	'createdAt',
 ];

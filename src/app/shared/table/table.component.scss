@@ -5,6 +5,19 @@ table {
 	th {
 		font-size: 16px;
 		font-weight: bold;
+		padding: 0 20px;
+	}
+	.mat-column-ticketType {
+		width: 10px;
+		padding-left: 10px;
+		padding-right: 0;
+	}
+	.mat-column-summary, .mat-column-description {
+		width: 35%;
+	}
+
+	td {
+		padding: 10px 20px;
 	}
   }
   

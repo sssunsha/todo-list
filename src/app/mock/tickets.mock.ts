@@ -26,8 +26,16 @@ export const mockTickets: Array<Ticket> =
 		},
 		{
 			id: generateMd5Hash('3'),
-			summary: 'ticket 3',
-			description: 'ticket 3 description',
+			summary: 'ticket 3, this is a test ticket with a very long long text,  I want to use this \
+			long long text to test the table support for long long text, so let me have a look how is\
+			the performance, hey hey. ticket 3, this is a test ticket with a very long long text,  I want to use this \
+			long long text to test the table support for long long text, so let me have a look how is\
+			the performance, hey hey.',
+			description: 'ticket 3, this is a test ticket with a very long long text,  I want to use this \
+			long long text to test the table support for long long text, so let me have a look how is\
+			the performance, hey hey. ticket 3, this is a test ticket with a very long long text,  I want to use this \
+			long long text to test the table support for long long text, so let me have a look how is\
+			the performance, hey hey.',
 			priority: EPriority.low,
 			createdAt: generateCreatedAt(),
 			modifiedAt: null,
