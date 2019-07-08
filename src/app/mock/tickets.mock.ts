@@ -25,7 +25,7 @@ export const mockTickets: Array<Ticket> =
 			modifiedAt: null,
 			ticketType: ETicketType.note,
 			// effort: ETicketEffort.half_hour,
-			progress: ETicktProgress.not_start,
+			// progress: ETicktProgress.not_start,
 			inPages: [EPageState.inbox, EPageState.future],
 		},
 		{
