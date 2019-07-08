@@ -12,7 +12,6 @@ import { TableComponent } from './shared/table/table.component';
 @NgModule({
   declarations: [
 	AppComponent,
-	TableComponent,
   ],
   imports: [
 	BrowserModule,
@@ -22,6 +21,7 @@ import { TableComponent } from './shared/table/table.component';
 	PageModule,
   ],
   providers: [AppService],
+  exports: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

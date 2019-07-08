@@ -7,6 +7,8 @@ import { AppService } from '../app.service';
 import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
 import { reducer } from '../reducers';
+import { TableComponent } from '../shared/table/table.component';
+import { SharedComponentModule } from '../shared/shared.module';
 
 
 
@@ -15,12 +17,13 @@ import { reducer } from '../reducers';
 	CommonModule,
 	AngularMaterialModule,
 	FormsModule,
+	SharedComponentModule,
 	// TODO: import StoreModule
 	// StoreModule.provideStore(reducer)
   ],
   declarations: [
 	  HeaderComponent,
-	  PaneComponent
+	  PaneComponent,
 	],
   exports: [
 	  HeaderComponent,

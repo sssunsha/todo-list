@@ -10,12 +10,16 @@ import { LifeComponent } from './life/life.component';
 import { OthersComponent } from './others/others.component';
 import { AngularMaterialModule } from '../core/angular-material.module';
 import { StatisticsComponent } from './statistics/statistics.component';
+import { FormsModule } from '@angular/forms';
+import { SharedComponentModule } from '../shared/shared.module';
 
 
 @NgModule({
   imports: [
 	CommonModule,
-	AngularMaterialModule
+	AngularMaterialModule,
+	FormsModule,
+	SharedComponentModule,
   ],
   declarations: [
 	  InboxComponent,
