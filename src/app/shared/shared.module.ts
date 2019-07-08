@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { TableComponent } from './table/table.component';
 import { StarComponent } from './star/star.component';
+import { ProgressComponent } from './progress/progress.component';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { StarComponent } from './star/star.component';
 	declarations: [
 		TableComponent,
 		StarComponent,
+		ProgressComponent,
 	],
 	exports: [
 		TableComponent,

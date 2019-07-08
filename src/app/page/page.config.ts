@@ -4,4 +4,5 @@ export const LISTCONFIG = [
 	'description',
 	'createdAt',
 	'effort',
+	'progress'
 ];

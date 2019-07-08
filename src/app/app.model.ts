@@ -36,6 +36,14 @@ export enum ETicketEffort {
 	half_year = 9,
 }
 
+export enum ETicktProgress {
+	not_start = 0,
+	just_begin = 1,
+	half_done = 2,
+	nearly_done = 3,
+	finished = 4,
+}
+
 
 export class Ticket {
 	id?: string;
@@ -46,6 +54,7 @@ export class Ticket {
 	modifiedAt: string;
 	ticketType: ETicketType;
 	effort?: ETicketEffort;
+	progress?: ETicktProgress;
 	inPages: Array<EPageState>;
 	constructor(data: Partial<Ticket>) {
 		this.id = data.id;

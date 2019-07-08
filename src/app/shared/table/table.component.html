@@ -10,8 +10,9 @@
 		<mat-icon *ngIf="column === 'ticketType' && element.ticketType === 'reminder'">access_alarms</mat-icon>
 		<mat-icon *ngIf="column === 'ticketType' && element.ticketType === 'note'">comment</mat-icon>
 		<mat-icon *ngIf="column === 'ticketType' && element.ticketType === 'task'">work</mat-icon>
-		<span *ngIf="column !== 'ticketType' && column !== 'effort'">{{element[column]}}</span>
+		<span *ngIf="column !== 'ticketType' && column !== 'effort' && column !== 'progress'">{{element[column]}}</span>
 		<app-star *ngIf="column === 'effort'" [effort]="element[column]"></app-star>
+		<app-progress *ngIf="column === 'progress'"></app-progress>
 	</td>
   </ng-container>
 
