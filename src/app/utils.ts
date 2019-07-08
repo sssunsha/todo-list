@@ -2,7 +2,7 @@ import {Md5} from "ts-md5";
 import { EPageState, Ticket } from './app.model';
 
 export function generateMd5Hash(data: string): string {
-    return Md5.hashStr(data).toString();
+    return Md5.hashStr(data+Math.random()).toString();
 }
 
 export function generateCreatedAt(): string {
