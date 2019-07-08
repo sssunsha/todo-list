@@ -7,10 +7,12 @@ import { BoardModule } from './board/board.module';
 import { AngularMaterialModule } from './core/angular-material.module';
 import { PageModule } from './page/page.module';
 import { AppService } from './app.service';
+import { TableComponent } from './shared/table/table.component';
 
 @NgModule({
   declarations: [
 	AppComponent,
+	TableComponent,
   ],
   imports: [
 	BrowserModule,
