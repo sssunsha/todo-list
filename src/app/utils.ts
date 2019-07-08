@@ -1,4 +1,5 @@
 import {Md5} from "ts-md5";
+import { EPageState, Ticket } from './app.model';
 
 export function generateMd5Hash(data: string): string {
     return Md5.hashStr(data).toString();
@@ -21,4 +22,8 @@ export function updateArrayData(array: Array<any>, data: any, isAdd: boolean): v
         })
     }
     array =  Array.from(new Set(array));
+}
+
+export function filterTicketsForPage(ticketArray: Array<Ticket>, pagestate: EPageState): Array<Ticket> {
+	return ticketArray.filter(t => t.inPages.includes(pagestate));
 }

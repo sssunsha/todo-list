@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 
 @Component({
@@ -14,12 +14,15 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
   ]
 })
 export class TableComponent implements OnInit {
-	dataSource = ELEMENT_DATA;
-	columnsToDisplay = ['name', 'weight', 'symbol', 'position'];
-	expandedElement: PeriodicElement | null;
+	@Input()
+	dataSource: Array<any>;
+	@Input()
+	columnsToDisplay: Array<string>;
+	expandedElement: Array<any>;
   constructor() { }
 
   ngOnInit() {
+	  this.expandedElement = this.dataSource;
   }
 }
 
