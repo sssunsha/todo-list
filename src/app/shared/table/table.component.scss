@@ -1,5 +1,11 @@
+@import '../../../resource/base.scss';
+
 table {
 	width: 100%;
+	th {
+		font-size: 16px;
+		font-weight: bold;
+	}
   }
   
   tr.example-detail-row {
@@ -44,4 +50,12 @@ table {
   
   .example-element-description-attribution {
 	opacity: 0.5;
+  }
+
+  .high {
+	  background-color: $high-light;
+  }
+
+  .low {
+	  background-color: $low-light;
   }
