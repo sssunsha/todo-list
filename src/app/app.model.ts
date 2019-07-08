@@ -23,6 +23,17 @@ export enum ETicketType {
 	reminder = 'reminder',
 }
 
+export enum ETicketEffort {
+	half_hour = 'half_hour',
+	one_hour = 'one_hour',
+	half_day = 'half_day',
+	one_day = 'one_day',
+	half_week = 'half_week',
+	one_week = 'one_week',
+	half_month = 'half_month',
+	one_month = 'one_month',
+}
+
 
 export class Ticket {
 	id?: string;
@@ -32,6 +43,7 @@ export class Ticket {
 	createdAt: string;
 	modifiedAt: string;
 	ticketType: ETicketType;
+	effort?: ETicketEffort;
 	inPages: Array<EPageState>;
 	constructor(data: Partial<Ticket>) {
 		this.id = data.id;
@@ -41,6 +53,7 @@ export class Ticket {
 		this.createdAt = data.createdAt;
 		this.modifiedAt = data.modifiedAt;
 		this.ticketType = data.ticketType;
+		this.effort = data.effort;
 		this.inPages = data.inPages;
 	}
 }

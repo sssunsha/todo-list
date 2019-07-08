@@ -1,4 +1,4 @@
-import { Ticket, EPriority, ETicketType, EPageState } from '../app.model';
+import { Ticket, EPriority, ETicketType, EPageState, ETicketEffort } from '../app.model';
 import { generateMd5Hash, generateCreatedAt } from '../utils';
 
 
@@ -12,6 +12,7 @@ export const mockTickets: Array<Ticket> =
 			createdAt: generateCreatedAt(),
 			modifiedAt: null,
 			ticketType: ETicketType.task,
+			effort: ETicketEffort.half_week,
 			inPages: [EPageState.inbox],
 		},
 		{
@@ -22,6 +23,7 @@ export const mockTickets: Array<Ticket> =
 			createdAt: generateCreatedAt(),
 			modifiedAt: null,
 			ticketType: ETicketType.note,
+			effort: ETicketEffort.half_hour,
 			inPages: [EPageState.inbox, EPageState.future],
 		},
 		{
@@ -40,6 +42,7 @@ export const mockTickets: Array<Ticket> =
 			createdAt: generateCreatedAt(),
 			modifiedAt: null,
 			ticketType: ETicketType.reminder,
+			effort: ETicketEffort.one_month,
 			inPages: [EPageState.inbox, EPageState.today],
 		}
 		
