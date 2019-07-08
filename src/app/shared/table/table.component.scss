@@ -65,6 +65,11 @@ tr.example-element-row:not(.example-expanded-row):active {
 
 .example-element-description {
     padding: 16px;
+    display: flex;
+    flex-direction: column;
+    div {
+        padding: 3px 0;
+    }
 }
 
 .example-element-description-attribution {

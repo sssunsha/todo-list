@@ -56,6 +56,7 @@ export class Ticket {
 	effort?: ETicketEffort;
 	progress?: ETicktProgress;
 	inPages: Array<EPageState>;
+	records?: Array<string>;
 	constructor(data: Partial<Ticket>) {
 		this.id = data.id;
 		this.summary = data.summary;
@@ -66,6 +67,7 @@ export class Ticket {
 		this.ticketType = data.ticketType;
 		this.effort = data.effort;
 		this.inPages = data.inPages;
+		this.records = data.records;
 	}
 }
 

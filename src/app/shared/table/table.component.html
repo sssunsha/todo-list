@@ -24,8 +24,10 @@
                     <div><b>In pages: </b><label class="expand-text">{{element.inPages.join(' ; ')}}</label></div>
                 </div>
                 <div class="example-element-description">
-                    {{element.description}}
-                    <span class="example-element-description-attribution"></span>
+                    <div *ngFor="let record of element.records">
+                        <div>{{record}}</div>
+                        <span class="example-element-description-attribution"></span>
+                    </div>
                 </div>
             </div>
         </td>

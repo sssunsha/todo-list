@@ -27,6 +27,7 @@ export const mockTickets: Array<Ticket> =
 			// effort: ETicketEffort.half_hour,
 			// progress: ETicktProgress.not_start,
 			inPages: [EPageState.inbox, EPageState.future],
+			records: ['this the record for the first day I found', 'this the record for the second day I found', 'this the record for the thrid day I found']
 		},
 		{
 			id: generateMd5Hash('3'),
@@ -47,6 +48,7 @@ export const mockTickets: Array<Ticket> =
 			effort: ETicketEffort.one_month,
 			progress: ETicktProgress.nearly_done,
 			inPages: [EPageState.inbox, EPageState.today],
+			records: ['records 1 ..', 'records 2 ...', 'records 3 ...'],
 		}
 		
 	];
