@@ -6,6 +6,8 @@ import { AngularMaterialModule } from '../core/angular-material.module';
 import { AppService } from '../app.service';
 import { FormsModule } from '@angular/forms';
 import { StoreModule } from '@ngrx/store';
+import { reducer } from '../reducers';
+
 
 
 @NgModule({
@@ -13,7 +15,8 @@ import { StoreModule } from '@ngrx/store';
 	CommonModule,
 	AngularMaterialModule,
 	FormsModule,
-	StoreModule
+	// TODO: import StoreModule
+	// StoreModule.provideStore(reducer)
   ],
   declarations: [
 	  HeaderComponent,

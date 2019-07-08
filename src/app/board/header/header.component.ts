@@ -11,7 +11,7 @@ import { Ticket } from '../../app.model';
 })
 export class HeaderComponent implements OnInit {
   query: string;
-  constructor(private store: Store<Ticket>) { }
+//   constructor(private store: Store<Ticket>) { }
 
   ngOnInit() {
   }
@@ -21,7 +21,8 @@ export class HeaderComponent implements OnInit {
   }
 
   onNewTicket() {
-    this.store.dispatch(new TicketActions.TicketCreateAction());
+	  // TODO: dispatch to store for testing
+    // this.store.dispatch(new TicketActions.TicketCreateAction());
   }
 
 }
