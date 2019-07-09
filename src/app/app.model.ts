@@ -10,6 +10,22 @@ export enum EPageState {
 	statistics = 'statistics',
 }
 
+export const PAGELIST = [
+	EPageState.inbox,
+	EPageState.today,
+	EPageState.this_week,
+	EPageState.this_month,
+	EPageState.future,
+	EPageState.work,
+	EPageState.life,
+	EPageState.others,
+]
+
+export interface ISelectConfig {
+	value: any;
+	label: string;
+}
+
 export enum EPriority {
 	high = 'high',
 	medium = 'medium',
@@ -17,11 +33,24 @@ export enum EPriority {
 	null = 'null',
 }
 
+export const TICKETPRIORITYSELECTCONFIG: Array<ISelectConfig> = [
+	{label: 'High', value: EPriority.high},
+	{label:'Medium', value: EPriority.medium},
+	{label: 'Low', value: EPriority.low},
+	{label:'None', value: EPriority.null},
+];
+
 export enum ETicketType {
 	task = 'task',
 	note = 'note',
 	reminder = 'reminder',
 }
+
+export const TICKETTYPESELECTCONFIG: Array<ISelectConfig> = [
+	{label: 'Task', value: ETicketType.task},
+	{label: 'Note', value: ETicketType.note},
+	{label: 'Reminder', value: ETicketType.reminder},
+];
 
 export enum ETicketEffort {
 	half_hour = 0,
@@ -36,6 +65,19 @@ export enum ETicketEffort {
 	half_year = 9,
 }
 
+export const TICKETEFFORTSELECTCONFIG: Array<ISelectConfig> = [
+	{label: '0.5h', value: ETicketEffort.half_hour},
+	{label: '1h', value: ETicketEffort.one_hour},
+	{label: '0.5d', value: ETicketEffort.half_day},
+	{label: '1d', value: ETicketEffort.one_day},
+	{label: '0.5 week', value: ETicketEffort.half_week},
+	{label: '1 week', value: ETicketEffort.one_week},
+	{label: '0.5 month', value: ETicketEffort.half_month},
+	{label: '1 month', value: ETicketEffort.one_month},
+	{label: '3 months', value: ETicketEffort.three_month},
+	{label: '0.5 year', value: ETicketEffort.half_year},
+];
+
 export enum ETicktProgress {
 	not_start = 0,
 	just_begin = 1,
@@ -44,6 +86,13 @@ export enum ETicktProgress {
 	finished = 4,
 }
 
+export const TICKETPROGRESSSELECTCONFIG: Array<ISelectConfig> = [
+	{label: 'Not start', value: ETicktProgress.not_start},
+	{label: 'Just begin', value: ETicktProgress.just_begin},
+	{label: 'Half done', value: ETicktProgress.half_done},
+	{label: 'Nearly done', value: ETicktProgress.nearly_done},
+	{label: 'Finished', value: ETicktProgress.finished},
+];
 
 export class Ticket {
 	id?: string;

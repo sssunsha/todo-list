@@ -3,6 +3,14 @@ import { Ticket } from 'src/app/app.model';
 import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
 import {Inject} from '@angular/core';
 import {MAT_BOTTOM_SHEET_DATA} from '@angular/material';
+import {
+  TICKETPRIORITYSELECTCONFIG,
+  TICKETTYPESELECTCONFIG,
+  TICKETEFFORTSELECTCONFIG,
+  TICKETPROGRESSSELECTCONFIG,
+  PAGELIST
+} from  'src/app/app.model';
+import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-bottom-sheet',
@@ -10,6 +18,11 @@ import {MAT_BOTTOM_SHEET_DATA} from '@angular/material';
   styleUrls: ['./bottom-sheet.component.scss']
 })
 export class BottomSheetComponent implements OnInit {
+  _TICKETPRIORITYSELECTCONFIG = TICKETPRIORITYSELECTCONFIG;
+  _TICKETTYPESELECTCONFIG = TICKETTYPESELECTCONFIG;
+  _TICKETEFFORTSELECTCONFIG = TICKETEFFORTSELECTCONFIG;
+  _TICKETPROGRESSSELECTCONFIG = TICKETPROGRESSSELECTCONFIG;
+  _PAGELIST = PAGELIST;
 
   constructor(
 	  private _bottomSheetRef: MatBottomSheetRef<BottomSheetComponent>,
