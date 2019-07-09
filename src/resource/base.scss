@@ -4,3 +4,21 @@ $high-light: #E27D60;
 $low-light: #379683;
 
 $default-font-family: Arial, Helvetica, sans-serif;
+
+.task-icon {
+	color: lightblue;
+}
+.note-icon {
+	color: darkgoldenrod;
+}
+.reminder-icon {
+	color: darkorchid;
+}
+
+.high {
+    background-color: $high-light;
+}
+
+.low {
+    background-color: $low-light;
+}
