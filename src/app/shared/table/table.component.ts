@@ -1,5 +1,8 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
+import { Ticket } from '../../app.model';
+import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
+import {BottomSheetComponent} from '../bottom-sheet/bottom-sheet.component';
 
 @Component({
   selector: 'app-table',
@@ -19,9 +22,15 @@ export class TableComponent implements OnInit {
 	@Input()
 	columnsToDisplay: Array<string>;
 	expandedElement: Array<any>;
-  constructor() { }
+  constructor(
+	private _bottomSheet: MatBottomSheet
+  ) { }
 
   ngOnInit() {
 	  this.expandedElement = this.dataSource;
+  }
+
+  openEditSheet(ticket: Ticket) {
+	  this._bottomSheet.open(BottomSheetComponent, {data: ticket, panelClass: 'bottom-sheet-custom'});
   }
 }

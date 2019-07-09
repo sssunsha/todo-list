@@ -1,0 +1,32 @@
+<div class='bottom-sheet'>
+	<div>
+		<label>Summary:</label>
+		<input type="text" matInput placeholder="summary" [(ngModel)]="ticket.summary">
+	</div>
+	<div>
+		<label>Description</label>
+		<textarea matInput placeholder="description" [(ngModel)]="ticket.description"></textarea>
+	</div>
+	<div>
+		<label>Priority:</label>
+	</div>
+	<div>
+		<label>Type:</label>
+	</div>
+	<div>
+		<label>Effort:</label>
+	</div>
+	<div>
+		<label>Progress:</label>
+	</div>
+	<div>
+		<label>Belongs to:</label>
+	</div>
+	<div>
+		<label>Records:</label>
+	</div>
+	<div class="bottom-sheet-actions">
+		<button mat-flat-button (click)="onCancel()">Cancel</button>
+		<button mat-stroked-button color="primary" (click)="onSave">Save</button>
+	</div>
+</div>
