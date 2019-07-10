@@ -40,6 +40,14 @@ export class BottomSheetComponent implements OnInit {
 	  this.close();
   }
 
+  onAddRecord(): void {
+    this.ticket.records.push('');
+  }
+
+  onRemoveRecord(): void {
+    this.ticket.records.pop();
+  }
+
   private close(): void {
 	this._bottomSheetRef.dismiss();
   }
