@@ -7,6 +7,7 @@ import { StarComponent } from './star/star.component';
 import { ProgressComponent } from './progress/progress.component';
 import { CardComponent } from './card/card.component';
 import { BottomSheetComponent } from './bottom-sheet/bottom-sheet.component';
+import { AlertComponent } from './alert/alert.component';
 
 
 @NgModule({
@@ -22,13 +23,15 @@ import { BottomSheetComponent } from './bottom-sheet/bottom-sheet.component';
 		ProgressComponent,
 		CardComponent,
 		BottomSheetComponent,
+		AlertComponent,
 	],
 	exports: [
 		TableComponent,
 		StarComponent,
 		CardComponent,
 		BottomSheetComponent,
+		AlertComponent,
 	],
-	entryComponents: [BottomSheetComponent],
+	entryComponents: [BottomSheetComponent, AlertComponent],
 })
 export class SharedComponentModule {}

@@ -1,5 +1,7 @@
 import {Md5} from "ts-md5";
-import { EPageState, Ticket } from './app.model';
+import { EPageState, Ticket, IAlertConfig } from './app.model';
+import { AlertComponent } from './shared/alert/alert.component';
+import {MatDialog} from '@angular/material/dialog';
 
 export function generateMd5Hash(data: string): string {
     return Md5.hashStr(data+Math.random()).toString();
@@ -26,4 +28,14 @@ export function updateArrayData(array: Array<any>, data: any, isAdd: boolean): v
 
 export function filterTicketsForPage(ticketArray: Array<Ticket>, pagestate: EPageState): Array<Ticket> {
 	return ticketArray.filter(t => t.inPages.includes(pagestate));
+}
+
+export function createAlert(dialog: MatDialog, data: IAlertConfig): void {
+	dialog.open(AlertComponent, {
+		minWidth: '400px',
+		maxWidth: '600px',
+		panelClass: 'alert-custom',
+		data: data
+	  });
+
 }

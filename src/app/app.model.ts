@@ -26,6 +26,11 @@ export interface ISelectConfig {
 	label: string;
 }
 
+export interface IAlertConfig {
+	title: string;
+	message?: string;
+}
+
 export enum EPriority {
 	high = 'high',
 	medium = 'medium',
