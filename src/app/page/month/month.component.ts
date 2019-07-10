@@ -3,6 +3,7 @@ import { Ticket, EPageState } from '../../app.model';
 import { mockTickets } from '../../mock/tickets.mock';
 import { LISTCONFIG } from '../page.config';
 import { filterTicketsForPage } from '../../utils'
+import { AppService } from '../../app.service';
 
 @Component({
   selector: 'app-month',
@@ -12,10 +13,10 @@ import { filterTicketsForPage } from '../../utils'
 export class MonthComponent implements OnInit {
 	ticketList: Array<Ticket>;
 	listConfig: Array<string> = LISTCONFIG;
-  constructor() { }
+  constructor(private service: AppService) { }
 
   ngOnInit() {
-	this.ticketList = filterTicketsForPage(mockTickets, EPageState.this_month);
+	this.ticketList = filterTicketsForPage(this.service.tickets, EPageState.this_month);
   }
 
 }

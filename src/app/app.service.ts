@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { EPageState, Ticket } from './app.model';
+import { mockTickets } from './mock/tickets.mock';
 
 
 @Injectable({
@@ -13,5 +14,6 @@ export class AppService {
 
   constructor() {
 	  this.currentPage = EPageState.today;
+	  this.tickets = mockTickets;
    }
 }

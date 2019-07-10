@@ -1,8 +1,14 @@
 <div class="header">
     <div>
-        <label>todo List</label>
-    </div>
+        <label>Todo List</label>
+	</div>
     <div class="action-button">
+		<div class='header-notification'>
+			<span matBadgeOverlap="false"
+				[matBadge]="getInboxTicketSize()" (click)="goto('inbox')">Inbox</span>
+			<span matBadgePosition="after" matBadgeColor="warn"
+			(click)="goto('today')" [matBadge]="getTodayTicketSize()">Today</span>
+		</div>
         <div>
             <button mat-icon-button (click)="onNewTicket()">
                 <mat-icon>add</mat-icon>

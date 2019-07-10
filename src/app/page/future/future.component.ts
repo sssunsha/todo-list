@@ -3,6 +3,8 @@ import { Ticket, EPageState } from '../../app.model';
 import { mockTickets } from '../../mock/tickets.mock';
 import { LISTCONFIG } from '../page.config';
 import { filterTicketsForPage } from '../../utils'
+import { AppService } from '../../app.service';
+
 
 @Component({
   selector: 'app-future',
@@ -12,10 +14,10 @@ import { filterTicketsForPage } from '../../utils'
 export class FutureComponent implements OnInit {
 	ticketList: Array<Ticket>;
 	listConfig: Array<string> = LISTCONFIG;
-  constructor() { }
+  constructor(private service: AppService) { }
 
   ngOnInit() {
-	this.ticketList = filterTicketsForPage(mockTickets, EPageState.future);
+	this.ticketList = filterTicketsForPage(this.service.tickets, EPageState.future);
   }
 
 }
