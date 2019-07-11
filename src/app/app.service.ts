@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { EPageState, Ticket } from './app.model';
 import { mockTickets } from './mock/tickets.mock';
 
-// import * as Evernote from 'evernote';
+import * as Evernote from 'evernote';
 
 export const callbackUrl = "http://localhost:4200/oauth_callback";
 
@@ -22,28 +22,19 @@ export class AppService {
   constructor() {
 	  this.currentPage = EPageState.today;
 	  this.tickets = mockTickets;
-	//   this.initClient();
+	  this.initClient();
    }
 
-//    initClient(): void {
-// 		this.evernoteClient = new Evernote.Client({
-// 			consumerKey: 'sssunsha',
-// 			consumerSecret: '04568e43ebe655a7',
-// 			sandbox: true,
-// 			china: false,
-// 		});
-// 		this.fetchOAuthToken();
-//    }
+   initClient(): void {
+	   this.evernoteClient =  new Evernote.Client({sandbox: false, token: 'S=s31:U=6d0aeb:E=16c040e783b:\
+	   C=16be001f0c0:P=1cd:A=en-devtoken:V=2:H=c4e0572c15d3c83875ed799e0364dd4a'});
 
-//    fetchOAuthToken(): void {
-// 	   this.evernoteClient.getRequestToken(callbackUrl, (error, oauthToken, oauthTokenSecret) => {
-// 		   if(error) {
-// 			   console.error(error);
-// 		   } else {
-// 			   this.oauthToken = oauthToken;
-// 			   this.oauthTokenSecret = oauthTokenSecret;
-// 			   console.log('[Appservice]fetchOAuthToken: succeed.');
-// 		   }
-// 	   });
-//    }
+	   const noteStore = this.evernoteClient.getNoteStore();
+	   noteStore.listNotebooks((notebooks => {
+		   notebooks.forEach(notebook => {
+			   console.log('notebook: ' + notebook.name);
+		   });
+	   }));
+
+	}
 }
