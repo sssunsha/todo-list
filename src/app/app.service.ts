@@ -3,6 +3,7 @@ import { EPageState, Ticket } from './app.model';
 import { mockTickets } from './mock/tickets.mock';
 import * as COS from 'cos-js-sdk-v5';
 import { cosConfig, appConfig } from './shared/app.config';
+import { Observable, Subject } from 'rxjs';
 
 
 
@@ -40,5 +41,14 @@ export class AppService {
 	}, function (err, data) {
 		console.log(err || data.Contents);
 	});
+	}
+
+	startSync(): Observable<any> {
+		var subject = new Subject();
+		window.setTimeout(()=> {
+			subject.next(1);
+			subject.complete();
+		}, 3000);
+		return subject.asObservable();
 	}
 }

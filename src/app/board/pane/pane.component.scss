@@ -8,6 +8,7 @@
 	.logo {
 		margin-left: 15px;
 		margin-top: 15px;
+		cursor: pointer;
 	}
 	mat-list-item {
 		margin-top: 20px;
@@ -24,4 +25,17 @@
 
 .opened {
 	color: $high-light;
+}
+@keyframes rotation {
+	from {
+		transform: rotate(0deg);
+	}
+	to {
+		transform: rotate(360deg);
+	}
+}
+
+.syncing {
+	transform: rotate(360deg);
+	animation: rotation 2s linear infinite;
 }

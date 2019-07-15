@@ -1,6 +1,6 @@
 <div class='pane'>
 	<div>
-		<img src="assets/img/logo.png" alt="image" class="logo">
+		<img src="assets/img/logo.png" alt="image" class="logo" (click)="startSync()" [ngClass]="{'syncing': isSyncing===true}">
 	</div>
 	<mat-list>
 		<mat-list-item>
