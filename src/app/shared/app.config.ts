@@ -5,3 +5,9 @@ export let cosConfig = {
 	Region: 'ap-chengdu',
 	Folder: 'todo-list/tickets',
 };
+
+export let appConfig = {
+	isLiveMode: false,
+	isAutoSync: false,
+	syncInterval: 3600,
+}

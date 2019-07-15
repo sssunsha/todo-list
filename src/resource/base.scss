@@ -22,3 +22,10 @@ $default-font-family: Arial, Helvetica, sans-serif;
 .low {
     background-color: $low-light;
 }
+
+input, textarea {
+	border-radius: 2px;
+  	border: solid 1px #e0e0e0;
+	background-color: lightgrey;
+	padding-left: 10px;
+}

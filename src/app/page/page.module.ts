@@ -14,7 +14,6 @@ import { FormsModule } from '@angular/forms';
 import { SharedComponentModule } from '../shared/shared.module';
 import { SettingsComponent } from './setttings/settings.component';
 
-
 @NgModule({
   imports: [
 	CommonModule,

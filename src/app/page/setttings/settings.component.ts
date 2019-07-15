@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { cosConfig } from '../../shared/app.config';
+import { AppService } from '../../app.service';
 
 @Component({
   selector: 'app-settings',
@@ -7,12 +7,13 @@ import { cosConfig } from '../../shared/app.config';
   styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
-	_cosConfig: object;
-  constructor() { 
-	  this._cosConfig = cosConfig;
+	_cosConfig: any;
+	_appConfig: any;
+  constructor(private service: AppService) { 
+	  this._cosConfig = this.service.cosConfig;
+	  this._appConfig = this.service.appConfig;
   }
 
   ngOnInit() {
   }
-
 }

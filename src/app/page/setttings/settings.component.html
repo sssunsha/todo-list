@@ -1,26 +1,49 @@
 <div class="settings-form">
-	<mat-form-field class="full-width">
-	  <input matInput placeholder="COS Bucket"
+	<div class="full-width">
+			<label>Live mode</label><p></p>
+		<mat-slide-toggle color="primary"
+		[(ngModel)]="_appConfig.isLiveMode">Live mode</mat-slide-toggle>
+	</div>
+
+	<div class="full-width">
+			<label>Auto sync</label><p></p>
+		<mat-slide-toggle color="primary"
+		[(ngModel)]="_appConfig.isAutoSync">auto sync</mat-slide-toggle>
+	</div>
+
+	<div class="full-width">
+			<label>Synce interval (second)</label><p></p>
+		<input matInput placeholder="synce interval (second)" id="syncInterval"
+		[(ngModel)]="_appConfig.syncInterval">
+	</div>
+	
+	<div class="full-width">
+		<label>COS Bucket</label><p></p>
+	  <input matInput placeholder="COS Bucket" id="Bucket"
 	  [(ngModel)]="_cosConfig.Bucket">
-	</mat-form-field>
+	</div>
   
-	<mat-form-field class="full-width">
-		<input matInput placeholder="COS Region"
+	<div class="full-width">
+			<label>COS Region</label><p></p>
+		<input matInput placeholder="COS Region" id="Region"
 		[(ngModel)]="_cosConfig.Region">
-	</mat-form-field>
+	</div>
 
-	<mat-form-field class="full-width">
-		<input matInput placeholder="COS SecretId"
+	<div class="full-width">
+			<label>COS SecretId</label><p></p>
+		<input matInput placeholder="COS SecretId" id="SecretId"
 		[(ngModel)]="_cosConfig.SecretId">
-	</mat-form-field>
+	</div>
 
-	<mat-form-field class="full-width">
-		<input matInput placeholder="COS SecretKey"
+	<div class="full-width">
+			<label>COS SecretKey</label><p></p>
+		<input matInput placeholder="COS SecretKey" id="SecretKey"
 		[(ngModel)]="_cosConfig.SecretKey">
-	</mat-form-field>
+	</div>
 
-	<mat-form-field class="full-width">
-		<input matInput placeholder="COS folder path"
+	<div class="full-width">
+			<label>COS folder path</label><p></p>
+		<input matInput placeholder="COS folder path" id="Folder"
 		[(ngModel)]="_cosConfig.Folder">
-	</mat-form-field>
+	</div>
 </div>
