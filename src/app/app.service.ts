@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { EPageState, Ticket } from './app.model';
 import { mockTickets } from './mock/tickets.mock';
-// import * as COS from 'cos-nodejs-sdk-v5';
 import * as COS from 'cos-js-sdk-v5';
 
 @Injectable({
@@ -28,7 +27,7 @@ export class AppService {
 	   this.cos.getBucket({
 		Bucket: 'dashboard-1255953405',
 		Region: 'ap-chengdu',
-		Prefix: '/',
+		Prefix: '',
 	}, function (err, data) {
 		console.log(err || data.Contents);
 	});
