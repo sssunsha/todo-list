@@ -8,6 +8,8 @@ export enum EPageState {
 	life = 'life',
 	others = 'others',
 	statistics = 'statistics',
+	// other pages
+	settings='settings',
 }
 
 export const PAGELIST = [

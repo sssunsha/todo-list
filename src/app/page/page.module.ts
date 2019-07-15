@@ -12,6 +12,7 @@ import { AngularMaterialModule } from '../core/angular-material.module';
 import { StatisticsComponent } from './statistics/statistics.component';
 import { FormsModule } from '@angular/forms';
 import { SharedComponentModule } from '../shared/shared.module';
+import { SettingsComponent } from './setttings/settings.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import { SharedComponentModule } from '../shared/shared.module';
 	  WorkComponent,
 	  LifeComponent,
 	  OthersComponent,
-	  StatisticsComponent
+	  StatisticsComponent,
+	  SettingsComponent
 	],
   exports: [
 	InboxComponent,
@@ -41,7 +43,8 @@ import { SharedComponentModule } from '../shared/shared.module';
 	WorkComponent,
 	LifeComponent,
 	OthersComponent,
-	StatisticsComponent
+	StatisticsComponent,
+	SettingsComponent
   ]
 })
 export class PageModule { }

@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { EPageState, Ticket } from './app.model';
 import { mockTickets } from './mock/tickets.mock';
 import * as COS from 'cos-js-sdk-v5';
+import { cosConfig } from './shared/app.config';
+
 
 @Injectable({
   providedIn: 'root'
@@ -21,12 +23,12 @@ export class AppService {
 
    initClient(): void {
 	   this.cos = new COS({
-		   SecretId: 'AKIDDJEzZ0xJGvsssiRp7HRV4EIBtRo1p5tZ',
-		   SecretKey: 'd4JMEwSr690vgFdppspdKqAJH4f4FLMC'
+		   SecretId: cosConfig.SecretId,
+		   SecretKey: cosConfig.SecretKey,
 	   });
 	   this.cos.getBucket({
-		Bucket: 'dashboard-1255953405',
-		Region: 'ap-chengdu',
+		Bucket: cosConfig.Bucket,
+		Region: cosConfig.Region,
 		Prefix: '',
 	}, function (err, data) {
 		console.log(err || data.Contents);
