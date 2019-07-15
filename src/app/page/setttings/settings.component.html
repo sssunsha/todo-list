@@ -1,9 +1,26 @@
-<form class="example-form">
-	<mat-form-field class="example-full-width">
-	  <input matInput placeholder="Favorite food" value="Sushi">
+<div class="settings-form">
+	<mat-form-field class="full-width">
+	  <input matInput placeholder="COS Bucket"
+	  [(ngModel)]="_cosConfig.Bucket">
 	</mat-form-field>
   
-	<mat-form-field class="example-full-width">
-	  <textarea matInput placeholder="Leave a comment"></textarea>
+	<mat-form-field class="full-width">
+		<input matInput placeholder="COS Region"
+		[(ngModel)]="_cosConfig.Region">
 	</mat-form-field>
-  </form>
+
+	<mat-form-field class="full-width">
+		<input matInput placeholder="COS SecretId"
+		[(ngModel)]="_cosConfig.SecretId">
+	</mat-form-field>
+
+	<mat-form-field class="full-width">
+		<input matInput placeholder="COS SecretKey"
+		[(ngModel)]="_cosConfig.SecretKey">
+	</mat-form-field>
+
+	<mat-form-field class="full-width">
+		<input matInput placeholder="COS folder path"
+		[(ngModel)]="_cosConfig.Folder">
+	</mat-form-field>
+</div>

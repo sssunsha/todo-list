@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { cosConfig } from '../../shared/app.config';
 
 @Component({
   selector: 'app-settings',
@@ -6,8 +7,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./settings.component.scss']
 })
 export class SettingsComponent implements OnInit {
-
-  constructor() { }
+	_cosConfig: object;
+  constructor() { 
+	  this._cosConfig = cosConfig;
+  }
 
   ngOnInit() {
   }
