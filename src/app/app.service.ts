@@ -23,12 +23,24 @@ export class AppService {
   // cos client object
   cos: any;
 
+  // autoSync handler
+  autoSyncHandler = null;
+
   constructor() {
-	  this.currentPage = EPageState.today;
-	  this.tickets = mockTickets;
-	  this.initClient();
+	  this.init();
    }
 
+   init(): void {
+		this.currentPage = EPageState.today;
+		this.tickets = mockTickets;
+		if (this.autoSyncHandler) {
+			window.clearInterval(this.autoSyncHandler);
+		}
+	   this.initClient();
+	   this.startAutoSync();
+   }
+
+// COS 
    initClient(): void {
 	   this.cos = new COS({
 		   SecretId: this.cosConfig.SecretId,
@@ -44,11 +56,23 @@ export class AppService {
 	}
 
 	startSync(): Observable<any> {
+		console.log('sync at: ' + new Date());
 		var subject = new Subject();
 		window.setTimeout(()=> {
+			// TODO: do the data sync with soc service here
 			subject.next(1);
 			subject.complete();
 		}, 3000);
 		return subject.asObservable();
+	}
+
+// timer
+	startAutoSync(): void {
+		if(this.appConfig.isAutoSync && this.appConfig.syncInterval) {
+			this.autoSyncHandler = window.setInterval(() => {
+				// start the sync
+				this.startSync()
+			}, this.appConfig.syncInterval * 1000);
+		}
 	}
 }
