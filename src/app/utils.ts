@@ -2,6 +2,7 @@ import {Md5} from "ts-md5";
 import { EPageState, Ticket, IAlertConfig } from './app.model';
 import { AlertComponent } from './shared/alert/alert.component';
 import {MatDialog} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 export function generateMd5Hash(data: string): string {
     return Md5.hashStr(data+Math.random()).toString();
@@ -38,4 +39,8 @@ export function createAlert(dialog: MatDialog, data: IAlertConfig): void {
 		data: data
 	  });
 
+}
+
+export function openSnackBar(snackBar: MatSnackBar, message: string, action= '', duration=2000) {
+	snackBar.open(message, action, {duration: duration, panelClass: 'snackBar-custom'});
 }

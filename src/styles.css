@@ -10,3 +10,11 @@
 	font-size: 20px;
 	font-family: Arial, Helvetica, sans-serif;
 }
+
+.snackBar-custom {
+	background-color: black;
+	color: wheat;
+	position: absolute;
+	right: 20px;
+	bottom: 10px;
+}
