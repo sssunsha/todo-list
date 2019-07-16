@@ -1,5 +1,5 @@
 import {Md5} from "ts-md5";
-import { EPageState, Ticket, IAlertConfig } from './app.model';
+import { EPageState, Ticket, IAlertConfig, TicketFile } from './app.model';
 import { AlertComponent } from './shared/alert/alert.component';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -64,5 +64,14 @@ export class Helper {
 		} else {
 			return `todo-list/mock-tickets/${this.generateTicketFileName()}`;
 		}
+	}
+
+	static generateTicketFile(tickets: Array<Ticket>): TicketFile {
+		const ticketFile: TicketFile = {
+			version: this.generateVersion(),
+			modifiedAt: this.generateCreatedAt(),
+			value: tickets,
+		}
+		return ticketFile;
 	}
 }

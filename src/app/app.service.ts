@@ -6,6 +6,7 @@ import { cosConfig, appConfig } from './shared/app.config';
 import { Observable, Subject } from 'rxjs';
 import { Helper } from './utils';
 import * as FileSaver from 'file-saver';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 
 
@@ -30,7 +31,7 @@ export class AppService {
   // autoSync handler
   autoSyncHandler = null;
 
-  constructor() {
+  constructor(private _snackBar: MatSnackBar) {
 	  this.init();
    }
 
@@ -62,18 +63,10 @@ export class AppService {
 
 	startSync(): Observable<any> {
 		var subject = new Subject();
-		window.setTimeout(()=> {
-			// TODO: do the data sync with soc service here
-			subject.next(1);
-			subject.complete();
-		}, 3000);
+		this.uploadTicketFileToSOC(subject);
 		return subject.asObservable();
 	}
 
-	prepareSocFile(): void {
-
-	}
-	
 	// download the relative ticket file on COS, and read the basic information
 	downloadTicketFileFromSOC(): void {
 		// read the basic information 
@@ -88,12 +81,26 @@ export class AppService {
 					this.tickets = ticketFileData.value;
 					this.cosFileVersion = ticketFileData.version;
 					this.modifiedAt = ticketFileData.modifiedAt;
+					Helper.openSnackBar(this._snackBar, 'download ticket file finished');
 				}
 			});
 	}
 
-	uploadTicketFileToSOC(): void {
-
+	uploadTicketFileToSOC(subject: Subject<any>): void {
+		const key = Helper.generateTicketFilePath(this.appConfig.isLiveMode)
+		this.cos.putObject({
+			Bucket: this.cosConfig.Bucket,
+			Region: this.cosConfig.Region,
+			Key: key,
+			Body: JSON.stringify(Helper.generateTicketFile(this.tickets))}, (err, data) => {
+				if(!err) {
+					Helper.openSnackBar(this._snackBar, 'upload ticket file finished');
+				} else {
+					console.error(err);
+				}
+				subject.next(1);
+				subject.complete();
+		});
 	}
 
 // auto sync ===========================================================================================
@@ -108,13 +115,7 @@ export class AppService {
 
 // local storage
 	startLocalStage(): void {
-		const ticketFile: TicketFile = {
-			version: Helper.generateVersion(),
-			modifiedAt: Helper.generateCreatedAt(),
-			value: this.tickets,
-		}
-
-		let blob = new Blob([JSON.stringify(ticketFile)], {type: "application/json;charset=utf-8"});
+		let blob = new Blob([JSON.stringify(Helper.generateTicketFile(this.tickets))], {type: "application/json;charset=utf-8"});
 		FileSaver.saveAs(blob, `${Helper.generateTicketFileName()}`);
 	}
 }
