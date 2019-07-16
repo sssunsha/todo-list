@@ -160,7 +160,7 @@ export const defaultTicket:Ticket = {
 }
 
 export interface TicketFile {
-	version: string;
+	version: number;
 	modifiedAt: string;
 	value: Array<Ticket>;
 }
