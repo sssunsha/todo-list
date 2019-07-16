@@ -28,7 +28,6 @@ export class PaneComponent implements OnInit {
 		this.isSyncing = true;
 		this.service.startSync().subscribe(() => {
 			this.isSyncing = false;
-			Helper.openSnackBar(this._snackBar, 'sync finished.');
 		});
 	}
 }

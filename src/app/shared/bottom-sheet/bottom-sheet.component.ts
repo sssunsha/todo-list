@@ -1,6 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Ticket } from 'src/app/app.model';
-import {MatBottomSheet, MatBottomSheetRef} from '@angular/material/bottom-sheet';
+import { MatBottomSheetRef} from '@angular/material/bottom-sheet';
 import {Inject} from '@angular/core';
 import {MAT_BOTTOM_SHEET_DATA} from '@angular/material';
 import {
@@ -10,7 +10,6 @@ import {
   TICKETPROGRESSSELECTCONFIG,
   PAGELIST
 } from  'src/app/app.model';
-import {FormControl} from '@angular/forms';
 
 @Component({
   selector: 'app-bottom-sheet',

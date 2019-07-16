@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { EPageState, Ticket, TicketFile } from './app.model';
-import { mockTickets } from './mock/tickets.mock';
 import * as COS from 'cos-js-sdk-v5';
 import { cosConfig, appConfig } from './shared/app.config';
 import { Observable, Subject } from 'rxjs';
@@ -67,7 +66,6 @@ export class AppService {
 		return subject.asObservable();
 	}
 
-	// download the relative ticket file on COS, and read the basic information
 	downloadTicketFileFromSOC(): void {
 		// read the basic information 
 		const key = Helper.generateTicketFilePath(this.appConfig.isLiveMode)
