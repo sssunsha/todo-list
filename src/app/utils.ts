@@ -54,7 +54,15 @@ export class Helper {
 
 	static generateTicketFileName(): string {
 		const now = new Date();
-		return now.getFullYear().toString();
+		return now.getFullYear().toString() + '.json';
 
+	}
+
+	static generateTicketFilePath(isLiveMode: boolean): string {
+		if (isLiveMode) {
+			return `todo-list/tickets/${this.generateTicketFileName()}`;
+		} else {
+			return `todo-list/mock-tickets/${this.generateTicketFileName()}`;
+		}
 	}
 }

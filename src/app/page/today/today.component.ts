@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, DoCheck } from '@angular/core';
 import { Ticket, EPageState } from '../../app.model';
-import { mockTickets } from '../../mock/tickets.mock';
 import { LISTCONFIG } from '../page.config';
 import { Helper } from '../../utils'
 import { AppService } from '../../app.service';
@@ -10,7 +9,7 @@ import { AppService } from '../../app.service';
   templateUrl: './today.component.html',
   styleUrls: ['./today.component.scss']
 })
-export class TodayComponent implements OnInit {
+export class TodayComponent implements OnInit, DoCheck {
 	ticketList: Array<Ticket>;
 	listConfig: Array<string> = LISTCONFIG;
 
@@ -18,6 +17,10 @@ export class TodayComponent implements OnInit {
 
   ngOnInit() {
 	  this.ticketList = Helper.filterTicketsForPage(this.service.tickets, EPageState.today);
+  }
+
+  ngDoCheck() {
+	this.ticketList = Helper.filterTicketsForPage(this.service.tickets, EPageState.today);
   }
 
 }

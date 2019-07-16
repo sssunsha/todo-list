@@ -1,7 +1,12 @@
 .header {
     width: 100%;
     display: flex;
-    justify-content: space-between;
+	justify-content: space-between;
+	.small {
+		font-size: 10px;
+		margin: auto 3px;
+	}
+	
     .action-button {
         display: flex;
 		justify-content: flex-end;

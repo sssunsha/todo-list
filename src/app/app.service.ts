@@ -16,7 +16,7 @@ export class AppService {
   currentPage: EPageState;
   
   // store tickets data here
-  tickets: Array<Ticket>;
+  tickets: Array<Ticket> = [];
 
   // config data
   cosConfig = cosConfig;
@@ -24,6 +24,8 @@ export class AppService {
 
   // cos client object
   cos: any;
+  cosFileVersion: number;
+  modifiedAt: string;
 
   // autoSync handler
   autoSyncHandler = null;
@@ -34,7 +36,6 @@ export class AppService {
 
    init(): void {
 		this.currentPage = EPageState.today;
-		this.tickets = mockTickets;
 		if (this.autoSyncHandler) {
 			window.clearInterval(this.autoSyncHandler);
 		}
@@ -52,8 +53,10 @@ export class AppService {
 		Bucket: this.cosConfig.Bucket,
 		Region: this.cosConfig.Region,
 		Prefix: 'todo-list/',
-	}, function (err, data) {
-		console.log(err || data.Contents);
+	}, (err, data) => {
+		if (!err) {
+			this.downloadTicketFileFromSOC();
+		}
 	});
 	}
 
@@ -71,16 +74,25 @@ export class AppService {
 
 	}
 	
-	// read
-	touchSOCTicketFile(): void {
+	// download the relative ticket file on COS, and read the basic information
+	downloadTicketFileFromSOC(): void {
 		// read the basic information 
+		const key = Helper.generateTicketFilePath(this.appConfig.isLiveMode)
+		this.cos.getObject({
+			Bucket: this.cosConfig.Bucket,
+			Region: this.cosConfig.Region,
+			Key: key}, (err, data) =>{
+				if (!err && data.Body) {
+					// save the download tickets
+					const ticketFileData = JSON.parse(data.Body)
+					this.tickets = ticketFileData.value;
+					this.cosFileVersion = ticketFileData.version;
+					this.modifiedAt = ticketFileData.modifiedAt;
+				}
+			});
 	}
 
 	uploadTicketFileToSOC(): void {
-
-	}
-
-	downloadTicketFileFromSOC(): void {
 
 	}
 
@@ -103,6 +115,6 @@ export class AppService {
 		}
 
 		let blob = new Blob([JSON.stringify(ticketFile)], {type: "application/json;charset=utf-8"});
-		FileSaver.saveAs(blob, `${Helper.generateTicketFileName()}.json`);
+		FileSaver.saveAs(blob, `${Helper.generateTicketFileName()}`);
 	}
 }
