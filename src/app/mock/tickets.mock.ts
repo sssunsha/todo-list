@@ -1,15 +1,15 @@
 import { Ticket, EPriority, ETicketType, EPageState, ETicketEffort, ETicktProgress } from '../app.model';
-import { generateMd5Hash, generateCreatedAt } from '../utils';
+import { Helper } from '../utils';
 
 
 export const mockTickets: Array<Ticket> = 
 	[
 		{
-			id: generateMd5Hash('1'),
+			id: Helper.generateMd5Hash('1'),
 			summary: 'ticket 1',
 			description: 'ticket 1 description',
 			priority: EPriority.high,
-			createdAt: generateCreatedAt(),
+			createdAt: Helper.generateCreatedAt(),
 			modifiedAt: null,
 			ticketType: ETicketType.task,
 			effort: ETicketEffort.half_week,
@@ -17,11 +17,11 @@ export const mockTickets: Array<Ticket> =
 			inPages: [EPageState.inbox],
 		},
 		{
-			id: generateMd5Hash('2'),
+			id: Helper.generateMd5Hash('2'),
 			summary: 'ticket 2',
 			description: 'ticket 2 description',
 			priority: EPriority.medium,
-			createdAt: generateCreatedAt(),
+			createdAt: Helper.generateCreatedAt(),
 			modifiedAt: null,
 			ticketType: ETicketType.note,
 			// effort: ETicketEffort.half_hour,
@@ -30,7 +30,7 @@ export const mockTickets: Array<Ticket> =
 			records: ['this the record for the first day I found', 'this the record for the second day I found', 'this the record for the thrid day I found']
 		},
 		{
-			id: generateMd5Hash('3'),
+			id: Helper.generateMd5Hash('3'),
 			summary: 'ticket 3, this is a test ticket with a very long long text,  I want to use this \
 			long long text to test the table support for long long text, so let me have a look how is\
 			the performance, hey hey. ticket 3, this is a test ticket with a very long long text,  I want to use this \
@@ -42,7 +42,7 @@ export const mockTickets: Array<Ticket> =
 			long long text to test the table support for long long text, so let me have a look how is\
 			the performance, hey hey.',
 			priority: EPriority.low,
-			createdAt: generateCreatedAt(),
+			createdAt: Helper.generateCreatedAt(),
 			modifiedAt: null,
 			ticketType: ETicketType.reminder,
 			effort: ETicketEffort.one_month,
@@ -51,11 +51,11 @@ export const mockTickets: Array<Ticket> =
 			records: ['records 1 ..', 'records 2 ...', 'records 3 ...'],
 		},
 		{
-			id: generateMd5Hash('4'),
+			id: Helper.generateMd5Hash('4'),
 			summary: 'ticket 4 ... ... ... ...',
 			description: 'ticket 4 description ... ... ... ...',
 			priority: EPriority.medium,
-			createdAt: generateCreatedAt(),
+			createdAt: Helper.generateCreatedAt(),
 			modifiedAt: null,
 			ticketType: ETicketType.note,
 			// effort: ETicketEffort.half_hour,
@@ -64,11 +64,11 @@ export const mockTickets: Array<Ticket> =
 			records: ['this the record for the first day I found', 'this the record for the second day I found', 'this the record for the thrid day I found']
 		},
 		{
-			id: generateMd5Hash('5'),
+			id: Helper.generateMd5Hash('5'),
 			summary: 'ticket 5 ... ... ... ... ...',
 			description: 'ticket 5 description ... ... ... ...',
 			priority: EPriority.medium,
-			createdAt: generateCreatedAt(),
+			createdAt: Helper.generateCreatedAt(),
 			modifiedAt: null,
 			ticketType: ETicketType.note,
 			// effort: ETicketEffort.half_hour,
@@ -77,11 +77,11 @@ export const mockTickets: Array<Ticket> =
 			records: ['this the record for the first day I found', 'this the record for the second day I found', 'this the record for the thrid day I found']
 		},
 		{
-			id: generateMd5Hash('6'),
+			id: Helper.generateMd5Hash('6'),
 			summary: 'ticket 6 ... ... ... ... ...',
 			description: 'ticket 6 description ... ... ... ...',
 			priority: EPriority.medium,
-			createdAt: generateCreatedAt(),
+			createdAt: Helper.generateCreatedAt(),
 			modifiedAt: null,
 			ticketType: ETicketType.note,
 			// effort: ETicketEffort.half_hour,
@@ -90,7 +90,7 @@ export const mockTickets: Array<Ticket> =
 			records: ['this the record for the first day I found', 'this the record for the second day I found', 'this the record for the thrid day I found']
 		},
 		{
-			id: generateMd5Hash('7'),
+			id: Helper.generateMd5Hash('7'),
 			summary: 'ticket 3, this is a test ticket with a very long long text,  I want to use this \
 			long long text to test the table support for long long text, so let me have a look how is\
 			the performance, hey hey. ticket 3, this is a test ticket with a very long long text,  I want to use this \
@@ -102,7 +102,7 @@ export const mockTickets: Array<Ticket> =
 			long long text to test the table support for long long text, so let me have a look how is\
 			the performance, hey hey.',
 			priority: EPriority.low,
-			createdAt: generateCreatedAt(),
+			createdAt: Helper.generateCreatedAt(),
 			modifiedAt: null,
 			ticketType: ETicketType.reminder,
 			effort: ETicketEffort.one_month,

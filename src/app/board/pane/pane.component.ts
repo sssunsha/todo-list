@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AppService } from '../../app.service';
 import { EPageState } from '../../app.model';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import { openSnackBar } from '../../utils';
+import { Helper } from '../../utils';
 
 
 @Component({
@@ -28,7 +28,7 @@ export class PaneComponent implements OnInit {
 		this.isSyncing = true;
 		this.service.startSync().subscribe(() => {
 			this.isSyncing = false;
-			openSnackBar(this._snackBar, 'sync finished.');
+			Helper.openSnackBar(this._snackBar, 'sync finished.');
 		});
 	}
 }

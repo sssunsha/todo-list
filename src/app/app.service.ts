@@ -4,6 +4,7 @@ import { mockTickets } from './mock/tickets.mock';
 import * as COS from 'cos-js-sdk-v5';
 import { cosConfig, appConfig } from './shared/app.config';
 import { Observable, Subject } from 'rxjs';
+import { Helper } from './utils';
 
 
 
@@ -40,7 +41,7 @@ export class AppService {
 	   this.startAutoSync();
    }
 
-// COS 
+// COS =================================================================================================
    initClient(): void {
 	   this.cos = new COS({
 		   SecretId: this.cosConfig.SecretId,
@@ -66,7 +67,24 @@ export class AppService {
 		return subject.asObservable();
 	}
 
-// timer
+	prepareSocFile(): void {
+
+	}
+	
+	// read
+	touchSOCTicketFile(): void {
+		// read the basic information 
+	}
+
+	uploadTicketFileToSOC(): void {
+
+	}
+
+	downloadTicketFileFromSOC(): void {
+
+	}
+
+// auto sync ===========================================================================================
 	startAutoSync(): void {
 		if(this.appConfig.isAutoSync && this.appConfig.syncInterval) {
 			this.autoSyncHandler = window.setInterval(() => {

@@ -158,3 +158,9 @@ export const defaultTicket:Ticket = {
 	ticketType: ETicketType.task,
 	inPages: [],
 }
+
+export interface TicketFile {
+	version: string;
+	modifiedAt: string;
+	value: Array<Ticket>;
+}
