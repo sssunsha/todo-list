@@ -51,4 +51,10 @@ export class Helper {
 		const now = new Date();
 		return now.getTime();
 	}
+
+	static generateTicketFileName(): string {
+		const now = new Date();
+		return now.getFullYear().toString();
+
+	}
 }

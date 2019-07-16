@@ -9,7 +9,12 @@
 			<span matBadgePosition="after" matBadgeColor="warn"
 			(click)="goto('today')" [matBadge]="getTodayTicketSize()">Today</span>
 		</div>
-        <div>
+		<div class="action-button">
+            <button mat-icon-button (click)="onLocalSaving()">
+                <mat-icon>save</mat-icon>
+            </button>
+        </div>
+        <div class="action-button">
             <button mat-icon-button (click)="onNewTicket()">
                 <mat-icon>add</mat-icon>
             </button>

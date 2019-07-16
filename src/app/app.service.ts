@@ -1,10 +1,11 @@
 import { Injectable } from '@angular/core';
-import { EPageState, Ticket } from './app.model';
+import { EPageState, Ticket, TicketFile } from './app.model';
 import { mockTickets } from './mock/tickets.mock';
 import * as COS from 'cos-js-sdk-v5';
 import { cosConfig, appConfig } from './shared/app.config';
 import { Observable, Subject } from 'rxjs';
 import { Helper } from './utils';
+import * as FileSaver from 'file-saver';
 
 
 
@@ -57,7 +58,6 @@ export class AppService {
 	}
 
 	startSync(): Observable<any> {
-		console.log('sync at: ' + new Date());
 		var subject = new Subject();
 		window.setTimeout(()=> {
 			// TODO: do the data sync with soc service here
@@ -92,5 +92,17 @@ export class AppService {
 				this.startSync()
 			}, this.appConfig.syncInterval * 1000);
 		}
+	}
+
+// local storage
+	startLocalStage(): void {
+		const ticketFile: TicketFile = {
+			version: Helper.generateVersion(),
+			modifiedAt: Helper.generateCreatedAt(),
+			value: this.tickets,
+		}
+
+		let blob = new Blob([JSON.stringify(ticketFile)], {type: "application/json;charset=utf-8"});
+		FileSaver.saveAs(blob, `${Helper.generateTicketFileName()}.json`);
 	}
 }

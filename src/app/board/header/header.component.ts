@@ -32,6 +32,10 @@ export class HeaderComponent implements OnInit {
 		new ticket message, new ticket message, new ticket message, new ticket message'});
   }
 
+  onLocalSaving(): void {
+	  this.service.startLocalStage();
+  }
+
   getInboxTicketSize(): number {
 	return this.service.tickets.filter(t => t.inPages.includes(EPageState.inbox)).length
   }
