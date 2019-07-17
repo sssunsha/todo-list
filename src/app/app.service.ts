@@ -110,9 +110,26 @@ export class AppService {
 			}, this.appConfig.syncInterval * 1000);
 		}
 	}
+// html5 local storage for backup========================================================================
+	startTicketsLocalStorageBackup(): void {
+		localStorage.setItem(Helper.generateTicketFilePath(this.appConfig.isLiveMode),
+			JSON.stringify(Helper.generateTicketFile(this.tickets)));
+	}
 
-// local storage
-	startLocalStage(): void {
+	retrieveTicketsFromLocalStorage(): void {
+		const localBackupTicketsFile = localStorage.getItem(Helper.generateTicketFilePath(this.appConfig.isLiveMode));
+		if (localBackupTicketsFile) {
+			const localBackupTicketsFileJson = JSON.parse(localBackupTicketsFile);
+			this.tickets = localBackupTicketsFileJson.value;
+			this.cosFileVersion = localBackupTicketsFileJson.version;
+			this.modifiedAt = localBackupTicketsFileJson.modifiedAt;
+		}
+	}
+
+
+
+// tickets save as file to backup
+	startSaveASFile(): void {
 		let blob = new Blob([JSON.stringify(Helper.generateTicketFile(this.tickets))], {type: "application/json;charset=utf-8"});
 		FileSaver.saveAs(blob, `${Helper.generateTicketFileName()}`);
 	}

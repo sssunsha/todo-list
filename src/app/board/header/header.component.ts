@@ -33,7 +33,7 @@ export class HeaderComponent implements OnInit {
   }
 
   onLocalSaving(): void {
-	  this.service.startLocalStage();
+	  this.service.startSaveASFile();
   }
 
   getInboxTicketSize(): number {
