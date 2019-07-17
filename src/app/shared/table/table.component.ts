@@ -3,6 +3,7 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 import { Ticket } from '../../app.model';
 import {MatBottomSheet} from '@angular/material/bottom-sheet';
 import {BottomSheetComponent} from '../bottom-sheet/bottom-sheet.component';
+import { Helper } from 'src/app/utils';
 
 @Component({
   selector: 'app-table',
@@ -32,5 +33,16 @@ export class TableComponent implements OnInit {
 
   openEditSheet(ticket: Ticket) {
 	  this._bottomSheet.open(BottomSheetComponent, {data: ticket, panelClass: 'bottom-sheet-custom'});
+  }
+
+  calculateTimeCost(element: Ticket): string {
+	  const timeCost = element.timeCosts;
+	  if (timeCost && timeCost.length > 0 ) {
+		  let timeCostinMS = 0;
+		  timeCost.forEach(data => timeCostinMS += data.to - data.from);
+		  return Helper.timeCostFormat(timeCostinMS);
+	  } else {
+		  return ''
+	  }
   }
 }

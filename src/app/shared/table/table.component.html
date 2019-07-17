@@ -22,6 +22,7 @@
                     <div><b>ID: </b> <label class="expand-text">{{element.id}}</label></div>
                     <div><b>last update: </b><label class="expand-text">{{element.modifiedAt}}</label></div>
                     <div><b>In pages: </b><label class="expand-text">{{element.inPages.join(' ; ')}}</label></div>
+                    <div><b>Time cost: </b><label class="expand-text">{{calculateTimeCost(element)}}</label></div>
                 </div>
                 <div class="example-element-description">
                     <div *ngFor="let record of element.records">
@@ -34,10 +35,7 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-	<tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row"
-		[class.example-expanded-row]="expandedElement === element"
-		(dblclick)="openEditSheet(element)"
-		(click)="expandedElement = expandedElement === element ? null : element">
+    <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row" [class.example-expanded-row]="expandedElement === element" (dblclick)="openEditSheet(element)" (click)="expandedElement = expandedElement === element ? null : element">
     </tr>
     <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
 </table>

@@ -74,4 +74,17 @@ export class Helper {
 		}
 		return ticketFile;
 	}
+
+	// convert time in month, day, hour, minute and seconds
+	static timeCostFormat(timeCost: number): string {
+		let timeCostInS = timeCost / 1000;
+		let s = timeCostInS % 60;
+		let m =  timeCostInS / 60 % 60;
+		let h = timeCostInS / 3600 % 24;
+		let d = timeCostInS / 86400 % 30;
+		let M = timeCostInS / 2592000;
+		let timeCostAfterFormatted = M ? `${M} month ` : '' 
+			+ d ? `${d} day ` : '' + h ? `${h} hour ` : '' + m ? `${m} m ` : '' + s ? `${s} s` : ''  
+		return timeCostAfterFormatted;
+	}
 }
