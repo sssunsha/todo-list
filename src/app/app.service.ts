@@ -123,6 +123,7 @@ export class AppService {
 			this.tickets = localBackupTicketsFileJson.value;
 			this.cosFileVersion = localBackupTicketsFileJson.version;
 			this.modifiedAt = localBackupTicketsFileJson.modifiedAt;
+			Helper.openSnackBar(this._snackBar, 'retrieve backup ticket file finished');
 		}
 	}
 

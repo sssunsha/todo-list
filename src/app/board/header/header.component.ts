@@ -32,8 +32,16 @@ export class HeaderComponent implements OnInit {
 		new ticket message, new ticket message, new ticket message, new ticket message'});
   }
 
-  onLocalSaving(): void {
+  onMenuSaveAs(): void {
 	  this.service.startSaveASFile();
+  }
+
+  onMenuSettings(): void {
+	  this.service.currentPage = EPageState.settings;
+  }
+
+  onMenuRetrieveLocalStorageBackup(): void {
+	  this.service.retrieveTicketsFromLocalStorage();
   }
 
   getInboxTicketSize(): number {

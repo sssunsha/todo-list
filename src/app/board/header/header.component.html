@@ -1,21 +1,41 @@
 <div class="header">
-    <div>
-		<label>Todo List</label>
-		<label class='small'>{{service.cosFileVersion}}</label>
-		<label class="small">{{service.modifiedAt}}</label>
+	<div class="left-header">
+		<div class="menu">
+			<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+				<mat-icon>more_vert</mat-icon>
+			</button>
+			<mat-menu #menu="matMenu">
+				<button mat-menu-item (click)="onNewTicket()">
+					<mat-icon>add</mat-icon>
+					<span>New ticket</span>
+				</button>
+				<button mat-menu-item (click)="onMenuSaveAs()">
+					<mat-icon>save</mat-icon>
+					<span>Save As</span>
+				</button>
+				<button mat-menu-item (click)="onMenuRetrieveLocalStorageBackup()">
+					<mat-icon>file_upload</mat-icon>
+					<span>retrieve localstorage backup</span>
+				</button>
+				<button mat-menu-item (click)="onMenuSettings()">
+					<mat-icon>settings</mat-icon>
+					<span>Settings</span>
+				</button>
+			</mat-menu>
+		</div>
+		<div>
+			<label>Todo List</label>
+			<label class='small'>{{service.cosFileVersion}}</label>
+			<label class="small">{{service.modifiedAt}}</label>
+		</div>
 	</div>
-    <div class="action-button">
+    <div class="right-header">
 		<div class='header-notification'>
 			<span matBadgeOverlap="false"
 				[matBadge]="getInboxTicketSize()" (click)="goto('inbox')">Inbox</span>
 			<span matBadgePosition="after" matBadgeColor="warn"
 			(click)="goto('today')" [matBadge]="getTodayTicketSize()">Today</span>
 		</div>
-		<div class="action-button">
-            <button mat-icon-button (click)="onLocalSaving()">
-                <mat-icon>save</mat-icon>
-            </button>
-        </div>
         <div class="action-button">
             <button mat-icon-button (click)="onNewTicket()">
                 <mat-icon>add</mat-icon>
