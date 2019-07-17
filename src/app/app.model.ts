@@ -102,6 +102,12 @@ export const TICKETPROGRESSSELECTCONFIG: Array<ISelectConfig> = [
 	{label: 'Finished', value: ETicktProgress.finished},
 ];
 
+// use this interface to record the time cost for every ticket
+export interface ITicketTimeCost {
+	from: string;
+	to: string;
+}
+
 export class Ticket {
 	id?: string;
 	summary: string;
@@ -114,6 +120,7 @@ export class Ticket {
 	progress?: ETicktProgress;
 	inPages: Array<EPageState>;
 	records?: Array<string>;
+	timeCosts?: Array<ITicketTimeCost>;
 	constructor(data: Partial<Ticket>) {
 		this.id = data.id;
 		this.summary = data.summary;
@@ -125,6 +132,7 @@ export class Ticket {
 		this.effort = data.effort;
 		this.inPages = data.inPages;
 		this.records = data.records;
+		this.timeCosts = data.timeCosts;
 	}
 }
 

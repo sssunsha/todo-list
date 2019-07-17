@@ -17,6 +17,8 @@ export class AppService {
   
   // store tickets data here
   tickets: Array<Ticket> = [];
+  // mark the current working on tickets
+  workingOnTickets: Array<Ticket> = [];
 
   // config data
   cosConfig = cosConfig;
