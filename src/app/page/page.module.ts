@@ -13,6 +13,7 @@ import { StatisticsComponent } from './statistics/statistics.component';
 import { FormsModule } from '@angular/forms';
 import { SharedComponentModule } from '../shared/shared.module';
 import { SettingsComponent } from './setttings/settings.component';
+import { CalendarComponent } from './calendar/calendar.component';
 
 @NgModule({
   imports: [
@@ -31,7 +32,8 @@ import { SettingsComponent } from './setttings/settings.component';
 	  LifeComponent,
 	  OthersComponent,
 	  StatisticsComponent,
-	  SettingsComponent
+	  SettingsComponent,
+	  CalendarComponent
 	],
   exports: [
 	InboxComponent,

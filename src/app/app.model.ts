@@ -9,7 +9,8 @@ export enum EPageState {
 	others = 'others',
 	statistics = 'statistics',
 	// other pages
-	settings='settings',
+	settings = 'settings',
+	calendar = 'calendar'
 }
 
 export const PAGELIST = [
