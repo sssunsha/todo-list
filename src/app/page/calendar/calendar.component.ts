@@ -3,6 +3,8 @@ import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angula
 declare const require: any;
 var Calendar = require('tui-calendar');
 
+// reference wiki: https://nhn.github.io/tui.calendar/latest/tutorial-example00-basic
+
 @Component({
   selector: 'app-calendar',
   templateUrl: './calendar.component.html',
