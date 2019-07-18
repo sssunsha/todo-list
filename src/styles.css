@@ -1,6 +1,8 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "~@angular/material/prebuilt-themes/pink-bluegrey.css";
+@import "tui-calendar/dist/tui-calendar.css";
+
 .bottom-sheet-custom {
     width: 1500px;
     height: 800px;

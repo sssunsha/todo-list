@@ -32,6 +32,7 @@
         "moment": "2.24.0",
         "rxjs": "^6.5.2",
         "ts-md5": "^1.2.4",
+        "tui-calendar": "^1.12.3",
         "web-animations-js": "2.3.2",
         "zone.js": "~0.9.1"
     },

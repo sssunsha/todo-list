@@ -45,7 +45,8 @@ import { CalendarComponent } from './calendar/calendar.component';
 	LifeComponent,
 	OthersComponent,
 	StatisticsComponent,
-	SettingsComponent
+	SettingsComponent,
+	CalendarComponent
   ]
 })
 export class PageModule { }
