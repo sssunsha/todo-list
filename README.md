@@ -19,3 +19,5 @@ https://fullcalendar.io/
 5. enhance every week, month task analysis and report
 
 6. implement regular task and notification for daily work
+
+7. think about how to refresh page during service data has updated
