@@ -2,17 +2,19 @@ $black-background: #212121;
 $default-background: #5D5C61;
 $high-light: #E27D60;
 $low-light: #379683;
-
-$default-font-family: Arial, Helvetica, sans-serif;
-
+$default-font-family: Arial,
+Helvetica,
+sans-serif;
 .task-icon {
-	color: lightblue;
+    color: lightblue;
 }
+
 .note-icon {
-	color: darkgoldenrod;
+    color: darkgoldenrod;
 }
+
 .reminder-icon {
-	color: darkorchid;
+    color: darkorchid;
 }
 
 .high {
@@ -23,9 +25,18 @@ $default-font-family: Arial, Helvetica, sans-serif;
     background-color: $low-light;
 }
 
-input, textarea {
-	border-radius: 2px;
-  	border: solid 1px #e0e0e0;
-	background-color: lightgrey;
-	padding-left: 10px;
+input,
+textarea {
+    border-radius: 2px;
+    border: solid 1px #e0e0e0;
+    background-color: lightgrey;
+    padding-left: 10px;
+}
+
+@mixin text-max-lines($number) {
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: $number;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }

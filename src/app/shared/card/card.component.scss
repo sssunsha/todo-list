@@ -1,29 +1,44 @@
 @import '../../../resource/base.scss';
 .card {
-	max-width: 400px;
-	max-height: 400px;
-	padding: 8px;
+    width: 200px;
+    height: 200px;
+    color: black;
+    background-image: url("src/assets/img/sticky.png");
+    background-size: 240px 260px;
+    padding-top: 25px;
+    .card-icon {
+        width: 24px;
+        height: 24px;
+    }
+    .card-title {
+        font-size: 14px;
+        font-weight: bold;
+        @include text-max-lines(5);
+    }
+    .card-content {
+        @include text-max-lines(5);
+        margin: 0 5px;
+    }
+    .card-actions {}
+}
 
-	.card-icon {
-		width: 24px;
-		height: 24px;
-	}
-	.card-title {
-		font-size: 16px;
-	}
+.high {
+    background-color: unset;
+    background-image: url("src/assets/img/sticky_high.png");
+}
 
-	.card-content {
-
-	}
-	.card-actions {
-
-	}
-  }
-
-  .high {
-    background-color: $high-light;
+.medium {
+    background-color: unset;
 }
 
 .low {
-    background-color: $low-light;
+    background-color: unset;
+    background-image: url("src/assets/img/sticky_low.png");
+}
+
+.note-icon,
+.task-icon,
+.reminder-icon,
+.event-icon {
+    color: black;
 }
