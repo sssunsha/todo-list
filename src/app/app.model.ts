@@ -52,6 +52,7 @@ export enum ETicketType {
 	task = 'task',
 	note = 'note',
 	reminder = 'reminder',
+	event = 'event',
 }
 
 export const TICKETTYPESELECTCONFIG: Array<ISelectConfig> = [
@@ -112,13 +113,13 @@ export class Ticket {
 	id?: string;
 	summary: string;
 	description: string;
-	priority: EPriority;
+	priority?: EPriority;
 	createdAt: string;
 	modifiedAt: string;
 	ticketType: ETicketType;
 	effort?: ETicketEffort;
 	progress?: ETicktProgress;
-	inPages: Array<EPageState>;
+	inPages?: Array<EPageState>;
 	records?: Array<string>;
 	timeCosts?: Array<ITicketTimeCost>; // for every tickets, can be finished with some group of time
 	constructor(data: Partial<Ticket>) {
@@ -154,6 +155,13 @@ export class Reminder extends Ticket {
 	constructor(data: Partial<Reminder>) {
 		super(data);
 		this.ticketType = ETicketType.reminder;
+	}
+}
+
+export class Event extends Ticket {
+	constructor(data: Partial<Event>) {
+		super(data);
+		this.ticketType = ETicketType.event;
 	}
 }
 

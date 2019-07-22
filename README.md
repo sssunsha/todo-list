@@ -15,3 +15,7 @@ https://fullcalendar.io/
 3. create a new ticket type as event, to record time spend on such as take part meeting etc. and record on Calendar page
 
 4. choose a rich text editor npm lib to use
+
+5. enhance every week, month task analysis and report
+
+6. implement regular task and notification for daily work
