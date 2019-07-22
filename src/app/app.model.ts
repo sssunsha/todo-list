@@ -27,6 +27,7 @@ export const PAGELIST = [
 export interface ISelectConfig {
 	value: any;
 	label: string;
+	icon? : string;
 }
 
 export interface IAlertConfig {
@@ -56,10 +57,10 @@ export enum ETicketType {
 }
 
 export const TICKETTYPESELECTCONFIG: Array<ISelectConfig> = [
-	{label: 'Task', value: ETicketType.task},
-	{label: 'Note', value: ETicketType.note},
-	{label: 'Reminder', value: ETicketType.reminder},
-	{label: 'Event', value: ETicketType.event},
+	{label: 'Task', value: ETicketType.task, icon: 'work'},
+	{label: 'Note', value: ETicketType.note, icon: 'comment'},
+	{label: 'Reminder', value: ETicketType.reminder, icon: 'access_alarms'},
+	{label: 'Event', value: ETicketType.event, icon: 'event'},
 ];
 
 export enum ETicketEffort {
