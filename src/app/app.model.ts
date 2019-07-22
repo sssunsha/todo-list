@@ -59,6 +59,7 @@ export const TICKETTYPESELECTCONFIG: Array<ISelectConfig> = [
 	{label: 'Task', value: ETicketType.task},
 	{label: 'Note', value: ETicketType.note},
 	{label: 'Reminder', value: ETicketType.reminder},
+	{label: 'Event', value: ETicketType.event},
 ];
 
 export enum ETicketEffort {
@@ -173,6 +174,7 @@ export const defaultTicket:Ticket = {
 	createdAt: '',
 	modifiedAt: '',
 	ticketType: ETicketType.task,
+	effort: ETicketEffort.half_hour,
 	inPages: [],
 }
 

@@ -21,3 +21,7 @@
     left: 20px;
     bottom: 10px;
 }
+
+label {
+	font-family: Arial, Helvetica, sans-serif;
+}

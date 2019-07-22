@@ -8,6 +8,7 @@ import { ProgressComponent } from './progress/progress.component';
 import { CardComponent } from './card/card.component';
 import { BottomSheetComponent } from './bottom-sheet/bottom-sheet.component';
 import { AlertComponent } from './alert/alert.component';
+import { TicketDialogComponent } from './ticket-dialog/ticket-dialog.component';
 
 
 @NgModule({
@@ -24,6 +25,7 @@ import { AlertComponent } from './alert/alert.component';
 		CardComponent,
 		BottomSheetComponent,
 		AlertComponent,
+		TicketDialogComponent,
 	],
 	exports: [
 		TableComponent,
@@ -31,7 +33,12 @@ import { AlertComponent } from './alert/alert.component';
 		CardComponent,
 		BottomSheetComponent,
 		AlertComponent,
+		TicketDialogComponent,
 	],
-	entryComponents: [BottomSheetComponent, AlertComponent],
+	entryComponents: [
+		BottomSheetComponent,
+		AlertComponent,
+		TicketDialogComponent,
+	],
 })
 export class SharedComponentModule {}

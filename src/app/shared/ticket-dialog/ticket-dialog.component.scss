@@ -1,0 +1,19 @@
+.form-container {
+	display: flex;
+	flex-direction: column;
+	label {
+		margin: 10px auto;
+		font-size: 14px;
+	}
+	mat-form-field {
+		width: 100%;
+	}
+	.form-actions {
+		width: 100%;
+		display: flex;
+		justify-content: flex-end;
+		button {
+			margin: 0 10px;
+		}
+	}
+}

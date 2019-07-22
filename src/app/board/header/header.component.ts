@@ -6,6 +6,7 @@ import { Ticket, EPageState } from '../../app.model';
 import { Helper } from '../../utils';
 import {MatDialog} from '@angular/material/dialog';
 import { AppService } from '../../app.service';
+import { TicketDialogComponent } from '../../shared/ticket-dialog/ticket-dialog.component';
 
 @Component({
   selector: 'app-header',
@@ -28,8 +29,14 @@ export class HeaderComponent implements OnInit {
   onNewTicket() {
 	  // TODO: dispatch to store for testing
 	// this.store.dispatch(new TicketActions.TicketCreateAction());
-	Helper.createAlert(this.dialog, {title: 'new ticket', message: 'new ticket message, new ticket message,\
-		new ticket message, new ticket message, new ticket message, new ticket message'});
+	const dialogRef = this.dialog.open(TicketDialogComponent, {
+		width: '600px',
+	});
+	dialogRef.afterClosed().subscribe(newTicket => {
+		if (newTicket) {
+			this.service.tickets.push(newTicket);
+		}
+	})
   }
 
   onMenuSaveAs(): void {
