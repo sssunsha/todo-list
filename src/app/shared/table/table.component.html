@@ -7,7 +7,8 @@
         <td mat-cell *matCellDef="let element" [ngClass]="{'high': element.priority === 'high', 'low': element.priority === 'low'}">
             <mat-icon *ngIf="column === 'ticketType' && element.ticketType === 'reminder'" class="reminder-icon">access_alarms</mat-icon>
             <mat-icon *ngIf="column === 'ticketType' && element.ticketType === 'note'" class="note-icon">comment</mat-icon>
-            <mat-icon *ngIf="column === 'ticketType' && element.ticketType === 'task'" class="task-icon">work</mat-icon>
+			<mat-icon *ngIf="column === 'ticketType' && element.ticketType === 'task'" class="task-icon">work</mat-icon>
+			<mat-icon *ngIf="column === 'ticketType' && element.ticketType === 'event'" class="task-icon">event</mat-icon>
             <span *ngIf="column !== 'ticketType' && column !== 'effort' && column !== 'progress'">{{element[column]}}</span>
             <app-star *ngIf="column === 'effort'" [effort]="element[column]"></app-star>
             <app-progress *ngIf="column === 'progress'" [progress]="element.progress"></app-progress>

@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Ticket } from '../../app.model';
+import { Helper } from '../../utils';
 import {
 	TICKETPRIORITYSELECTCONFIG,
 	TICKETTYPESELECTCONFIG,
@@ -45,6 +46,7 @@ export class TicketDialogComponent implements OnInit {
   prepareForSaving(): void {
 	  // default in page is inbox
 	  this.ticket.inPages = [EPageState.inbox];
+	  this.ticket.createdAt = Helper.generateCreatedAt();
   }
 
 }
