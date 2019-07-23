@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { EPageState, Ticket, TicketFile } from './app.model';
 import * as COS from 'cos-js-sdk-v5';
 import { cosConfig, appConfig } from './shared/app.config';
@@ -12,13 +12,15 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 @Injectable({
   providedIn: 'root'
 })
-export class AppService {
+export class AppService implements OnDestroy{
   currentPage: EPageState;
   
   // store tickets data here
   private tickets: Array<Ticket> = [];
+  ticketsSubject: Subject<any> = new Subject<any>();
   // mark the current working on tickets
   private workingOnTickets: Array<Ticket> = [];
+  workingOnTicketsSubject: Subject<any> = new Subject<any>();
 
   // config data
   cosConfig = cosConfig;
@@ -44,9 +46,13 @@ export class AppService {
 	   this.initClient();
 	   this.startAutoSync();
    }
+
+   ngOnDestroy() {
+   }
 // public mthod for private member
    setTickets(tickets: Array<Ticket>): void {
 	   this.tickets  = tickets;
+	   this.ticketsSubject.next('tickets set updated');
    }
 
    getTickets(): Array<Ticket> {
@@ -55,12 +61,18 @@ export class AppService {
 
    pushIntoTickets(ticket: Ticket): void {
 	   this.tickets.push(ticket);
+	   this.ticketsSubject.next('ticket push updated')
    }
 
    setWorkingOnTickets(tickets: Array<Ticket>): void {
 	   this.workingOnTickets = tickets;
+	   this.workingOnTicketsSubject.next('workingOnTicket set updated');
    }
 
+   pushIntoWorkingOnTicket(ticket: Ticket): void {
+	   this.workingOnTickets.push(ticket);
+	   this.workingOnTicketsSubject.next('workingOnTicket push updated');
+   }
 // COS =================================================================================================
    initClient(): void {
 	   this.cos = new COS({
