@@ -1,4 +1,4 @@
-<mat-card class="card" [ngClass]="{'high': ticket.priority === 'high', 'medium': ticket.priority === 'medium', 'low': ticket.priority === 'low'}">
+<mat-card class="card" [ngClass]="{'high': ticket.priority === 'high', 'medium': ticket.priority === 'medium', 'low': ticket.priority === 'low'}" [matMenuTriggerFor]="cardActions">
     <mat-card-header>
         <div mat-card-avatar class="card-icon">
             <mat-icon *ngIf="ticket.ticketType === 'reminder'" class="reminder-icon">access_alarms</mat-icon>
@@ -15,7 +15,31 @@
         </p>
     </mat-card-content>
     <mat-card-actions class="card-actions">
-        <!-- <button mat-button>LIKE</button>
-	  <button mat-button>SHARE</button> -->
-    </mat-card-actions>
+	</mat-card-actions>
+	<mat-menu #cardActions="matMenu" class="menu-container">
+		<button mat-menu-item [matMenuTriggerFor]="moveTo">Move to</button>
+		<button mat-menu-item [matMenuTriggerFor]="priority">Piority</button>
+		<button mat-menu-item [matMenuTriggerFor]="changeType">Change type</button>
+	  </mat-menu>
+	  
+	  <mat-menu #priority="matMenu">
+		<button mat-menu-item (click)="handlePriorityChanged('high')">High</button>
+		<button mat-menu-item (click)="handlePriorityChanged('medium')">Medium</button>
+		<button mat-menu-item (click)="handlePriorityChanged('low')">Low</button>
+	  </mat-menu>
+	  
+	  <mat-menu #moveTo="matMenu">
+		<button mat-menu-item (click)="handleMovetoChanged('today')">Today</button>
+		<button mat-menu-item (click)="handleMovetoChanged('week')">This week</button>
+		<button mat-menu-item (click)="handleMovetoChanged('life')">This month</button>
+		<button mat-menu-item (click)="handleMovetoChanged('future')">Future</button>
+	  </mat-menu>
+
+	  <mat-menu #changeType="matMenu">
+		<button mat-menu-item (click)="handleTicketTypeChanged('task')">Task</button>
+		<button mat-menu-item (click)="handleTicketTypeChanged('note')">Note</button>
+		<button mat-menu-item (click)="handleTicketTypeChanged('event')">Event</button>
+		<button mat-menu-item (click)="handleTicketTypeChanged('reminder')">Reminder</button>
+	  </mat-menu>
+
 </mat-card>

@@ -15,7 +15,7 @@ export class Helper {
 	
 	}
 	
-	static updateArrayData(array: Array<any>, data: any, isAdd: boolean): void {
+	static updateArrayData(array: Array<any>, data: any, isAdd: boolean): Array<any> {
 		if (isAdd) {
 			array.push(data);
 		} else {
@@ -25,7 +25,7 @@ export class Helper {
 				}
 			})
 		}
-		array =  Array.from(new Set(array));
+		return array =  Array.from(new Set(array));
 	}
 	
 	static filterTicketsForPage(ticketArray: Array<Ticket>, pagestate: EPageState): Array<Ticket> {

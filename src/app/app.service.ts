@@ -73,6 +73,14 @@ export class AppService implements OnDestroy{
 	   this.workingOnTickets.push(ticket);
 	   this.workingOnTicketsSubject.next('workingOnTicket push updated');
    }
+
+   notifyTicketsChanged(): void {
+	   this.ticketsSubject.next('ticket notified updated');
+   }
+
+   notifyWorkingOnTicketsChanged(): void {
+	   this.workingOnTicketsSubject.next('workingOnTicket notified updated');
+   }
 // COS =================================================================================================
    initClient(): void {
 	   this.cos = new COS({
