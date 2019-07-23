@@ -34,7 +34,7 @@ export class HeaderComponent implements OnInit {
 	});
 	dialogRef.afterClosed().subscribe(newTicket => {
 		if (newTicket) {
-			this.service.tickets.push(newTicket);
+			this.service.pushIntoTickets(newTicket);
 		}
 	})
   }
@@ -52,11 +52,11 @@ export class HeaderComponent implements OnInit {
   }
 
   getInboxTicketSize(): number {
-	return this.service.tickets.filter(t => t.inPages.includes(EPageState.inbox)).length
+	return this.service.getTickets().filter(t => t.inPages.includes(EPageState.inbox)).length
   }
 
   getTodayTicketSize(): number {
-	return this.service.tickets.filter(t => t.inPages.includes(EPageState.today)).length
+	return this.service.getTickets().filter(t => t.inPages.includes(EPageState.today)).length
   }
 
   goto(pageState: EPageState): void {

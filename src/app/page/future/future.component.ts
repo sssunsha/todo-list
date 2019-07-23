@@ -16,7 +16,7 @@ export class FutureComponent implements OnInit {
   constructor(private service: AppService) { }
 
   ngOnInit() {
-	this.ticketList = Helper.filterTicketsForPage(this.service.tickets, EPageState.future);
+	this.ticketList = Helper.filterTicketsForPage(this.service.getTickets(), EPageState.future);
   }
 
 }

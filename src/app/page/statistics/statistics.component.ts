@@ -15,7 +15,7 @@ export class StatisticsComponent implements OnInit {
   constructor(private service: AppService) { }
 
   ngOnInit() {
-	this.ticketList = Helper.filterTicketsForPage(this.service.tickets, EPageState.statistics);
+	this.ticketList = Helper.filterTicketsForPage(this.service.getTickets(), EPageState.statistics);
   }
 
 }

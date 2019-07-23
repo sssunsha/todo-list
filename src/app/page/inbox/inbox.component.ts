@@ -16,7 +16,7 @@ export class InboxComponent implements OnInit {
   constructor(private service: AppService) { }
 
   ngOnInit() {
-	this.ticketList = Helper.filterTicketsForPage(this.service.tickets, EPageState.inbox);
+	this.ticketList = Helper.filterTicketsForPage(this.service.getTickets(), EPageState.inbox);
   }
 
 }

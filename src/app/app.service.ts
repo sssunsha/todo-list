@@ -16,9 +16,9 @@ export class AppService {
   currentPage: EPageState;
   
   // store tickets data here
-  tickets: Array<Ticket> = [];
+  private tickets: Array<Ticket> = [];
   // mark the current working on tickets
-  workingOnTickets: Array<Ticket> = [];
+  private workingOnTickets: Array<Ticket> = [];
 
   // config data
   cosConfig = cosConfig;
@@ -43,6 +43,22 @@ export class AppService {
 		}
 	   this.initClient();
 	   this.startAutoSync();
+   }
+// public mthod for private member
+   setTickets(tickets: Array<Ticket>): void {
+	   this.tickets  = tickets;
+   }
+
+   getTickets(): Array<Ticket> {
+	   return this.tickets;
+   }
+
+   pushIntoTickets(ticket: Ticket): void {
+	   this.tickets.push(ticket);
+   }
+
+   setWorkingOnTickets(tickets: Array<Ticket>): void {
+	   this.workingOnTickets = tickets;
    }
 
 // COS =================================================================================================
@@ -78,7 +94,7 @@ export class AppService {
 				if (!err && data.Body) {
 					// save the download tickets
 					const ticketFileData = JSON.parse(data.Body)
-					this.tickets = ticketFileData.value;
+					this.setTickets(ticketFileData.value);
 					this.cosFileVersion = ticketFileData.version;
 					this.modifiedAt = ticketFileData.modifiedAt;
 					Helper.openSnackBar(this._snackBar, 'download ticket file finished');
@@ -92,7 +108,7 @@ export class AppService {
 			Bucket: this.cosConfig.Bucket,
 			Region: this.cosConfig.Region,
 			Key: key,
-			Body: JSON.stringify(Helper.generateTicketFile(this.tickets))}, (err, data) => {
+			Body: JSON.stringify(Helper.generateTicketFile(this.getTickets()))}, (err, data) => {
 				if(!err) {
 					Helper.openSnackBar(this._snackBar, 'upload ticket file finished');
 				} else {
@@ -115,14 +131,14 @@ export class AppService {
 // html5 local storage for backup========================================================================
 	startTicketsLocalStorageBackup(): void {
 		localStorage.setItem(Helper.generateTicketFilePath(this.appConfig.isLiveMode),
-			JSON.stringify(Helper.generateTicketFile(this.tickets)));
+			JSON.stringify(Helper.generateTicketFile(this.getTickets())));
 	}
 
 	retrieveTicketsFromLocalStorage(): void {
 		const localBackupTicketsFile = localStorage.getItem(Helper.generateTicketFilePath(this.appConfig.isLiveMode));
 		if (localBackupTicketsFile) {
 			const localBackupTicketsFileJson = JSON.parse(localBackupTicketsFile);
-			this.tickets = localBackupTicketsFileJson.value;
+			this.setTickets(localBackupTicketsFileJson.value);
 			this.cosFileVersion = localBackupTicketsFileJson.version;
 			this.modifiedAt = localBackupTicketsFileJson.modifiedAt;
 			Helper.openSnackBar(this._snackBar, 'retrieve backup ticket file finished');
@@ -133,7 +149,7 @@ export class AppService {
 
 // tickets save as file to backup
 	startSaveASFile(): void {
-		let blob = new Blob([JSON.stringify(Helper.generateTicketFile(this.tickets))], {type: "application/json;charset=utf-8"});
+		let blob = new Blob([JSON.stringify(Helper.generateTicketFile(this.getTickets()))], {type: "application/json;charset=utf-8"});
 		FileSaver.saveAs(blob, `${Helper.generateTicketFileName()}`);
 	}
 }

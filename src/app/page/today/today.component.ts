@@ -16,11 +16,11 @@ export class TodayComponent implements OnInit, DoCheck {
   constructor(private service: AppService) { }
 
   ngOnInit() {
-	  this.ticketList = Helper.filterTicketsForPage(this.service.tickets, EPageState.today);
+	  this.ticketList = Helper.filterTicketsForPage(this.service.getTickets(), EPageState.today);
   }
 
   ngDoCheck() {
-	this.ticketList = Helper.filterTicketsForPage(this.service.tickets, EPageState.today);
+	this.ticketList = Helper.filterTicketsForPage(this.service.getTickets(), EPageState.today);
   }
 
 }

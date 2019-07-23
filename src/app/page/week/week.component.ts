@@ -15,7 +15,7 @@ export class WeekComponent implements OnInit {
   constructor(private service: AppService) { }
 
   ngOnInit() {
-	this.ticketList = Helper.filterTicketsForPage(this.service.tickets, EPageState.this_week);
+	this.ticketList = Helper.filterTicketsForPage(this.service.getTickets(), EPageState.this_week);
   }
 
 }

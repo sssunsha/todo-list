@@ -16,7 +16,7 @@ export class WorkComponent implements OnInit {
   constructor(private service: AppService) { }
 
   ngOnInit() {
-	this.ticketList = Helper.filterTicketsForPage(this.service.tickets, EPageState.work);
+	this.ticketList = Helper.filterTicketsForPage(this.service.getTickets(), EPageState.work);
   }
 
 }

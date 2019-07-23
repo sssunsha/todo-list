@@ -16,7 +16,7 @@ export class OthersComponent implements OnInit {
   constructor(private service: AppService) { }
 
   ngOnInit() {
-	this.ticketList = Helper.filterTicketsForPage(this.service.tickets, EPageState.others);
+	this.ticketList = Helper.filterTicketsForPage(this.service.getTickets(), EPageState.others);
   }
 
 }

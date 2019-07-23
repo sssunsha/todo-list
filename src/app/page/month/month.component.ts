@@ -15,7 +15,7 @@ export class MonthComponent implements OnInit {
   constructor(private service: AppService) { }
 
   ngOnInit() {
-	this.ticketList = Helper.filterTicketsForPage(this.service.tickets, EPageState.this_month);
+	this.ticketList = Helper.filterTicketsForPage(this.service.getTickets(), EPageState.this_month);
   }
 
 }

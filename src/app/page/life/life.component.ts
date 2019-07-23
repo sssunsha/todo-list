@@ -15,7 +15,7 @@ export class LifeComponent implements OnInit {
   constructor(private service: AppService) { }
 
   ngOnInit() {
-	this.ticketList = Helper.filterTicketsForPage(this.service.tickets, EPageState.life);
+	this.ticketList = Helper.filterTicketsForPage(this.service.getTickets(), EPageState.life);
   }
 
 }
