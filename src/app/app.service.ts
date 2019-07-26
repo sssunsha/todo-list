@@ -64,6 +64,17 @@ export class AppService implements OnDestroy{
 	   this.ticketsSubject.next('ticket push updated')
    }
 
+   updateIickets(ticket: Ticket): void {
+	   if (ticket) {
+		   this.tickets.forEach(t =>  {
+			   if(t.id === ticket.id) {
+				   t = ticket;
+				   return;
+			   }
+		   })
+	   }
+   }
+
    setWorkingOnTickets(tickets: Array<Ticket>): void {
 	   this.workingOnTickets = tickets;
 	   this.workingOnTicketsSubject.next('workingOnTicket set updated');

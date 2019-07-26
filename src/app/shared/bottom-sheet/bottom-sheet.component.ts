@@ -25,18 +25,13 @@ export class BottomSheetComponent implements OnInit {
 
   constructor(
 	  private _bottomSheetRef: MatBottomSheetRef<BottomSheetComponent>,
-	  @Inject(MAT_BOTTOM_SHEET_DATA) public ticket: Ticket) { }
+	  @Inject(MAT_BOTTOM_SHEET_DATA) private ticket: Ticket) { }
 
   ngOnInit() {
   }
 
-  onCancel(): void {
-	  this.close();
-  }
-
-  onSave(): void {
-	  //TODO: save action handler
-	  this.close();
+  onOk(): void {
+	  this._bottomSheetRef.dismiss();
   }
 
   onAddRecord(): void {
@@ -46,9 +41,4 @@ export class BottomSheetComponent implements OnInit {
   onRemoveRecord(): void {
     this.ticket.records.pop();
   }
-
-  private close(): void {
-	this._bottomSheetRef.dismiss();
-  }
-
 }

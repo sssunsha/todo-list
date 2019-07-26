@@ -1,9 +1,10 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import { Ticket } from '../../app.model';
-import {MatBottomSheet} from '@angular/material/bottom-sheet';
+import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import {BottomSheetComponent} from '../bottom-sheet/bottom-sheet.component';
 import { Helper } from 'src/app/utils';
+import { AppService } from '../../app.service';
 
 @Component({
   selector: 'app-table',
@@ -23,8 +24,10 @@ export class TableComponent implements OnInit {
 	@Input()
 	columnsToDisplay: Array<string>;
 	expandedElement: Array<any>;
+	bottomSheetRef: MatBottomSheetRef;
   constructor(
-	private _bottomSheet: MatBottomSheet
+	private _bottomSheet: MatBottomSheet,
+	private service: AppService
   ) { }
 
   ngOnInit() {
@@ -32,7 +35,7 @@ export class TableComponent implements OnInit {
   }
 
   openEditSheet(ticket: Ticket) {
-	  this._bottomSheet.open(BottomSheetComponent, {data: ticket, panelClass: 'bottom-sheet-custom'});
+	  this.bottomSheetRef = this._bottomSheet.open(BottomSheetComponent, {data: ticket, panelClass: 'bottom-sheet-custom'});
   }
 
   calculateTimeCost(element: Ticket): string {
