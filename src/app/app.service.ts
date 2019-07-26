@@ -6,6 +6,7 @@ import { Observable, Subject } from 'rxjs';
 import { Helper } from './utils';
 import * as FileSaver from 'file-saver';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { AlramService } from './alram.service';
 
 
 
@@ -34,7 +35,9 @@ export class AppService implements OnDestroy{
   // autoSync handler
   autoSyncHandler = null;
 
-  constructor(private _snackBar: MatSnackBar) {
+  constructor(
+	  private _snackBar: MatSnackBar,
+	  private alarmService: AlramService) {
 	  this.init();
    }
 

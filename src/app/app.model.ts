@@ -184,3 +184,10 @@ export interface TicketFile {
 	modifiedAt: string;
 	value: Array<Ticket>;
 }
+
+export interface IAlarm {
+	id?: string;
+	at: Date;
+	ticketID?: string;
+	message?: string;
+}
