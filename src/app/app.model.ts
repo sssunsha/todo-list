@@ -187,7 +187,7 @@ export interface TicketFile {
 
 export interface IAlarm {
 	id?: string;
-	at: Date;
+	at: number; // timestamp
 	ticketID?: string;
 	message?: string;
 }

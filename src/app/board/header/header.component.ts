@@ -7,6 +7,7 @@ import { Helper } from '../../utils';
 import {MatDialog} from '@angular/material/dialog';
 import { AppService } from '../../app.service';
 import { TicketDialogComponent } from '../../shared/ticket-dialog/ticket-dialog.component';
+import { AlramService } from '../../alram.service';
 
 @Component({
   selector: 'app-header',
@@ -16,10 +17,17 @@ import { TicketDialogComponent } from '../../shared/ticket-dialog/ticket-dialog.
 export class HeaderComponent implements OnInit {
   query: string;
   constructor(private dialog: MatDialog,
-	private service: AppService) {}
+	private alarmService: AlramService,
+	private service: AppService) {
+
+	}
 //   constructor(private store: Store<Ticket>) { }
 
   ngOnInit() {
+	  // TODO: test code for alram service
+	  this.alarmService.addAlaram({
+		  at: new Date().getTime() + 300000000,
+	  });
   }
 
   onSearch() {
