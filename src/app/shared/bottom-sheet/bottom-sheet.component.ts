@@ -35,7 +35,13 @@ export class BottomSheetComponent implements OnInit {
   }
 
   onAddRecord(): void {
-    this.ticket.records.push('');
+	  if (this.ticket.records && this.ticket.records.length > 0)
+	  {
+		this.ticket.records.push('');
+	  } else {
+		  // if the records is undefined, create one
+		  this.ticket.records = [''];
+	  }
   }
 
   onRemoveRecord(): void {
