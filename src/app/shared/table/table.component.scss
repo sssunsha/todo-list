@@ -1,6 +1,6 @@
 @import '../../../resource/base.scss';
 table {
-    width: 100%;
+	width: 100%;
     th {
         font-size: 16px;
         font-weight: bold;
@@ -16,7 +16,8 @@ table {
         width: 35%;
     }
     td {
-        padding: 10px 20px;
+		padding: 10px 20px;
+		cursor: pointer;
     }
 }
 

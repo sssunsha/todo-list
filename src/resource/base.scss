@@ -18,12 +18,20 @@ sans-serif;
 }
 
 .high {
-    background-color: $high-light;
+	background-color: #F57C95;
+	color: black;
+}
+
+.medium {
+	color: black;
+	background-color: #F5EC78;
 }
 
 .low {
-    background-color: $low-light;
+	background-color: #BAF4FF;
+	color: black;
 }
+
 
 input,
 textarea {

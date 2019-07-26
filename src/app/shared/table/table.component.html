@@ -1,17 +1,24 @@
 <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
     <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
         <th mat-header-cell *matHeaderCellDef>
-            <span *ngIf="column !== 'ticketType'">{{column}}</span>
-            <span *ngIf="column === 'ticketType'"></span>
+            <span *ngIf="column !== 'ticketType' && column !== 'more'">{{column}}</span>
+			<span *ngIf="column === 'ticketType'"></span>
+			<span *ngIf="column === 'more'"></span>
         </th>
-        <td mat-cell *matCellDef="let element" [ngClass]="{'high': element.priority === 'high', 'low': element.priority === 'low'}">
+		<td mat-cell *matCellDef="let element" 
+			[ngClass]="{
+						'high': element.priority === 'high',
+						'low': element.priority === 'low',
+						'medium': element.priority === 'medium'
+					}">
             <mat-icon *ngIf="column === 'ticketType' && element.ticketType === 'reminder'" class="reminder-icon">access_alarms</mat-icon>
             <mat-icon *ngIf="column === 'ticketType' && element.ticketType === 'note'" class="note-icon">comment</mat-icon>
 			<mat-icon *ngIf="column === 'ticketType' && element.ticketType === 'task'" class="task-icon">work</mat-icon>
 			<mat-icon *ngIf="column === 'ticketType' && element.ticketType === 'event'" class="task-icon">event</mat-icon>
             <span *ngIf="column !== 'ticketType' && column !== 'effort' && column !== 'progress'">{{element[column]}}</span>
             <app-star *ngIf="column === 'effort'" [effort]="element[column]"></app-star>
-            <app-progress *ngIf="column === 'progress'" [progress]="element.progress"></app-progress>
+			<app-progress *ngIf="column === 'progress'" [progress]="element.progress"></app-progress>
+			<mat-icon *ngIf="column === 'more'" (click)="expandedElement = expandedElement === element ? null : element">expand_more</mat-icon>
         </td>
     </ng-container>
 
@@ -36,7 +43,7 @@
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
-    <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row" [class.example-expanded-row]="expandedElement === element" (dblclick)="openEditSheet(element)" (click)="expandedElement = expandedElement === element ? null : element">
+    <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row" [class.example-expanded-row]="expandedElement === element" (dblclick)="openEditSheet(element)">
     </tr>
     <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
 </table>
