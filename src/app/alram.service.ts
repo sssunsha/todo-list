@@ -4,47 +4,53 @@ import { Helper } from './utils';
 import * as Alarm from 'alarm';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
+export interface IAlarmConfig {
+	cancelFunction: Function;
+	alarmObject: IAlarm;
+}
+
 @Injectable({
   providedIn: 'root'
 })
 export class AlramService {
-	private alarmList: Array<IAlarm>;
+	private alarmConfigList: Array<IAlarmConfig>;
 
   constructor(private dialog: MatDialog) { 
-	  this.alarmList = [];
+	  this.alarmConfigList = [];
   }
 
   addAlaram(newAlarm: IAlarm): void {
+	  const that = this;
 	  if (newAlarm) {
 		  newAlarm.id = Helper.generateMd5Hash(newAlarm.at.toString());
-		  Alarm(new Date(newAlarm.at), this.alramCallback(this));
-		  this.alarmList.push(newAlarm);
+		  this.alarmConfigList.push({
+			  alarmObject: newAlarm,
+			  cancelFunction: Alarm(newAlarm.at,
+				// TODO: here is the draft callback function for test alarm features
+				() => {
+				Helper.createAlert(that.dialog, {
+					title: 'Alarm',
+					message: '... ...'
+				});
+			  })
+			});
 	  }
   }
 
   removeAlarm(id: string):void {
-	  this.alarmList = this.alarmList.filter(alarm => alarm.id !== id);
+	  this.alarmConfigList = this.alarmConfigList.filter(alarm => alarm.alarmObject.id !== id);
   }
 
   changeAlarm(newAlarm: IAlarm): void {
-	  this.alarmList.forEach(alram => {
-		  if (alram.id === newAlarm.id) {
-			  alram = newAlarm;
+	  this.alarmConfigList.forEach(alram => {
+		  if (alram.alarmObject.id === newAlarm.id) {
+			  alram.alarmObject = newAlarm;
 			  return;
 		  }
 	  })
   }
 
-  getAlarmList(): Array<IAlarm> {
-	  return this.alarmList;
-  }
-
-// this is the callback for  alram
-  alramCallback(that: any): void {
-	  // popup a notification for the alram reached
-	  Helper.createAlert(that.dialog, {
-		  title: 'Alarm',
-		  message: '... ...'
-	  });
+  getalarmConfigList(): Array<IAlarmConfig> {
+	  return this.alarmConfigList;
   }
 }
