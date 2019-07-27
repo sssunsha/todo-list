@@ -18,6 +18,7 @@ https://fullcalendar.io/
 
 5. enhance every week, month task analysis and report
 
-6. implement regular task and notification for daily work
+6. implement regular task and notification for daily work (partly done, have added alarm service)
 
-7. think about how to refresh page during service data has updated
+7. sync alarm config data to SOC, and init everytime re-start the todo-list app
+
