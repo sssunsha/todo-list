@@ -124,6 +124,7 @@ export class Ticket {
 	inPages?: Array<EPageState>;
 	records?: Array<string>;
 	timeCosts?: Array<ITicketTimeCost>; // for every tickets, can be finished with some group of time
+	alram?: IRecurrency;
 	constructor(data: Partial<Ticket>) {
 		this.id = data.id;
 		this.summary = data.summary;
@@ -136,6 +137,7 @@ export class Ticket {
 		this.inPages = data.inPages;
 		this.records = data.records;
 		this.timeCosts = data.timeCosts;
+		this.alram = data.alram;
 	}
 }
 
@@ -151,6 +153,51 @@ export class Note extends Ticket {
 		super(data);
 		this.ticketType = ETicketType.note;
 	}
+}
+
+export enum RecurrencyType {
+	day =  'day',
+	week = 'week',
+	month = 'month',
+	year = 'year'
+}
+
+export interface IRecurrency {
+	id?: string;
+	type: RecurrencyType;
+	at?: Date; // the alarm time in UTC +8
+	interval: number;
+	legs: number; // -1: unlimited, other number will be the time it will occurred, the data should bigger than -2
+}
+
+export enum DayOfWeek {
+	monday = 'monday',
+	tuesday = 'tuesday',
+	wednesday = 'wednesday',
+	thursday = 'thursday',
+	friday = 'friday',
+	saturday = 'saturday',
+	sunday = 'sunday',
+}
+export interface IWeekRecurrency extends IRecurrency {
+	dayOfWeek: DayOfWeek;
+}
+
+export enum WeekOfMonth {
+	first = 'first',
+	second = 'second',
+	thrid = 'thrid',
+	fourth = 'fourth',
+	last = 'last',
+}
+
+export interface IMonthDayRecurrency extends IRecurrency {
+	weekOfMonth: WeekOfMonth;
+	daOfWeek: DayOfWeek;
+}
+
+export interface IMonthDateRecurrency extends IRecurrency {
+	index: number; // 1 -31
 }
 
 export class Reminder extends Ticket {
