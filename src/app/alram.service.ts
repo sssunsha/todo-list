@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IAlarm } from './app.model';
+import { IAlarm, Ticket } from './app.model';
 import { Helper } from './utils';
 import * as Alarm from 'alarm';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
@@ -52,5 +52,9 @@ export class AlramService {
 
   getalarmConfigList(): Array<IAlarmConfig> {
 	  return this.alarmConfigList;
+  }
+
+  prepareAlarmConfigList(tickets: Array<Ticket>): void {
+
   }
 }

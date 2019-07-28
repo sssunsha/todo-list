@@ -52,7 +52,7 @@ export class AppService implements OnDestroy{
 
    ngOnDestroy() {
    }
-// public mthod for private member
+// public mthod for private ticket member ===========================================================
    setTickets(tickets: Array<Ticket>): void {
 	   this.tickets  = tickets;
 	   this.ticketsSubject.next('tickets set updated');
@@ -95,6 +95,8 @@ export class AppService implements OnDestroy{
    notifyWorkingOnTicketsChanged(): void {
 	   this.workingOnTicketsSubject.next('workingOnTicket notified updated');
    }
+// alarm methods =======================================================================================
+
 // COS =================================================================================================
    initClient(): void {
 	   this.cos = new COS({

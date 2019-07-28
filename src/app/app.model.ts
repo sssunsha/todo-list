@@ -155,19 +155,24 @@ export class Note extends Ticket {
 	}
 }
 
-export enum RecurrencyType {
+export enum TicketRecurrencyType {
+	once = 'once',
 	day =  'day',
 	week = 'week',
 	month = 'month',
 	year = 'year'
 }
 
+/*
+	if type =  once, only need set at property
+	if type != once, need interval, legs, and at is optional
+*/
 export interface IRecurrency {
 	id?: string;
-	type: RecurrencyType;
+	type: TicketRecurrencyType;
 	at?: Date; // the alarm time in UTC +8
-	interval: number;
-	legs: number; // -1: unlimited, other number will be the time it will occurred, the data should bigger than -2
+	interval?: number;
+	legs?: number; // -1: unlimited, other number will be the time it will occurred, the data should bigger than -2
 }
 
 export enum DayOfWeek {

@@ -1,5 +1,10 @@
 import {Md5} from "ts-md5";
-import { EPageState, Ticket, IAlertConfig, TicketFile } from './app.model';
+import { EPageState,
+		Ticket,
+		IAlertConfig,
+		IRecurrency,
+		TicketFile, 
+		TicketRecurrencyType} from './app.model';
 import { AlertComponent } from './shared/alert/alert.component';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -86,5 +91,23 @@ export class Helper {
 		let timeCostAfterFormatted = M ? `${M} month ` : '' 
 			+ d ? `${d} day ` : '' + h ? `${h} hour ` : '' + m ? `${m} m ` : '' + s ? `${s} s` : ''  
 		return timeCostAfterFormatted;
+	}
+
+	static generateDefaultTicketAlarm(isRecurrency: boolean = false): IRecurrency {
+		if (isRecurrency) {
+			return {
+				id: this.generateMd5Hash(this.generateCreatedAt() + 'ticket recurrency'),
+				type: TicketRecurrencyType.day,
+				at: null,
+				interval: 1,
+				legs: 10,
+			}
+		} else {
+			return {
+				id: this.generateMd5Hash(this.generateCreatedAt() + 'ticket alarm'),
+				type: TicketRecurrencyType.once,
+				at: null, // need be set latter
+			} as IRecurrency;
+		}
 	}
 }
