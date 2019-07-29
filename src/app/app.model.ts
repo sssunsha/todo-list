@@ -173,6 +173,9 @@ export interface ITicketRecurrency {
 	at?: Date; // the alarm time in UTC +8
 	interval?: number;
 	legs?: number; // -1: unlimited, other number will be the time it will occurred, the data should bigger than -2
+	dayOfWeek?: DayOfWeek; // for weekly and month day
+	weekOfMonth?: WeekOfMonth; // for month day
+	index?: number; // for month date
 }
 
 export enum DayOfWeek {
@@ -195,10 +198,6 @@ export const DAYOFWEEK = [
 	DayOfWeek.sunday
 ];
 
-export interface IWeekRecurrency extends ITicketRecurrency {
-	dayOfWeek: DayOfWeek;
-}
-
 export enum WeekOfMonth {
 	first = 'first',
 	second = 'second',
@@ -214,15 +213,6 @@ export const WEEKOFMONTH = [
 	WeekOfMonth.fourth,
 	WeekOfMonth.last
 ]
-
-export interface IMonthDayRecurrency extends ITicketRecurrency {
-	weekOfMonth: WeekOfMonth;
-	daOfWeek: DayOfWeek;
-}
-
-export interface IMonthDateRecurrency extends ITicketRecurrency {
-	index: number; // 1 -31
-}
 
 export interface ITicketRecurrencyDialogConfig {
 	ticketAlarm: ITicketRecurrency,

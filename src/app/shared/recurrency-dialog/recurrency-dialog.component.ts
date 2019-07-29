@@ -28,7 +28,7 @@ export class RecurrencyDialogComponent implements OnInit {
 	  if (!this.data.ticketAlarm) {
 		  // should generate a new one
 		  this.data.ticketAlarm = 
-		  	Helper.generateDefaultTicketAlarm(this.data.type !== ETicketRecurrencyType.once);
+		  	Helper.generateDefaultTicketAlarm(this.data.type );
 	  }
   }
 

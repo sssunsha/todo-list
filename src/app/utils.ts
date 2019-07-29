@@ -8,6 +8,7 @@ import { EPageState,
 import { AlertComponent } from './shared/alert/alert.component';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import { DayOfWeek, WeekOfMonth } from './app.model';
 
 export class Helper {
 	static generateMd5Hash(data: string): string {
@@ -93,22 +94,38 @@ export class Helper {
 		return timeCostAfterFormatted;
 	}
 
-	static generateDefaultTicketAlarm(isRecurrency: boolean = false): ITicketRecurrency {
-		if (isRecurrency) {
-			return {
-				id: this.generateMd5Hash(this.generateCreatedAt() + 'ticket recurrency'),
-				type: ETicketRecurrencyType.day,
-				at: null,
-				interval: 1,
-				legs: 10,
-			}
-		} else {
-			return {
-				id: this.generateMd5Hash(this.generateCreatedAt() + 'ticket alarm'),
-				type: ETicketRecurrencyType.once,
-				at: null, // need be set latter
-			} as ITicketRecurrency;
+	static generateDefaultTicketAlarm(type: ETicketRecurrencyType = ETicketRecurrencyType.once): ITicketRecurrency {
+		let defaultRecurrency: ITicketRecurrency = {
+			id: this.generateMd5Hash(this.generateCreatedAt() + 'ticket recurrency'),
+			type: type,
+			at: new Date()
 		}
+		switch(type) {
+			case ETicketRecurrencyType.once:
+				break;
+			case ETicketRecurrencyType.day:
+				defaultRecurrency.interval = 1;
+				defaultRecurrency.legs = 10;
+				break;
+			case ETicketRecurrencyType.week:
+				defaultRecurrency.interval = 1;
+				defaultRecurrency.legs = 10;
+				defaultRecurrency.dayOfWeek = DayOfWeek.monday;
+				break;
+			case ETicketRecurrencyType.monthDay:
+				defaultRecurrency.interval = 1;
+				defaultRecurrency.legs = 10;
+				defaultRecurrency.weekOfMonth = WeekOfMonth.first;
+				defaultRecurrency.dayOfWeek = DayOfWeek.monday;
+				break;
+			case ETicketRecurrencyType.monthDate:
+				defaultRecurrency.interval = 1;
+				defaultRecurrency.legs = 10;
+				defaultRecurrency.index = 1;
+				break;
+
+		}
+		return defaultRecurrency;
 	}
 
 	static isDateToday(date: Date): boolean {
