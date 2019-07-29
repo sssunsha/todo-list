@@ -9,6 +9,7 @@ import { CardComponent } from './card/card.component';
 import { BottomSheetComponent } from './bottom-sheet/bottom-sheet.component';
 import { AlertComponent } from './alert/alert.component';
 import { TicketDialogComponent } from './ticket-dialog/ticket-dialog.component';
+import { RecurrencyDialogComponent } from './recurrency-dialog/recurrency-dialog.component';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { TicketDialogComponent } from './ticket-dialog/ticket-dialog.component';
 		BottomSheetComponent,
 		AlertComponent,
 		TicketDialogComponent,
+		RecurrencyDialogComponent,
 	],
 	exports: [
 		TableComponent,
