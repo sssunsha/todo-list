@@ -10,14 +10,16 @@ import { BottomSheetComponent } from './bottom-sheet/bottom-sheet.component';
 import { AlertComponent } from './alert/alert.component';
 import { TicketDialogComponent } from './ticket-dialog/ticket-dialog.component';
 import { RecurrencyDialogComponent } from './recurrency-dialog/recurrency-dialog.component';
-
+import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 
 @NgModule({
 	imports: [
 		CommonModule,
 		FormsModule,
 		AngularMaterialModule,
-		ReactiveFormsModule 
+		ReactiveFormsModule,
+		OwlDateTimeModule, 
+        OwlNativeDateTimeModule,
 	],
 	declarations: [
 		TableComponent,

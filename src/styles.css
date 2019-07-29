@@ -2,6 +2,7 @@
 
 @import "~@angular/material/prebuilt-themes/pink-bluegrey.css";
 @import "tui-calendar/dist/tui-calendar.css";
+@import "~ng-pick-datetime/assets/style/picker.min.css";
 
 .bottom-sheet-custom {
     width: 1500px;
