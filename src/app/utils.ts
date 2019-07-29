@@ -95,37 +95,16 @@ export class Helper {
 	}
 
 	static generateDefaultTicketAlarm(type: ETicketRecurrencyType = ETicketRecurrencyType.once): ITicketRecurrency {
-		let defaultRecurrency: ITicketRecurrency = {
+		return {
 			id: this.generateMd5Hash(this.generateCreatedAt() + 'ticket recurrency'),
 			type: type,
-			at: new Date()
-		}
-		switch(type) {
-			case ETicketRecurrencyType.once:
-				break;
-			case ETicketRecurrencyType.day:
-				defaultRecurrency.interval = 1;
-				defaultRecurrency.legs = 10;
-				break;
-			case ETicketRecurrencyType.week:
-				defaultRecurrency.interval = 1;
-				defaultRecurrency.legs = 10;
-				defaultRecurrency.dayOfWeek = DayOfWeek.monday;
-				break;
-			case ETicketRecurrencyType.monthDay:
-				defaultRecurrency.interval = 1;
-				defaultRecurrency.legs = 10;
-				defaultRecurrency.weekOfMonth = WeekOfMonth.first;
-				defaultRecurrency.dayOfWeek = DayOfWeek.monday;
-				break;
-			case ETicketRecurrencyType.monthDate:
-				defaultRecurrency.interval = 1;
-				defaultRecurrency.legs = 10;
-				defaultRecurrency.index = 1;
-				break;
-
-		}
-		return defaultRecurrency;
+			at: new Date(),
+			interval: 1,
+			legs: 10,
+			dayOfWeek: DayOfWeek.monday,
+			weekOfMonth: WeekOfMonth.first,
+			index: 1,
+		} as ITicketRecurrency;
 	}
 
 	static isDateToday(date: Date): boolean {

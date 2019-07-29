@@ -9,6 +9,7 @@
 		display: flex;
 		align-content: space-between;
 		div {
+			min-width: 187px;
 			margin-top: 15px;
 			mat-select, input {
 				padding: 5px;
@@ -47,6 +48,12 @@
 		}
 	}
 	
+	.notification {
+		width: 100%;
+	}
+}
 
-	
+.error {
+	background-color: red;
+	color: yellow;
 }
