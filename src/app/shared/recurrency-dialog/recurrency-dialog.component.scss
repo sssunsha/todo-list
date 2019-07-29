@@ -1,0 +1,27 @@
+@import '../../../resource//base.scss';
+
+.dialog-container {
+	display: flex;
+	flex-direction: column;
+	align-content: center;
+	div {
+		margin-top: 15px;
+	}
+
+	.title {
+		margin: 0 auto;
+	}
+
+	.calendar {
+		margin: 0 auto;
+		padding-top: 15px;
+	}
+
+	.actions {
+		display: flex;
+		justify-content: flex-end;
+		&:first-child {
+			margin-right: 20px;
+		}
+	}
+}

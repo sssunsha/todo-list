@@ -184,6 +184,17 @@ export enum DayOfWeek {
 	saturday = 'saturday',
 	sunday = 'sunday',
 }
+
+export const DAYOFWEEK = [
+	DayOfWeek.monday,
+	DayOfWeek.tuesday,
+	DayOfWeek.wednesday,
+	DayOfWeek.thursday,
+	DayOfWeek.friday,
+	DayOfWeek.saturday,
+	DayOfWeek.sunday
+];
+
 export interface IWeekRecurrency extends ITicketRecurrency {
 	dayOfWeek: DayOfWeek;
 }
@@ -195,6 +206,14 @@ export enum WeekOfMonth {
 	fourth = 'fourth',
 	last = 'last',
 }
+
+export const WEEKOFMONTH = [
+	WeekOfMonth.first,
+	WeekOfMonth.second,
+	WeekOfMonth.thrid,
+	WeekOfMonth.fourth,
+	WeekOfMonth.last
+]
 
 export interface IMonthDayRecurrency extends ITicketRecurrency {
 	weekOfMonth: WeekOfMonth;
@@ -209,6 +228,14 @@ export interface ITicketRecurrencyDialogConfig {
 	ticketAlarm: ITicketRecurrency,
 	type: ETicketRecurrencyType
 }
+
+export const TICKEALARMTYPESELECTCONFIG: Array<ISelectConfig> = [
+	{label: 'Once', value: ETicketRecurrencyType.once},
+	{label: 'Daily', value: ETicketRecurrencyType.day},
+	{label: 'Weekly', value: ETicketRecurrencyType.week},
+	{label: 'Monthly Date', value: ETicketRecurrencyType.monthDate},
+	{label: 'Monthly Day', value: ETicketRecurrencyType.monthDay},
+];
 
 export class Reminder extends Ticket {
 	constructor(data: Partial<Reminder>) {

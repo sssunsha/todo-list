@@ -1,5 +1,10 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
-import { ETicketRecurrencyType, ITicketRecurrency, ITicketRecurrencyDialogConfig } from '../../app.model';
+import { ETicketRecurrencyType,
+		ITicketRecurrency,
+		ITicketRecurrencyDialogConfig,
+		DAYOFWEEK,
+		WEEKOFMONTH,
+		TICKEALARMTYPESELECTCONFIG } from '../../app.model';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Helper } from '../../utils';
 
@@ -9,10 +14,10 @@ import { Helper } from '../../utils';
   styleUrls: ['./recurrency-dialog.component.scss']
 })
 export class RecurrencyDialogComponent implements OnInit {
-	// @Input()
-	// type: ETicketRecurrencyType;
-	// @Input()
-	// alarm: ITicketRecurrency;
+	_TICKEALARMTYPESELECTCONFIG = TICKEALARMTYPESELECTCONFIG;
+	_DAYOFWEEK = DAYOFWEEK;
+	_WEEKOFMONTH = WEEKOFMONTH;
+	alarm: ITicketRecurrency;
 
   constructor(
 	  private _dialogRef: MatDialogRef<RecurrencyDialogComponent>,
@@ -27,12 +32,19 @@ export class RecurrencyDialogComponent implements OnInit {
 	  }
   }
 
-  onCancel() {
+  isDateValid(date: Date): boolean {
+	if (date > new Date()) {
+		return true;
+	}
+	return Helper.isDateToday(date);
+}
 
+  onCancel() {
+	  this._dialogRef.close();
   }
 
   onSave() {
-
+	this._dialogRef.close();
   }
 
 }
