@@ -1,72 +1,74 @@
 <div class="dialog-container">
-	<div class="title"><label>Set ticket alarm</label></div>
-	<div class="detail-container">
-		<div class="left-container">
-			<div class="type">
-				<label>Type:</label><p></p>
-				<mat-select [(ngModel)]="data.ticketAlarm.type" (change)="onChanged()">
-					<mat-option *ngFor="let item of _TICKEALARMTYPESELECTCONFIG" [value]="item.value">
-						{{item.label}}
-					</mat-option>
-				</mat-select>
-			</div>
-		
-			<div class="week" *ngIf="data.ticketAlarm.type === 'week'">
-				<label>Day of Week:</label><p></p>
-				<mat-select [(ngModel)]="data.ticketAlarm.dayOfWeek" (change)="onChanged()">
-					<mat-option *ngFor="let day of _DAYOFWEEK" [value]="day">{{day}}</mat-option>
-				</mat-select>
-			</div>
-		
-			<div class="monthDate" *ngIf="data.ticketAlarm.type === 'monthDate'">
-				<label>Index of month (1 - 31)</label><p></p>
-				<input matInput id="monthDateIndex" [(ngModel)]="data.ticketAlarm.index" (change)="onChanged()">
-			</div>
-		
-			<div class="monthDay" *ngIf="data.ticketAlarm.type === 'monthDay'">
-				<label>Week of month:</label><p></p>
-				<mat-select [(ngModel)]="data.ticketAlarm.weekOfMonth" (change)="onChanged()">
-					<mat-option *ngFor="let item of _WEEKOFMONTH" [value]="item.value">
-						{{item.label}}
-					</mat-option>
-				</mat-select>
-				<label>Day of week:</label><p></p>
-				<mat-select [(ngModel)]="data.ticketAlarm.daOfWeek" (change)="onChanged()">
-					<mat-option *ngFor="let item of _DAYOFWEEK" [value]="item.value">
-						{{item.label}}
-					</mat-option>
-				</mat-select>
-			</div>
-		
-			<div class="interval" *ngIf="data.ticketAlarm.type !== 'once'">
-				<label>Interval:</label><p></p>
-				<input matInput id="interval" [(ngModel)]="data.ticketAlarm.interval" (change)="onChanged()">
-			</div>
-		
-			<div class="legs" *ngIf="data.ticketAlarm.type !== 'once'">
-				<label>Leg:</label><p></p>
-				<input matInput id="legs" [(ngModel)]="data.ticketAlarm.legs" (change)="onChanged()">
-			</div>
-		</div>
-		<div class="right-container">
-			<div class="calendar">
-				<label>Set alarm at:</label><p></p>
-				<owl-date-time-inline class="time-picker"
-					(change)="onChanged()"
-					[hideOtherMonths]="true"
-					[hour12Timer]="true"
-					[owlDateTimeFilter]="isDateValid.bind(this)"
-					[(ngModel)]="data.ticketAlarm.at"
-				></owl-date-time-inline>
-			</div>
-			
-			<div class="actions">
-				<button mat-raised-button color="primary" (click)="onCancel()">Cancel</button>
-				<button mat-raised-button color="accent" (click)="onSave()">Save</button>
-			</div>
-		</div>
-	</div>
-	<div class="notification" [ngClass]="{'error': isError}">
-		<label>{{notifcationMsg}}</label>
-	</div>	
+    <div class="title"><label>Set ticket alarm</label></div>
+    <div class="detail-container">
+        <div class="left-container">
+            <div class="type">
+                <label>Type:</label>
+                <p></p>
+                <mat-select [(ngModel)]="data.ticketAlarm.type" (selectionChange)="onChanged()">
+                    <mat-option *ngFor="let item of _TICKEALARMTYPESELECTCONFIG" [value]="item.value">
+                        {{item.label}}
+                    </mat-option>
+                </mat-select>
+            </div>
+
+            <div class="week" *ngIf="data.ticketAlarm.type === 'week'">
+                <label>Day of Week:</label>
+                <p></p>
+                <mat-select [(ngModel)]="data.ticketAlarm.dayOfWeek" (selectionChange)="onChanged()">
+                    <mat-option *ngFor="let day of _DAYOFWEEK" [value]="day">{{day}}</mat-option>
+                </mat-select>
+            </div>
+
+            <div class="monthDate" *ngIf="data.ticketAlarm.type === 'monthDate'">
+                <label>Index of month (1 - 31)</label>
+                <p></p>
+                <input matInput id="monthDateIndex" [(ngModel)]="data.ticketAlarm.index" (change)="onChanged()" type="number">
+            </div>
+
+            <div class="monthDay" *ngIf="data.ticketAlarm.type === 'monthDay'">
+                <label>Week of month:</label>
+                <p></p>
+                <mat-select [(ngModel)]="data.ticketAlarm.weekOfMonth" (selectionChange)="onChanged()">
+                    <mat-option *ngFor="let item of _WEEKOFMONTH" [value]="item.value">
+                        {{item.label}}
+                    </mat-option>
+                </mat-select>
+                <label>Day of week:</label>
+                <p></p>
+                <mat-select [(ngModel)]="data.ticketAlarm.daOfWeek" (selectionChange)="onChanged()">
+                    <mat-option *ngFor="let item of _DAYOFWEEK" [value]="item.value">
+                        {{item.label}}
+                    </mat-option>
+                </mat-select>
+            </div>
+
+            <div class="interval" *ngIf="data.ticketAlarm.type !== 'once'">
+                <label>Interval:</label>
+                <p></p>
+                <input matInput id="interval" [(ngModel)]="data.ticketAlarm.interval" (change)="onChanged()" type="number">
+            </div>
+
+            <div class="legs" *ngIf="data.ticketAlarm.type !== 'once'">
+                <label>Leg:</label>
+                <p></p>
+                <input matInput id="legs" [(ngModel)]="data.ticketAlarm.legs" (change)="onChanged()" type="number">
+            </div>
+        </div>
+        <div class="right-container">
+            <div class="calendar">
+                <label>Set alarm at:</label>
+                <p></p>
+                <owl-date-time-inline class="time-picker" (dateTimeChange)="onChanged()" [hideOtherMonths]="true" [hour12Timer]="true" [owlDateTimeFilter]="isDateValid.bind(this)" [(ngModel)]="data.ticketAlarm.at"></owl-date-time-inline>
+            </div>
+
+            <div class="actions">
+                <button mat-raised-button color="primary" (click)="onCancel()">Cancel</button>
+                <button mat-raised-button color="accent" (click)="onSave()">Save</button>
+            </div>
+        </div>
+    </div>
+    <div class="notification" [ngClass]="{'error': isError}">
+        <label>{{notificationMsg}}</label>
+    </div>
 </div>

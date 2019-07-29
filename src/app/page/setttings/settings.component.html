@@ -1,49 +1,49 @@
 <div class="settings-form">
-	<div class="full-width">
-			<label>Live mode</label><p></p>
-		<mat-slide-toggle color="primary"
-		[(ngModel)]="_appConfig.isLiveMode">Live mode</mat-slide-toggle>
-	</div>
+    <div class="full-width">
+        <label>Live mode</label>
+        <p></p>
+        <mat-slide-toggle color="primary" [(ngModel)]="_appConfig.isLiveMode">Live mode</mat-slide-toggle>
+    </div>
 
-	<div class="full-width">
-			<label>Auto sync</label><p></p>
-		<mat-slide-toggle color="primary"
-		[(ngModel)]="_appConfig.isAutoSync">auto sync</mat-slide-toggle>
-	</div>
+    <div class="full-width">
+        <label>Auto sync</label>
+        <p></p>
+        <mat-slide-toggle color="primary" [(ngModel)]="_appConfig.isAutoSync">auto sync</mat-slide-toggle>
+    </div>
 
-	<div class="full-width">
-			<label>Synce interval (second)</label><p></p>
-		<input matInput placeholder="synce interval (second)" id="syncInterval"
-		[(ngModel)]="_appConfig.syncInterval">
-	</div>
-	
-	<div class="full-width">
-		<label>COS Bucket</label><p></p>
-	  <input matInput placeholder="COS Bucket" id="Bucket"
-	  [(ngModel)]="_cosConfig.Bucket">
-	</div>
-  
-	<div class="full-width">
-			<label>COS Region</label><p></p>
-		<input matInput placeholder="COS Region" id="Region"
-		[(ngModel)]="_cosConfig.Region">
-	</div>
+    <div class="full-width">
+        <label>Synce interval (second)</label>
+        <p></p>
+        <input matInput placeholder="synce interval (second)" id="syncInterval" type="number" [(ngModel)]="_appConfig.syncInterval">
+    </div>
 
-	<div class="full-width">
-			<label>COS SecretId</label><p></p>
-		<input matInput placeholder="COS SecretId" id="SecretId"
-		[(ngModel)]="_cosConfig.SecretId">
-	</div>
+    <div class="full-width">
+        <label>COS Bucket</label>
+        <p></p>
+        <input matInput placeholder="COS Bucket" id="Bucket" [(ngModel)]="_cosConfig.Bucket">
+    </div>
 
-	<div class="full-width">
-			<label>COS SecretKey</label><p></p>
-		<input matInput placeholder="COS SecretKey" id="SecretKey"
-		[(ngModel)]="_cosConfig.SecretKey">
-	</div>
+    <div class="full-width">
+        <label>COS Region</label>
+        <p></p>
+        <input matInput placeholder="COS Region" id="Region" [(ngModel)]="_cosConfig.Region">
+    </div>
 
-	<div class="full-width">
-			<label>COS folder path</label><p></p>
-		<input matInput placeholder="COS folder path" id="Folder"
-		[(ngModel)]="_cosConfig.Folder">
-	</div>
+    <div class="full-width">
+        <label>COS SecretId</label>
+        <p></p>
+        <input matInput placeholder="COS SecretId" id="SecretId" [(ngModel)]="_cosConfig.SecretId">
+    </div>
+
+    <div class="full-width">
+        <label>COS SecretKey</label>
+        <p></p>
+        <input matInput placeholder="COS SecretKey" id="SecretKey" [(ngModel)]="_cosConfig.SecretKey">
+    </div>
+
+    <div class="full-width">
+        <label>COS folder path</label>
+        <p></p>
+        <input matInput placeholder="COS folder path" id="Folder" [(ngModel)]="_cosConfig.Folder">
+    </div>
 </div>

@@ -61,18 +61,44 @@ export class RecurrencyDialogComponent implements OnInit {
   }
 
   private generateNotificationMessage() {
-	this.notificationMsg = this.data.ticketAlarm.type + ' ' +
-		this.data.ticketAlarm.at || '' + ' ' +
-		this.data.ticketAlarm.weekOfMonth || '' + ' ' +
-		this.data.ticketAlarm.dayOfWeek || '' + ' ' +
-		this.data.ticketAlarm.index || '' + ' ' +
-		this.data.ticketAlarm.interval || '' + ' ' +
-		this.data.ticketAlarm.legs || '';
+		this.notificationMsg = '';
+
+		switch(this.data.ticketAlarm.type) {
+			case ETicketRecurrencyType.monthDate:
+				this.notificationMsg += ' From: ' + this.data.ticketAlarm.at.toLocaleString() || '' + '\t';
+				this.notificationMsg += ' Every ' + this.data.ticketAlarm.interval || '' + '\t';
+				this.notificationMsg += this.data.ticketAlarm.index || '' + ' \tof month';
+				this.notificationMsg += ' for ' + this.data.ticketAlarm.legs || '' + '\ttimes ';
+				break;
+			case ETicketRecurrencyType.monthDay:
+				this.notificationMsg += ' From: ' + this.data.ticketAlarm.at.toLocaleString() || '' + ' \t';
+				this.notificationMsg += ' Every ' + this.data.ticketAlarm.interval || '' + '\t';
+				this.notificationMsg += this.data.ticketAlarm.weekOfMonth ||  '' + '\t';
+				this.notificationMsg += this.data.ticketAlarm.dayOfWeek ||  '' + '\t';
+				this.notificationMsg += ' for ' + this.data.ticketAlarm.legs || '' + '\ttimes ';
+				break;
+			case ETicketRecurrencyType.week:
+				this.notificationMsg += ' From: ' + this.data.ticketAlarm.at.toLocaleString() || '' + '\t';
+				this.notificationMsg += ' Every ' + this.data.ticketAlarm.interval || '' + '\t';
+				this.notificationMsg += this.data.ticketAlarm.dayOfWeek ||  '' + '\t';
+				this.notificationMsg += ' for ' + this.data.ticketAlarm.legs || '' + '\ttimes ';
+				break;
+			case ETicketRecurrencyType.day:
+				this.notificationMsg += ' From: ' + this.data.ticketAlarm.at.toLocaleString() || '' + '\t';
+				this.notificationMsg += ' Every ' + this.data.ticketAlarm.interval || '' + '\t';
+				this.notificationMsg += this.data.ticketAlarm.type + '\t';
+				this.notificationMsg += ' for ' + this.data.ticketAlarm.legs || '' + '\ttimes ';
+				break;
+			case ETicketRecurrencyType.once:
+				this.notificationMsg += this.data.ticketAlarm.type + '\t';
+				this.notificationMsg += ' At: ' + this.data.ticketAlarm.at.toLocaleString() || '' + '\t';
+				break;
+		  }
   }
 
   private prepareForSaving() {
 	  // first check the payload  validation for different type
-	  switch(this.data.type) {
+	  switch(this.data.ticketAlarm.type) {
 		case ETicketRecurrencyType.monthDate:
 			this.checkRecurrencyAt();
 			this.checkRecurrencyInterval();

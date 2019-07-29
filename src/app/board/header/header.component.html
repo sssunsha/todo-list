@@ -1,48 +1,46 @@
 <div class="header">
-	<div class="left-header">
-		<div class="menu">
-			<button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <div class="left-header">
+        <div class="menu">
+            <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
 				<mat-icon>more_vert</mat-icon>
 			</button>
-			<mat-menu #menu="matMenu">
-				<button mat-menu-item (click)="onNewTicket()">
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="onNewTicket()">
 					<mat-icon>add</mat-icon>
 					<span>New ticket</span>
 				</button>
-				<button mat-menu-item (click)="onMenuSaveAs()">
+                <button mat-menu-item (click)="onMenuSaveAs()">
 					<mat-icon>save</mat-icon>
 					<span>Save As</span>
 				</button>
-				<button mat-menu-item (click)="onMenuRetrieveLocalStorageBackup()">
+                <button mat-menu-item (click)="onMenuRetrieveLocalStorageBackup()">
 					<mat-icon>file_upload</mat-icon>
 					<span>retrieve localstorage backup</span>
 				</button>
-				<button mat-menu-item (click)="onMenuSettings()">
+                <button mat-menu-item (click)="onMenuSettings()">
 					<mat-icon>settings</mat-icon>
 					<span>Settings</span>
 				</button>
-			</mat-menu>
-		</div>
-		<div>
-			<label>Todo List</label>
-			<label class='small'>{{service.cosFileVersion}}</label>
-			<label class="small">{{service.modifiedAt}}</label>
-		</div>
-	</div>
+            </mat-menu>
+        </div>
+        <div>
+            <label>Todo List</label>
+            <label class='small'>{{service.cosFileVersion}}</label>
+            <label class="small">{{service.modifiedAt}}</label>
+        </div>
+    </div>
     <div class="right-header">
-		<div class='header-notification'>
-			<span matBadgeOverlap="false"
-				[matBadge]="getInboxTicketSize()" (click)="goto('inbox')">Inbox</span>
-			<span matBadgePosition="after" matBadgeColor="warn"
-			(click)="goto('today')" [matBadge]="getTodayTicketSize()">Today</span>
-		</div>
+        <div class='header-notification'>
+            <span matBadgeOverlap="false" [matBadge]="getInboxTicketSize()" (click)="goto('inbox')">Inbox</span>
+            <span matBadgePosition="after" matBadgeColor="warn" (click)="goto('today')" [matBadge]="getTodayTicketSize()">Today</span>
+        </div>
         <div class="action-button">
             <button mat-icon-button (click)="onNewTicket()">
                 <mat-icon>add</mat-icon>
             </button>
         </div>
         <div>
-            <input matInput placeholder="Search" [(ngModel)]="query">
+            <input matInput placeholder="Search" [(ngModel)]="query" type="text">
             <button mat-icon-button (click)="onSearch()">
                 <mat-icon>search</mat-icon>
             </button>
