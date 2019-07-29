@@ -39,6 +39,21 @@ export class RecurrencyDialogComponent implements OnInit {
 	return Helper.isDateToday(date);
 }
 
+onTypeChanged(): void {
+	switch(this.data.type) {
+		case ETicketRecurrencyType.once:
+			break;
+		case ETicketRecurrencyType.day:
+			break;
+		case ETicketRecurrencyType.week:
+			break;
+		case ETicketRecurrencyType.monthDay:
+			break;
+		case ETicketRecurrencyType.monthDate:
+			break;
+	}
+}
+
   onCancel() {
 	  this._dialogRef.close();
   }

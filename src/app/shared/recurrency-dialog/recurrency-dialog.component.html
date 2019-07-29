@@ -1,53 +1,71 @@
 <div class="dialog-container">
 	<div class="title"><label>Set ticket alarm</label></div>
-	<div class="type">
-		<label>Type:</label>
-		<mat-select [(ngModel)]="data.type">
-			<mat-option *ngFor="let item of _TICKEALARMTYPESELECTCONFIG" [value]="item.value">
-				{{item.label}}
-			</mat-option>
-		</mat-select>
+	<div class="detail-container">
+		<div class="left-container">
+			<div class="type">
+				<label>Type:</label><p></p>
+				<mat-select [(ngModel)]="data.type" (change)="onTypeChanged()">
+					<mat-option *ngFor="let item of _TICKEALARMTYPESELECTCONFIG" [value]="item.value">
+						{{item.label}}
+					</mat-option>
+				</mat-select>
+			</div>
+		
+			<div class="week" *ngIf="data.type === 'week'">
+				<label>Day of Week:</label><p></p>
+				<mat-select [(ngModel)]="data.dayOfWeek">
+					<mat-option *ngFor="let day of _DAYOFWEEK" [value]="day">{{day}}</mat-option>
+				</mat-select>
+			</div>
+		
+			<div class="monthDate" *ngIf="data.type === 'monthDate'">
+				<label>Index of month (1 - 31)</label><p></p>
+				<input matInput id="monthDateIndex" [(ngModel)]="data.index">
+			</div>
+		
+			<div class="monthDay" *ngIf="data.type === 'monthDay'">
+				<label>Week of month:</label><p></p>
+				<mat-select [(ngModel)]="data.weekOfMonth">
+					<mat-option *ngFor="let item of _WEEKOFMONTH" [value]="item.value">
+						{{item.label}}
+					</mat-option>
+				</mat-select>
+				<label>Day of week:</label><p></p>
+				<mat-select [(ngModel)]="data.daOfWeek">
+					<mat-option *ngFor="let item of _DAYOFWEEK" [value]="item.value">
+						{{item.label}}
+					</mat-option>
+				</mat-select>
+			</div>
+		
+			<div class="interval" *ngIf="data.type !== 'once'">
+				<label>Interval:</label><p></p>
+				<input matInput id="interval" [(ngModel)]="data.interval">
+			</div>
+		
+			<div class="legs" *ngIf="data.type !== 'once'">
+				<label>Leg:</label><p></p>
+				<input matInput id="legs" [(ngModel)]="data.legs">
+			</div>
+		</div>
+		<div class="right-container">
+			<div class="calendar">
+				<label>Set alarm at:</label><p></p>
+				<owl-date-time-inline class="time-picker"
+					[hideOtherMonths]="true"
+					[hour12Timer]="true"
+					[owlDateTimeFilter]="isDateValid.bind(this)"
+					[(ngModel)]="data.at"
+				></owl-date-time-inline>
+			</div>
+			
+			<div class="actions">
+				<button mat-raised-button color="primary" (click)="onCancel()">Cancel</button>
+				<button mat-raised-button color="accent" (click)="onSave()">Save</button>
+			</div>
+		</div>
 	</div>
+	
 
-	<div class="calendar">
-		<label>Set alarm at:</label><p></p>
-		<owl-date-time-inline class="time-picker"
-			[hideOtherMonths]="true"
-			[hour12Timer]="true"
-			[owlDateTimeFilter]="isDateValid.bind(this)"
-			[(ngModel)]="data.at"
-		></owl-date-time-inline>
-	</div>
-
-	<div class="week" *ngIf="data.type === 'week'">
-		<label>Day of Week:</label>
-		<mat-select [(ngModel)]="data.dayOfWeek">
-			<mat-option *ngFor="let day of _DAYOFWEEK" [value]="day">{{day}}</mat-option>
-		</mat-select>
-	</div>
-
-	<div class="monthDate" *ngIf="data.type === 'monthDate'">
-		<label>Index of month (1 - 31)</label>
-		<input matInput id="monthDateIndex" [(ngModel)]="data.index">
-	</div>
-
-	<div class="monthDay" *ngIf="data.type === 'monthDay'">
-		<label>Week of month:</label>
-		<mat-select [(ngModel)]="data.weekOfMonth">
-			<mat-option *ngFor="let item of _WEEKOFMONTH" [value]="item.value">
-				{{item.label}}
-			</mat-option>
-		</mat-select>
-		<label>Day of week:</label>
-		<mat-select [(ngModel)]="data.daOfWeek">
-			<mat-option *ngFor="let item of _DAYOFWEEK" [value]="item.value">
-				{{item.label}}
-			</mat-option>
-		</mat-select>
-	</div>
-
-	<div class="actions">
-		<button mat-raised-button color="primary" (click)="onCancel()">Cancel</button>
-		<button mat-raised-button color="accent" (click)="onSave()">Save</button>
-	</div>
+	
 </div>
