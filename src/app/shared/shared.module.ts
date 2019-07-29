@@ -36,11 +36,13 @@ import { RecurrencyDialogComponent } from './recurrency-dialog/recurrency-dialog
 		BottomSheetComponent,
 		AlertComponent,
 		TicketDialogComponent,
+		RecurrencyDialogComponent,
 	],
 	entryComponents: [
 		BottomSheetComponent,
 		AlertComponent,
 		TicketDialogComponent,
+		RecurrencyDialogComponent,
 	],
 })
 export class SharedComponentModule {}

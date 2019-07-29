@@ -1,7 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Ticket, EPriority, EPageState, ETicketType } from '../../app.model';
+import { Ticket, EPriority, EPageState, ETicketType, ETicketRecurrencyType } from '../../app.model';
 import { AppService } from '../../app.service';
 import { Helper } from '../../utils';
+import { RecurrencyDialogComponent } from '../recurrency-dialog/recurrency-dialog.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-card',
@@ -11,7 +13,9 @@ import { Helper } from '../../utils';
 export class CardComponent implements OnInit {
 	@Input()
 	ticket: Ticket;
-  constructor(private service: AppService) { }
+  constructor(private service: AppService,
+			private dialog: MatDialog
+	) { }
 
   ngOnInit() {
   }
@@ -29,5 +33,14 @@ export class CardComponent implements OnInit {
   handleTicketTypeChanged(type: ETicketType): void {
 	  this.ticket.ticketType = type;
 	  this.service.notifyTicketsChanged();
+  }
+  handleTicketAlarmSet(type: ETicketRecurrencyType): void {
+	  const dialogRef = this.dialog.open(RecurrencyDialogComponent, {
+		  maxWidth: '600px',
+	  })
+
+	  dialogRef.afterClosed().subscribe(alarm => {
+		  
+	  })
   }
 }

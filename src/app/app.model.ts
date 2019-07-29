@@ -155,12 +155,12 @@ export class Note extends Ticket {
 	}
 }
 
-export enum TicketRecurrencyType {
+export enum ETicketRecurrencyType {
 	once = 'once',
 	day =  'day',
 	week = 'week',
-	month = 'month',
-	year = 'year'
+	monthDay = 'monthDay',
+	monthDate = 'monthDate',
 }
 
 /*
@@ -169,7 +169,7 @@ export enum TicketRecurrencyType {
 */
 export interface IRecurrency {
 	id?: string;
-	type: TicketRecurrencyType;
+	type: ETicketRecurrencyType;
 	at?: Date; // the alarm time in UTC +8
 	interval?: number;
 	legs?: number; // -1: unlimited, other number will be the time it will occurred, the data should bigger than -2

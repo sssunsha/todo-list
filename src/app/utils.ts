@@ -4,7 +4,7 @@ import { EPageState,
 		IAlertConfig,
 		IRecurrency,
 		TicketFile, 
-		TicketRecurrencyType} from './app.model';
+		ETicketRecurrencyType} from './app.model';
 import { AlertComponent } from './shared/alert/alert.component';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -97,7 +97,7 @@ export class Helper {
 		if (isRecurrency) {
 			return {
 				id: this.generateMd5Hash(this.generateCreatedAt() + 'ticket recurrency'),
-				type: TicketRecurrencyType.day,
+				type: ETicketRecurrencyType.day,
 				at: null,
 				interval: 1,
 				legs: 10,
@@ -105,7 +105,7 @@ export class Helper {
 		} else {
 			return {
 				id: this.generateMd5Hash(this.generateCreatedAt() + 'ticket alarm'),
-				type: TicketRecurrencyType.once,
+				type: ETicketRecurrencyType.once,
 				at: null, // need be set latter
 			} as IRecurrency;
 		}

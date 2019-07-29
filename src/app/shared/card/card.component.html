@@ -30,19 +30,16 @@
     </mat-menu>
 
     <mat-menu #alarm="matMenu">
-        <button mat-menu-item [matMenuTriggerFor]="setAlaramOnce">Once</button>
-        <button mat-menu-item [matMenuTriggerFor]="setAlarmDaily">Daily</button>
-        <button mat-menu-item [matMenuTriggerFor]="setAlarmWeekly">Weekly</button>
+        <button mat-menu-item (click)="handleTicketAlarmSet('once')">Once</button>
+        <button mat-menu-item (click)="handleTicketAlarmSet('day')">Daily</button>
+        <button mat-menu-item (click)="handleTicketAlarmSet('week')">Weekly</button>
         <button mat-menu-item [matMenuTriggerFor]="setAlarMonthly">Monthly</button>
     </mat-menu>
 
-    <mat-menu #setAlarmOnce="matMenu"></mat-menu>
-    <mat-menu #setAlarmDaily="matMenu"></mat-menu>
-    <mat-menu #setAlarmWeekly="matMenu"></mat-menu>
-	<mat-menu #setAlarMonthly="matMenu"></mat-menu>
-	
-	<mat-menu #setAlarmMonthlyDate="matMenu"></mat-menu>
-	<mat-menu #setAlarmMonthlyDay="matMenu"></mat-menu>
+	<mat-menu #setAlarMonthly="matMenu">
+		<button mat-menu-item (click)="handleTicketAlarmSet('monthDate')">Monthly Date</button>
+		<button mat-menu-item (click)="handleTicketAlarmSet('monthDay')">Monthly Day</button>
+	</mat-menu>
 
     <mat-menu #moveTo="matMenu">
         <button mat-menu-item (click)="handleMovetoChanged('today')">Today</button>
