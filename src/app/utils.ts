@@ -2,7 +2,7 @@ import {Md5} from "ts-md5";
 import { EPageState,
 		Ticket,
 		IAlertConfig,
-		IRecurrency,
+		ITicketRecurrency,
 		TicketFile, 
 		ETicketRecurrencyType} from './app.model';
 import { AlertComponent } from './shared/alert/alert.component';
@@ -93,7 +93,7 @@ export class Helper {
 		return timeCostAfterFormatted;
 	}
 
-	static generateDefaultTicketAlarm(isRecurrency: boolean = false): IRecurrency {
+	static generateDefaultTicketAlarm(isRecurrency: boolean = false): ITicketRecurrency {
 		if (isRecurrency) {
 			return {
 				id: this.generateMd5Hash(this.generateCreatedAt() + 'ticket recurrency'),
@@ -107,7 +107,7 @@ export class Helper {
 				id: this.generateMd5Hash(this.generateCreatedAt() + 'ticket alarm'),
 				type: ETicketRecurrencyType.once,
 				at: null, // need be set latter
-			} as IRecurrency;
+			} as ITicketRecurrency;
 		}
 	}
 }

@@ -124,7 +124,7 @@ export class Ticket {
 	inPages?: Array<EPageState>;
 	records?: Array<string>;
 	timeCosts?: Array<ITicketTimeCost>; // for every tickets, can be finished with some group of time
-	alram?: IRecurrency;
+	alram?: ITicketRecurrency;
 	constructor(data: Partial<Ticket>) {
 		this.id = data.id;
 		this.summary = data.summary;
@@ -167,7 +167,7 @@ export enum ETicketRecurrencyType {
 	if type =  once, only need set at property
 	if type != once, need interval, legs, and at is optional
 */
-export interface IRecurrency {
+export interface ITicketRecurrency {
 	id?: string;
 	type: ETicketRecurrencyType;
 	at?: Date; // the alarm time in UTC +8
@@ -184,7 +184,7 @@ export enum DayOfWeek {
 	saturday = 'saturday',
 	sunday = 'sunday',
 }
-export interface IWeekRecurrency extends IRecurrency {
+export interface IWeekRecurrency extends ITicketRecurrency {
 	dayOfWeek: DayOfWeek;
 }
 
@@ -196,13 +196,18 @@ export enum WeekOfMonth {
 	last = 'last',
 }
 
-export interface IMonthDayRecurrency extends IRecurrency {
+export interface IMonthDayRecurrency extends ITicketRecurrency {
 	weekOfMonth: WeekOfMonth;
 	daOfWeek: DayOfWeek;
 }
 
-export interface IMonthDateRecurrency extends IRecurrency {
+export interface IMonthDateRecurrency extends ITicketRecurrency {
 	index: number; // 1 -31
+}
+
+export interface ITicketRecurrencyDialogConfig {
+	ticketAlarm: ITicketRecurrency,
+	type: ETicketRecurrencyType
 }
 
 export class Reminder extends Ticket {

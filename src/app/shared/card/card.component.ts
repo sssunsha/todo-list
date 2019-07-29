@@ -37,10 +37,14 @@ export class CardComponent implements OnInit {
   handleTicketAlarmSet(type: ETicketRecurrencyType): void {
 	  const dialogRef = this.dialog.open(RecurrencyDialogComponent, {
 		  maxWidth: '600px',
+		  data: {
+			  type: type,
+			  ticketAlarm: this.ticket.alram
+		  }
 	  })
 
 	  dialogRef.afterClosed().subscribe(alarm => {
-		  
+
 	  })
   }
 }
