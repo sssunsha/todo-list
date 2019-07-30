@@ -50,13 +50,13 @@ export class RecurrencyDialogComponent implements OnInit {
 	}
 
   onCancel() {
-	  this._dialogRef.close();
+	  this._dialogRef.close(null);
   }
 
   onSave() {
 	this.prepareForSaving();
 	if (!this.isError) {
-		this._dialogRef.close();
+		this._dialogRef.close(this.data.ticketAlarm);
 	}
   }
 
@@ -65,33 +65,24 @@ export class RecurrencyDialogComponent implements OnInit {
 
 		switch(this.data.ticketAlarm.type) {
 			case ETicketRecurrencyType.monthDate:
-				this.notificationMsg += ' From: ' + this.data.ticketAlarm.at.toLocaleString() || '' + '\t';
-				this.notificationMsg += ' Every ' + this.data.ticketAlarm.interval || '' + '\t';
-				this.notificationMsg += this.data.ticketAlarm.index || '' + ' \tof month';
-				this.notificationMsg += ' for ' + this.data.ticketAlarm.legs || '' + '\ttimes ';
+				this.notificationMsg = ` From ${this.data.ticketAlarm.at.toLocaleString()} every ${this.data.ticketAlarm.interval} \
+				of month ${this.data.ticketAlarm.index} for ${this.data.ticketAlarm.legs} times`;
 				break;
 			case ETicketRecurrencyType.monthDay:
-				this.notificationMsg += ' From: ' + this.data.ticketAlarm.at.toLocaleString() || '' + ' \t';
-				this.notificationMsg += ' Every ' + this.data.ticketAlarm.interval || '' + '\t';
-				this.notificationMsg += this.data.ticketAlarm.weekOfMonth ||  '' + '\t';
-				this.notificationMsg += this.data.ticketAlarm.dayOfWeek ||  '' + '\t';
-				this.notificationMsg += ' for ' + this.data.ticketAlarm.legs || '' + '\ttimes ';
+				this.notificationMsg = ` From ${this.data.ticketAlarm.at.toLocaleString()} every ${this.data.ticketAlarm.interval} \
+					${this.data.ticketAlarm.weekOfMonth} ${this.data.ticketAlarm.dayOfWeek} \
+					for ${this.data.ticketAlarm.legs} times`;
 				break;
 			case ETicketRecurrencyType.week:
-				this.notificationMsg += ' From: ' + this.data.ticketAlarm.at.toLocaleString() || '' + '\t';
-				this.notificationMsg += ' Every ' + this.data.ticketAlarm.interval || '' + '\t';
-				this.notificationMsg += this.data.ticketAlarm.dayOfWeek ||  '' + '\t';
-				this.notificationMsg += ' for ' + this.data.ticketAlarm.legs || '' + '\ttimes ';
+				this.notificationMsg = ` From ${this.data.ticketAlarm.at.toLocaleString()} every ${this.data.ticketAlarm.interval} \
+					${this.data.ticketAlarm.dayOfWeek}  weekly for ${this.data.ticketAlarm.legs} times`;
 				break;
 			case ETicketRecurrencyType.day:
-				this.notificationMsg += ' From: ' + this.data.ticketAlarm.at.toLocaleString() || '' + '\t';
-				this.notificationMsg += ' Every ' + this.data.ticketAlarm.interval || '' + '\t';
-				this.notificationMsg += this.data.ticketAlarm.type + '\t';
-				this.notificationMsg += ' for ' + this.data.ticketAlarm.legs || '' + '\ttimes ';
+				this.notificationMsg = ` From ${this.data.ticketAlarm.at.toLocaleString()} every ${this.data.ticketAlarm.interval} \
+					day for ${this.data.ticketAlarm.legs} times`;
 				break;
 			case ETicketRecurrencyType.once:
-				this.notificationMsg += this.data.ticketAlarm.type + '\t';
-				this.notificationMsg += ' At: ' + this.data.ticketAlarm.at.toLocaleString() || '' + '\t';
+				this.notificationMsg += this.data.ticketAlarm.type + ' at: ' + this.data.ticketAlarm.at.toLocaleString() || '';
 				break;
 		  }
   }

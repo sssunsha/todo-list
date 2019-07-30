@@ -44,7 +44,11 @@ export class CardComponent implements OnInit {
 	  })
 
 	  dialogRef.afterClosed().subscribe(alarm => {
-
+		  if (alarm !== null) {
+			this.ticket.alram = alarm;
+			this.service.updateIickets(this.ticket);
+			this.service.notifyTicketsChanged();
+		  }
 	  })
   }
 }

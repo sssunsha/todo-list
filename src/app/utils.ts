@@ -8,7 +8,7 @@ import { EPageState,
 import { AlertComponent } from './shared/alert/alert.component';
 import {MatDialog} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import { DayOfWeek, WeekOfMonth } from './app.model';
+import { EDayOfWeek, EWeekOfMonth } from './app.model';
 
 export class Helper {
 	static generateMd5Hash(data: string): string {
@@ -101,8 +101,8 @@ export class Helper {
 			at: new Date(),
 			interval: 1,
 			legs: 10,
-			dayOfWeek: DayOfWeek.monday,
-			weekOfMonth: WeekOfMonth.first,
+			dayOfWeek: EDayOfWeek.monday,
+			weekOfMonth: EWeekOfMonth.first,
 			index: 1,
 		} as ITicketRecurrency;
 	}

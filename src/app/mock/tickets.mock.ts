@@ -27,7 +27,7 @@ export const mockTickets: Array<Ticket> =
 			// effort: ETicketEffort.half_hour,
 			progress: ETicktProgress.finished,
 			inPages: [EPageState.inbox, EPageState.future],
-			records: ['this the record for the first day I found', 'this the record for the second day I found', 'this the record for the thrid day I found']
+			records: ['this the record for the first day I found', 'this the record for the second day I found', 'this the record for the third day I found']
 		},
 		{
 			id: Helper.generateMd5Hash('3'),
@@ -61,7 +61,7 @@ export const mockTickets: Array<Ticket> =
 			// effort: ETicketEffort.half_hour,
 			progress: ETicktProgress.finished,
 			inPages: [EPageState.inbox, EPageState.future, EPageState.this_month, EPageState.this_week],
-			records: ['this the record for the first day I found', 'this the record for the second day I found', 'this the record for the thrid day I found']
+			records: ['this the record for the first day I found', 'this the record for the second day I found', 'this the record for the third day I found']
 		},
 		{
 			id: Helper.generateMd5Hash('5'),
@@ -74,7 +74,7 @@ export const mockTickets: Array<Ticket> =
 			// effort: ETicketEffort.half_hour,
 			progress: ETicktProgress.half_done,
 			inPages: [EPageState.inbox, EPageState.life],
-			records: ['this the record for the first day I found', 'this the record for the second day I found', 'this the record for the thrid day I found']
+			records: ['this the record for the first day I found', 'this the record for the second day I found', 'this the record for the third day I found']
 		},
 		{
 			id: Helper.generateMd5Hash('6'),
@@ -87,7 +87,7 @@ export const mockTickets: Array<Ticket> =
 			// effort: ETicketEffort.half_hour,
 			progress: ETicktProgress.half_done,
 			inPages: [EPageState.inbox, EPageState.work, EPageState.others],
-			records: ['this the record for the first day I found', 'this the record for the second day I found', 'this the record for the thrid day I found']
+			records: ['this the record for the first day I found', 'this the record for the second day I found', 'this the record for the third day I found']
 		},
 		{
 			id: Helper.generateMd5Hash('7'),

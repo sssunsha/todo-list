@@ -69,12 +69,8 @@ export class AppService implements OnDestroy{
 
    updateIickets(ticket: Ticket): void {
 	   if (ticket) {
-		   this.tickets.forEach(t =>  {
-			   if(t.id === ticket.id) {
-				   t = ticket;
-				   return;
-			   }
-		   })
+		   this.tickets = this.tickets.filter(t => t.id !== ticket.id);
+		   this.tickets.push(Object.assign({}, ticket));
 	   }
    }
 

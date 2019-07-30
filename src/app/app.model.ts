@@ -173,12 +173,12 @@ export interface ITicketRecurrency {
 	at?: Date; // the alarm time in UTC +8
 	interval?: number;
 	legs?: number; // -1: unlimited, other number will be the time it will occurred, the data should bigger than -2
-	dayOfWeek?: DayOfWeek; // for weekly and month day
-	weekOfMonth?: WeekOfMonth; // for month day
+	dayOfWeek?: EDayOfWeek; // for weekly and month day
+	weekOfMonth?: EWeekOfMonth; // for month day
 	index?: number; // for month date
 }
 
-export enum DayOfWeek {
+export enum EDayOfWeek {
 	monday = 'monday',
 	tuesday = 'tuesday',
 	wednesday = 'wednesday',
@@ -189,30 +189,30 @@ export enum DayOfWeek {
 }
 
 export const DAYOFWEEK = [
-	DayOfWeek.monday,
-	DayOfWeek.tuesday,
-	DayOfWeek.wednesday,
-	DayOfWeek.thursday,
-	DayOfWeek.friday,
-	DayOfWeek.saturday,
-	DayOfWeek.sunday
+	{label: 'monday', value: EDayOfWeek.monday},
+	{label: 'tuesday', value: EDayOfWeek.tuesday},
+	{label: 'wednesday', value: EDayOfWeek.wednesday},
+	{label: 'thursday', value: EDayOfWeek.thursday},
+	{label: 'friday', value: EDayOfWeek.friday},
+	{label: 'saturday', value: EDayOfWeek.saturday},
+	{label: 'sunday', value: EDayOfWeek.sunday}
 ];
 
-export enum WeekOfMonth {
+export enum EWeekOfMonth {
 	first = 'first',
 	second = 'second',
-	thrid = 'thrid',
+	third = 'third',
 	fourth = 'fourth',
 	last = 'last',
 }
 
 export const WEEKOFMONTH = [
-	WeekOfMonth.first,
-	WeekOfMonth.second,
-	WeekOfMonth.thrid,
-	WeekOfMonth.fourth,
-	WeekOfMonth.last
-]
+	{label: 'first', value: EWeekOfMonth.first},
+	{label: 'second', value: EWeekOfMonth.second},
+	{label: 'third', value: EWeekOfMonth.third},
+	{label: 'fourth', value: EWeekOfMonth.fourth},
+	{label: 'last', value: EWeekOfMonth.last},
+];
 
 export interface ITicketRecurrencyDialogConfig {
 	ticketAlarm: ITicketRecurrency,
