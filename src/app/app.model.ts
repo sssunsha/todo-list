@@ -37,16 +37,16 @@ export interface IAlertConfig {
 
 export enum EPriority {
 	high = 'high',
-	medium = 'medium',
+	intermediate = 'intermediate',
 	low = 'low',
 	null = 'null',
 }
 
 export const TICKETPRIORITYSELECTCONFIG: Array<ISelectConfig> = [
 	{label: 'High', value: EPriority.high},
-	{label:'Medium', value: EPriority.medium},
+	{label:'Intermediate', value: EPriority.intermediate},
 	{label: 'Low', value: EPriority.low},
-	{label:'None', value: EPriority.null},
+	{label:'Null', value: EPriority.null},
 ];
 
 export enum ETicketType {

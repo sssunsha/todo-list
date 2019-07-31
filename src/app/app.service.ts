@@ -55,6 +55,7 @@ export class AppService implements OnDestroy{
 // public mthod for private ticket member ===========================================================
    setTickets(tickets: Array<Ticket>): void {
 	   this.tickets  = tickets;
+	   this.sortTicketByPriority();
 	   this.ticketsSubject.next('tickets set updated');
    }
 
@@ -64,6 +65,7 @@ export class AppService implements OnDestroy{
 
    pushIntoTickets(ticket: Ticket): void {
 	   this.tickets.push(ticket);
+	   this.sortTicketByPriority();
 	   this.ticketsSubject.next('ticket push updated')
    }
 
@@ -71,6 +73,7 @@ export class AppService implements OnDestroy{
 	   if (ticket) {
 		   this.tickets = this.tickets.filter(t => t.id !== ticket.id);
 		   this.tickets.push(Object.assign({}, ticket));
+		   this.sortTicketByPriority();
 	   }
    }
 
@@ -90,6 +93,18 @@ export class AppService implements OnDestroy{
 
    notifyWorkingOnTicketsChanged(): void {
 	   this.workingOnTicketsSubject.next('workingOnTicket notified updated');
+   }
+
+   private sortTicketByPriority(): void {
+	   this.tickets.sort((t1, t2) => {
+		if (t1.priority > t2.priority) {
+			return 1;
+		} else if (t1.priority === t2.priority) {
+			return 0;
+		} else {
+			return -1;
+		}
+	   });
    }
 // alarm methods =======================================================================================
 

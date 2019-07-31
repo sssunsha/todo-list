@@ -9,7 +9,7 @@
 			[ngClass]="{
 						'high': element.priority === 'high',
 						'low': element.priority === 'low',
-						'medium': element.priority === 'medium'
+						'intermediate': element.priority === 'intermediate'
 					}">
             <mat-icon *ngIf="column === 'ticketType' && element.ticketType === 'reminder'" class="reminder-icon">access_alarms</mat-icon>
             <mat-icon *ngIf="column === 'ticketType' && element.ticketType === 'note'" class="note-icon">comment</mat-icon>

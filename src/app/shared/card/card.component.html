@@ -1,4 +1,4 @@
-<mat-card class="card" [ngClass]="{'high': ticket.priority === 'high', 'medium': ticket.priority === 'medium', 'low': ticket.priority === 'low'}" [matMenuTriggerFor]="cardActions">
+<mat-card class="card" [ngClass]="{'high': ticket.priority === 'high', 'intermediate': ticket.priority === 'intermediate', 'low': ticket.priority === 'low'}" [matMenuTriggerFor]="cardActions">
     <mat-card-header>
         <div mat-card-avatar class="card-icon">
             <mat-icon *ngIf="ticket.ticketType === 'reminder'" class="reminder-icon">access_alarms</mat-icon>
@@ -25,7 +25,7 @@
 
     <mat-menu #priority="matMenu">
         <button mat-menu-item (click)="handlePriorityChanged('high')">High</button>
-        <button mat-menu-item (click)="handlePriorityChanged('medium')">Medium</button>
+        <button mat-menu-item (click)="handlePriorityChanged('intermediate')">Intermediate</button>
         <button mat-menu-item (click)="handlePriorityChanged('low')">Low</button>
     </mat-menu>
 
