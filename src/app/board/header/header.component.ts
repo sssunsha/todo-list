@@ -7,7 +7,7 @@ import { Helper } from '../../utils';
 import {MatDialog} from '@angular/material/dialog';
 import { AppService } from '../../app.service';
 import { TicketDialogComponent } from '../../shared/ticket-dialog/ticket-dialog.component';
-import { AlramService } from '../../alram.service';
+import { AlarmService } from '../../alarm.service';
 
 @Component({
   selector: 'app-header',
@@ -17,7 +17,7 @@ import { AlramService } from '../../alram.service';
 export class HeaderComponent implements OnInit {
   query: string;
   constructor(private dialog: MatDialog,
-	private alarmService: AlramService,
+	private alarmService: AlarmService,
 	private service: AppService) {
 
 	}

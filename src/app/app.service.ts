@@ -6,7 +6,7 @@ import { Observable, Subject } from 'rxjs';
 import { Helper } from './utils';
 import * as FileSaver from 'file-saver';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import { AlramService } from './alram.service';
+import { AlarmService } from './alarm.service';
 
 
 
@@ -37,7 +37,7 @@ export class AppService implements OnDestroy{
 
   constructor(
 	  private _snackBar: MatSnackBar,
-	  private alarmService: AlramService) {
+	  private alarmService: AlarmService) {
 	  this.init();
    }
 

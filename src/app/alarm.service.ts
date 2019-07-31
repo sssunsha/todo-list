@@ -17,7 +17,7 @@ export interface IAlarmConfig {
 @Injectable({
   providedIn: 'root'
 })
-export class AlramService {
+export class AlarmService {
 	private alarmConfigList: Array<IAlarmConfig>;
 
   constructor(private dialog: MatDialog) { 
