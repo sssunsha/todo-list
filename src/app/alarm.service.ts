@@ -94,12 +94,19 @@ export class AlarmService {
 	  return alarm;
   }
 
-  // TODO: need to calculate alarm timestamp
+  // O means no need to add the alarm, the timestamp is past
+
   private calculateOnceAlarmTriggeredAt(ticketAlarm: ITicketRecurrency): number {
-	  return 0;
+	  const now = new Date().getTime();
+	  const alarmTimestamp = ticketAlarm.at.getTime();
+	  return alarmTimestamp > now ? alarmTimestamp : 0;
   }
 
   private calculateDailyRecurrenyTriggeredAt(ticketAlarm: ITicketRecurrency): number {
+	  const now = new Date();
+	  if ((ticketAlarm.legs > 0 || ticketAlarm.legs === -1)  && ticketAlarm.interval > 0) {
+
+	  }
 	  return 0;
   }
 
