@@ -9,6 +9,9 @@ export interface IAlarmConfig {
 	alarmObject: IAlarm;
 }
 
+const DAYINMS = 86400000;
+const WEEKINMS = 604800000;
+
 /*
 	in alarm service, for recurrency alarm, everytime only one instance avaliable in the alarm COnfigList
 	after one instance be triggerred, the next one will be generated
@@ -94,31 +97,61 @@ export class AlarmService {
 	  return alarm;
   }
 
-  // O means no need to add the alarm, the timestamp is past
+  // -1 means no need to add the alarm, the timestamp is past
 
-  private calculateOnceAlarmTriggeredAt(ticketAlarm: ITicketRecurrency): number {
+  private calculateOnceAlarmTriggeredAt(t: ITicketRecurrency): number {
 	  const now = new Date().getTime();
-	  const alarmTimestamp = ticketAlarm.at.getTime();
-	  return alarmTimestamp > now ? alarmTimestamp : 0;
+	  const alarmTimestamp = t.at.getTime();
+	  return alarmTimestamp > now ? alarmTimestamp : -1;
   }
 
-  private calculateDailyRecurrenyTriggeredAt(ticketAlarm: ITicketRecurrency): number {
-	  const now = new Date();
-	  if ((ticketAlarm.legs > 0 || ticketAlarm.legs === -1)  && ticketAlarm.interval > 0) {
-
-	  }
-	  return 0;
+  private calculateDailyRecurrenyTriggeredAt(t: ITicketRecurrency): number {
+	//   const now = new Date().getTime();
+	//   const dayInterval =  DAYINMS * t.interval;
+	//   if (t.legs > 0  && t.interval > 0) {
+	// 	  while(t.legs > 0) {
+	// 		  let timeStamp = t.at.getTime();
+	// 		  if ( timeStamp < now && timeStamp + dayInterval > now) {
+	// 			  t.at = new Date(timeStamp + dayInterval);
+	// 			  t.legs -- ;
+	// 		  } else {
+	// 			  return timeStamp;
+	// 		  }
+	// 	  }
+	//   } else if (t.legs === -1 && t.interval > 0) {
+	// 	  while(1) {
+	// 		let timeStamp = t.at.getTime();
+	// 		  if (timeStamp + dayInterval < now ) {
+	// 			t.at = new Date(timeStamp + dayInterval);
+	// 		  } else {
+	// 			  return timeStamp;
+	// 		  }
+	// 	  }
+	//   }
+	  return -1;
   }
 
-  private calculateWeeklyRecurrencyTriggeredAt(ticketAlarm: ITicketRecurrency): number {
-	  return 0;
+  private calculateWeeklyRecurrencyTriggeredAt(t: ITicketRecurrency): number {
+	//   const now = new Date().getTime();
+	//   const weekInterval = WEEKINMS * t.interval;
+	//   if (t.legs > 0 && t.interval > 0 && t.dayOfWeek) {
+	// 	  while(t.legs >0) {
+	// 		  let timeStamp = t.at.getTime();
+
+	// 	  }
+
+	//   } else if (t.legs === -1 && t.interval > 0 && t.dayOfWeek) {
+
+	//   }
+
+	  return -1;
   }
 
-  private calculateMonthlyDateRecurrencyTriggeredAt(ticketAlarm: ITicketRecurrency): number {
-	  return 0;
+  private calculateMonthlyDateRecurrencyTriggeredAt(t: ITicketRecurrency): number {
+	  return -1;
   }
 
-  private calculateeMonthlyDayRecurrencyTriggeredAt(ticketAlarm: ITicketRecurrency): number {
-	  return 0;
+  private calculateeMonthlyDayRecurrencyTriggeredAt(t: ITicketRecurrency): number {
+	  return -1;
   }
 }
