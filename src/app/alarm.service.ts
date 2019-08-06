@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IAlarm, Ticket, ETicketRecurrencyType, ITicketRecurrency } from './app.model';
+import { IAlarm, Ticket, ETicketRecurrencyType, ITicketRecurrency, EDayOfWeek } from './app.model';
 import { Helper } from './utils';
 import * as Alarm from 'alarm';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
@@ -76,82 +76,203 @@ export class AlarmService {
 	  alarm.ticketID = ticket.id;
 	  alarm.message = ticket.summary;
 	  	  
-	  switch (ticket.alram.type) {
-		case ETicketRecurrencyType.once:
-			alarm.at = this.calculateOnceAlarmTriggeredAt(ticket.alram);
-			break;
-		case ETicketRecurrencyType.day:
-			alarm.at = this.calculateDailyRecurrenyTriggeredAt(ticket.alram);
-			break;
-		case ETicketRecurrencyType.week:
-			alarm.at = this.calculateWeeklyRecurrencyTriggeredAt(ticket.alram);
-			break;
-		case ETicketRecurrencyType.monthDate:
-			alarm.at = this.calculateMonthlyDateRecurrencyTriggeredAt(ticket.alram);
-			break;
-		case ETicketRecurrencyType.monthDay:
-			alarm.at = this.calculateeMonthlyDayRecurrencyTriggeredAt(ticket.alram);
-			break;
-	  }
+	//   switch (ticket.alram.type) {
+	// 	case ETicketRecurrencyType.once:
+	// 		alarm.at = this.calculateOnceAlarmTriggeredAt(ticket.alram);
+	// 		break;
+	// 	case ETicketRecurrencyType.day:
+	// 		alarm.at = this.calculateDailyRecurrenyTriggeredAt(ticket.alram);
+	// 		break;
+	// 	case ETicketRecurrencyType.week:
+	// 		alarm.at = this.calculateWeeklyRecurrencyTriggeredAt(ticket.alram);
+	// 		break;
+	// 	case ETicketRecurrencyType.monthDate:
+	// 		alarm.at = this.calculateMonthlyDateRecurrencyTriggeredAt(ticket.alram);
+	// 		break;
+	// 	case ETicketRecurrencyType.monthDay:
+	// 		alarm.at = this.calculateeMonthlyDayRecurrencyTriggeredAt(ticket.alram);
+	// 		break;
+	//   }
 
 	  return alarm;
   }
 
+  // parse the ticket recurrency data
   // -1 means no need to add the alarm, the timestamp is past
 
-  private calculateOnceAlarmTriggeredAt(t: ITicketRecurrency): number {
+  private parseTicketOnceAlarm(t: ITicketRecurrency): number {
 	  const now = new Date().getTime();
 	  const alarmTimestamp = t.at.getTime();
 	  return alarmTimestamp > now ? alarmTimestamp : -1;
   }
 
-  private calculateDailyRecurrenyTriggeredAt(t: ITicketRecurrency): number {
-	//   const now = new Date().getTime();
-	//   const dayInterval =  DAYINMS * t.interval;
-	//   if (t.legs > 0  && t.interval > 0) {
-	// 	  while(t.legs > 0) {
-	// 		  let timeStamp = t.at.getTime();
-	// 		  if ( timeStamp < now && timeStamp + dayInterval > now) {
-	// 			  t.at = new Date(timeStamp + dayInterval);
-	// 			  t.legs -- ;
-	// 		  } else {
-	// 			  return timeStamp;
-	// 		  }
-	// 	  }
-	//   } else if (t.legs === -1 && t.interval > 0) {
-	// 	  while(1) {
-	// 		let timeStamp = t.at.getTime();
-	// 		  if (timeStamp + dayInterval < now ) {
-	// 			t.at = new Date(timeStamp + dayInterval);
-	// 		  } else {
-	// 			  return timeStamp;
-	// 		  }
-	// 	  }
-	//   }
+  private parseTicketDailyRecurrenyAlarm(t: ITicketRecurrency): number {
+	  const now = new Date().getTime();
+	  if (t.interval > 0) {
+		  const dayInterval =  DAYINMS * t.interval;
+		  while(t.legs > 0 || t.legs === -1) {
+			let atTS = t.at.getTime();
+			if(atTS < now){
+				t.at = new Date(atTS + dayInterval);
+				t.legs = t.legs !== -1 ? t.legs -1 : -1;
+			} else {
+				return atTS;
+			}
+		  }
+	  }
 	  return -1;
   }
 
-  private calculateWeeklyRecurrencyTriggeredAt(t: ITicketRecurrency): number {
-	//   const now = new Date().getTime();
-	//   const weekInterval = WEEKINMS * t.interval;
-	//   if (t.legs > 0 && t.interval > 0 && t.dayOfWeek) {
-	// 	  while(t.legs >0) {
-	// 		  let timeStamp = t.at.getTime();
+  private parseTicketWeeklyRecurrencyAlarm(t: ITicketRecurrency): number {
+	  const now = new Date();
+	  if(t.interval > 0) {
+		  const weekInterval = WEEKINMS * t.interval;
+		  let dayOfweekIndex = -1;
+			  switch(t.dayOfWeek) {
+				case EDayOfWeek.sunday:
+					dayOfweekIndex = 0;
+					break;
+				case EDayOfWeek.monday:
+					dayOfweekIndex = 1;
+					break;
+				case EDayOfWeek.tuesday:
+					dayOfweekIndex = 2;
+					break;
+				case EDayOfWeek.wednesday:
+					dayOfweekIndex = 3;
+					break;
+				case EDayOfWeek.thursday:
+					dayOfweekIndex = 4;
+					break;
+				case EDayOfWeek.friday:
+					dayOfweekIndex = 5;
+					break;
+				case EDayOfWeek.saturday:
+					dayOfweekIndex = 6;
+					break;
+		  }
 
-	// 	  }
-
-	//   } else if (t.legs === -1 && t.interval > 0 && t.dayOfWeek) {
-
-	//   }
+		  let atTS = t.at.getTime();
+		  // first check the at day === dayOfWeek or not
+		  let dayGap = dayOfweekIndex - t.at.getDay();
+		  if (dayGap > 0) {
+				// should move to the right day
+				t.at = new Date(t.at.getTime() + WEEKINMS * dayGap);
+			} else if(dayGap < 0) {
+				// should move to the right day
+				t.at = new Date(t.at.getTime() + WEEKINMS * (dayGap + 7));
+			}
+		
+		  while(t.legs > 0 || t.legs === -1) {
+			  if(atTS < now.getTime()) {
+				t.at = new Date(atTS + weekInterval);
+				t.legs = t.legs !== -1 ? t.legs -1 : -1;
+			  } else {
+				  return atTS;
+			  }
+		  }
+	  }
 
 	  return -1;
   }
 
-  private calculateMonthlyDateRecurrencyTriggeredAt(t: ITicketRecurrency): number {
+  private parseTicketMonthlyDateRecurrencyAlarm(t: ITicketRecurrency): number {
+	const now = new Date();
 	  return -1;
   }
 
-  private calculateeMonthlyDayRecurrencyTriggeredAt(t: ITicketRecurrency): number {
+  private parseTicketMonthlyDayRecurrencyAlarm(t: ITicketRecurrency): number {
+	const now = new Date();
+	if (t.interval > 0) {
+		let atTS = t.at.getTime();
+		if(t.index > t.at.getDate()) {
+			// shpuld move to the right date of current month
+			t.at.setDate(t.index);
+
+		} else if(t.index < t.at.getDate()) {
+			// shpuld move to the right date of next month
+			t.at.setMonth(t.at.getMonth() + 1);
+			t.at.setDate(t.index);
+		}
+		while(t.legs > 0 || t.legs === -1) {
+			if(atTS < now.getTime()) {
+				switch(t.at.getMonth()) {
+					case 0: //Jan.
+						if (t.index > 29) {
+							if (t.at.getFullYear()%4 === 0) {
+								t.at.setDate(29);
+								t.at.setMonth(t.at.getMonth() + 1);
+							} else {
+								t.at.setDate(28);
+								t.at.setMonth(t.at.getMonth() + 1);
+							}
+						} else if(t.index === 29 && t.at.getFullYear() % 4 !== 0) {
+							t.at.setDate(28);
+							t.at.setMonth(t.at.getMonth() + 1);
+						} else {
+							t.at.setMonth(t.at.getMonth() + 1);
+						}
+						break;
+					case 1: // Feb.
+						t.at.setMonth(t.at.getMonth() + 1);
+						break;
+					case 2: // March.
+						if(t.index === 31) {
+							t.at.setDate(30);
+							t.at.setMonth(t.at.getMonth() + 1);
+						} else {
+							t.at.setMonth(t.at.getMonth() + 1);
+						}
+						break;
+					case 3: // April
+						t.at.setMonth(t.at.getMonth() + 1);
+						break;
+					case 4:
+						if(t.index === 31) {
+							t.at.setDate(30);
+							t.at.setMonth(t.at.getMonth() + 1);
+						} else {
+							t.at.setMonth(t.at.getMonth() + 1);
+						}
+						break;
+					case 5:
+						t.at.setMonth(t.at.getMonth() + 1);
+						break;
+					case 6:
+						t.at.setMonth(t.at.getMonth() + 1);
+						break;
+					case 7:
+						if(t.index === 31) {
+							t.at.setDate(30);
+							t.at.setMonth(t.at.getMonth() + 1);
+						} else {
+							t.at.setMonth(t.at.getMonth() + 1);
+						}
+						break;
+					case 8:
+						t.at.setMonth(t.at.getMonth() + 1);
+						break;
+					case 9:
+						if(t.index === 31) {
+							t.at.setDate(30);
+							t.at.setMonth(t.at.getMonth() + 1);
+						} else {
+							t.at.setMonth(t.at.getMonth() + 1);
+						}
+						break;
+					case 10:
+						t.at.setMonth(t.at.getMonth() + 1);
+						break;
+					case 11:
+						t.at.setMonth(t.at.getMonth() + 1);
+						break;
+				}
+			  t.legs = t.legs !== -1 ? t.legs -1 : -1;
+			} else {
+				return atTS;
+			}
+		}
+	}
 	  return -1;
   }
 }
