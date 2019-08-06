@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IAlarm, Ticket, ETicketRecurrencyType, ITicketRecurrency, EDayOfWeek } from './app.model';
+import { IAlarm, Ticket, ETicketRecurrencyType, ITicketRecurrency, EDayOfWeek, EWeekOfMonth } from './app.model';
 import { Helper } from './utils';
 import * as Alarm from 'alarm';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
@@ -176,12 +176,63 @@ export class AlarmService {
 	  return -1;
   }
 
-  private parseTicketMonthlyDateRecurrencyAlarm(t: ITicketRecurrency): number {
+  private parseTicketMonthlyDayRecurrencyAlarm(t: ITicketRecurrency): number {
 	const now = new Date();
+	if(t.interval > 0) {
+		let atTS = t.at.getTime();
+		let weekOfMonth = 5; // 5 is the last week of month
+		switch(t.weekOfMonth) {
+			case EWeekOfMonth.first:
+				weekOfMonth = 1;
+				break;
+			case EWeekOfMonth.second:
+				weekOfMonth = 2;
+				break;
+			case EWeekOfMonth.third:
+				weekOfMonth = 3;
+				break;
+			case EWeekOfMonth.fourth:
+				weekOfMonth = 4;
+				break;
+			case EWeekOfMonth.last:
+				weekOfMonth = 5;
+				break;
+		}
+		let dayOfweekIndex = -1;
+		switch(t.dayOfWeek) {
+		  case EDayOfWeek.sunday:
+			  dayOfweekIndex = 0;
+			  break;
+		  case EDayOfWeek.monday:
+			  dayOfweekIndex = 1;
+			  break;
+		  case EDayOfWeek.tuesday:
+			  dayOfweekIndex = 2;
+			  break;
+		  case EDayOfWeek.wednesday:
+			  dayOfweekIndex = 3;
+			  break;
+		  case EDayOfWeek.thursday:
+			  dayOfweekIndex = 4;
+			  break;
+		  case EDayOfWeek.friday:
+			  dayOfweekIndex = 5;
+			  break;
+		  case EDayOfWeek.saturday:
+			  dayOfweekIndex = 6;
+			  break;
+	}
+
+	// caculate the at month date based on weekOfMonth and dayOfWeek
+	let first = new Date(t.at).setDate(1);
+	// TODO:: continue to work the month day caculation
+
+
+	}
 	  return -1;
   }
 
-  private parseTicketMonthlyDayRecurrencyAlarm(t: ITicketRecurrency): number {
+  private parseTicketMonthlyDateRecurrencyAlarm(t: ITicketRecurrency): number {
 	const now = new Date();
 	if (t.interval > 0) {
 		let atTS = t.at.getTime();
