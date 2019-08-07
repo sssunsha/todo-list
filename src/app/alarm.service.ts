@@ -3,6 +3,7 @@ import { IAlarm, Ticket, ETicketRecurrencyType, ITicketRecurrency, EDayOfWeek, E
 import { Helper } from './utils';
 import * as Alarm from 'alarm';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import * as moment from 'moment';
 
 export interface IAlarmConfig {
 	cancelFunction: Function;
@@ -97,16 +98,16 @@ export class AlarmService {
 	  return alarm;
   }
 
-  // parse the ticket recurrency data
+  // convert the ticket recurrency data
   // -1 means no need to add the alarm, the timestamp is past
 
-  private parseTicketOnceAlarm(t: ITicketRecurrency): number {
+  private convertTicketOnceAlarm(t: ITicketRecurrency): number {
 	  const now = new Date().getTime();
 	  const alarmTimestamp = t.at.getTime();
 	  return alarmTimestamp > now ? alarmTimestamp : -1;
   }
 
-  private parseTicketDailyRecurrenyAlarm(t: ITicketRecurrency): number {
+  private convertTicketDailyRecurrenyAlarm(t: ITicketRecurrency): number {
 	  const now = new Date().getTime();
 	  if (t.interval > 0) {
 		  const dayInterval =  DAYINMS * t.interval;
@@ -123,7 +124,7 @@ export class AlarmService {
 	  return -1;
   }
 
-  private parseTicketWeeklyRecurrencyAlarm(t: ITicketRecurrency): number {
+  private convertTicketWeeklyRecurrencyAlarm(t: ITicketRecurrency): number {
 	  const now = new Date();
 	  if(t.interval > 0) {
 		  const weekInterval = WEEKINMS * t.interval;
@@ -176,63 +177,30 @@ export class AlarmService {
 	  return -1;
   }
 
-  private parseTicketMonthlyDayRecurrencyAlarm(t: ITicketRecurrency): number {
+  private convertTicketMonthlyDayRecurrencyAlarm(t: ITicketRecurrency): number {
 	const now = new Date();
+	now.setHours(t.at.getHours());
+	now.setMinutes(t.at.getMinutes());
+	now.setSeconds(t.at.getSeconds());
+	now.setMilliseconds(t.at.getMilliseconds());
+	const DayInNowMonth = this.caculateMatchedMonthlyDay(now, t.weekOfMonth, t.dayOfWeek);
+	t.at = this.caculateMatchedMonthlyDay(t.at, t.weekOfMonth, t.dayOfWeek);
 	if(t.interval > 0) {
-		let atTS = t.at.getTime();
-		let weekOfMonth = 5; // 5 is the last week of month
-		switch(t.weekOfMonth) {
-			case EWeekOfMonth.first:
-				weekOfMonth = 1;
-				break;
-			case EWeekOfMonth.second:
-				weekOfMonth = 2;
-				break;
-			case EWeekOfMonth.third:
-				weekOfMonth = 3;
-				break;
-			case EWeekOfMonth.fourth:
-				weekOfMonth = 4;
-				break;
-			case EWeekOfMonth.last:
-				weekOfMonth = 5;
-				break;
+		while(t.legs > 0 || t.legs === -1) {
+			if (t.at.getTime() < DayInNowMonth.getTime()) {
+				// move to the right day of next week
+				t.at.setDate(1);
+				t.at.setMonth(t.at.getMonth() + 1);
+				t.at = this.caculateMatchedMonthlyDay(t.at, t.weekOfMonth, t.dayOfWeek);
+			} else {
+				return t.at.getTime();
+			}
 		}
-		let dayOfweekIndex = -1;
-		switch(t.dayOfWeek) {
-		  case EDayOfWeek.sunday:
-			  dayOfweekIndex = 0;
-			  break;
-		  case EDayOfWeek.monday:
-			  dayOfweekIndex = 1;
-			  break;
-		  case EDayOfWeek.tuesday:
-			  dayOfweekIndex = 2;
-			  break;
-		  case EDayOfWeek.wednesday:
-			  dayOfweekIndex = 3;
-			  break;
-		  case EDayOfWeek.thursday:
-			  dayOfweekIndex = 4;
-			  break;
-		  case EDayOfWeek.friday:
-			  dayOfweekIndex = 5;
-			  break;
-		  case EDayOfWeek.saturday:
-			  dayOfweekIndex = 6;
-			  break;
-	}
-
-	// caculate the at month date based on weekOfMonth and dayOfWeek
-	let first = new Date(t.at).setDate(1);
-	// TODO:: continue to work the month day caculation
-
-
 	}
 	  return -1;
   }
 
-  private parseTicketMonthlyDateRecurrencyAlarm(t: ITicketRecurrency): number {
+  private convertTicketMonthlyDateRecurrencyAlarm(t: ITicketRecurrency): number {
 	const now = new Date();
 	if (t.interval > 0) {
 		let atTS = t.at.getTime();
@@ -325,5 +293,83 @@ export class AlarmService {
 		}
 	}
 	  return -1;
+  }
+
+  //  private help function
+  private caculateMatchedMonthlyDay(t: Date, wom: EWeekOfMonth, dow: EDayOfWeek): Date {
+	let weekOfMonth = 5; // 5 is the last week of month
+	switch(wom) {
+		case EWeekOfMonth.first:
+			weekOfMonth = 1;
+			break;
+		case EWeekOfMonth.second:
+			weekOfMonth = 2;
+			break;
+		case EWeekOfMonth.third:
+			weekOfMonth = 3;
+			break;
+		case EWeekOfMonth.fourth:
+			weekOfMonth = 4;
+			break;
+		case EWeekOfMonth.last:
+			weekOfMonth = 5;
+			break;
+	}
+	let dayOfweekIndex = -1;
+	switch(dow) {
+	  case EDayOfWeek.sunday:
+		  dayOfweekIndex = 0;
+		  break;
+	  case EDayOfWeek.monday:
+		  dayOfweekIndex = 1;
+		  break;
+	  case EDayOfWeek.tuesday:
+		  dayOfweekIndex = 2;
+		  break;
+	  case EDayOfWeek.wednesday:
+		  dayOfweekIndex = 3;
+		  break;
+	  case EDayOfWeek.thursday:
+		  dayOfweekIndex = 4;
+		  break;
+	  case EDayOfWeek.friday:
+		  dayOfweekIndex = 5;
+		  break;
+	  case EDayOfWeek.saturday:
+		  dayOfweekIndex = 6;
+		  break;
+	}
+
+	// caculate the at month date based on weekOfMonth and dayOfWeek
+	let matchedDate: Date = null;
+	let newAt = new Date(t);
+	const currentMonth = newAt.getMonth();
+	if (weekOfMonth <= 4) {
+		// set newAt to the first day of the month
+		newAt.setDate(1);
+		let dayOfWeekNewAt = newAt.getDay();
+		let weekOfMonthNewAt = 1;
+		while (newAt.getMonth() === currentMonth) {
+			if(dayOfWeekNewAt === dayOfweekIndex && weekOfMonthNewAt === weekOfMonth) {
+				matchedDate = newAt;
+			} else {
+				newAt.setDate(newAt.getDate() + 1);
+			}
+		}
+	} else { // for EWeekOfMonth.last
+		// set newAt to the last day of the month
+		newAt.setDate(1);
+		newAt.setMonth(newAt.getMonth() + 1);
+		newAt.setDate(newAt.getDate() - 1);
+		let dayOfWeekNewAt = newAt.getDay();
+		while(newAt.getMonth() == currentMonth) {
+			if (dayOfWeekNewAt === dayOfweekIndex) {
+				matchedDate = newAt;
+			} else {
+				newAt.setDate(newAt.getDate() - 1);
+			}
+		}
+	}
+	return matchedDate;
   }
 }
