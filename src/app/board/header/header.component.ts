@@ -16,6 +16,9 @@ import { AlarmService } from '../../alarm.service';
 })
 export class HeaderComponent implements OnInit {
   query: string;
+  isShowAlarmList: false;
+
+
   constructor(private dialog: MatDialog,
 	private alarmService: AlarmService,
 	private service: AppService) {

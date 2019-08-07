@@ -1,3 +1,5 @@
+@import '../../../resource/base.scss';
+
 .header {
     width: 100%;
     display: flex;
@@ -29,9 +31,22 @@
 				margin: 0 8px;
 				cursor: pointer;
 			}
+			.alarm-button {
+				cursor: pointer;
+			}
 		}
 		.action-button {
 			margin: auto 10px;
 		}
-    }
+	}
+	
+	.alarm-list {
+		position: absolute;
+		background-color: $black-background;
+		top: 64px;
+		right: 0px;
+		min-width: 300px;
+		min-height: 600px;
+		border-radius: 2px;
+	}
 }
