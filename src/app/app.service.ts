@@ -145,7 +145,7 @@ export class AppService implements OnDestroy{
 					this.cosFileVersion = ticketFileData.version;
 					this.modifiedAt = ticketFileData.modifiedAt;
 					Helper.openSnackBar(this._snackBar, 'download ticket file finished');
-					// start alram setup
+					// start alarm setup
 					this.alarmService.prepareAlarmConfigList(this.tickets);
 				}
 			});

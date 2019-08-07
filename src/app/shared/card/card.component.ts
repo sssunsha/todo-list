@@ -39,13 +39,13 @@ export class CardComponent implements OnInit {
 		  maxWidth: '1000px',
 		  data: {
 			  type: type,
-			  ticketAlarm: this.ticket.alram
+			  ticketAlarm: this.ticket.alarm
 		  }
 	  })
 
 	  dialogRef.afterClosed().subscribe(alarm => {
 		  if (alarm !== null) {
-			this.ticket.alram = alarm;
+			this.ticket.alarm = alarm;
 			this.service.updateIickets(this.ticket);
 			this.service.notifyTicketsChanged();
 		  }

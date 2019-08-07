@@ -124,7 +124,7 @@ export class Ticket {
 	inPages?: Array<EPageState>;
 	records?: Array<string>;
 	timeCosts?: Array<ITicketTimeCost>; // for every tickets, can be finished with some group of time
-	alram?: ITicketRecurrency;
+	alarm?: ITicketRecurrency;
 	constructor(data: Partial<Ticket>) {
 		this.id = data.id;
 		this.summary = data.summary;
@@ -137,7 +137,7 @@ export class Ticket {
 		this.inPages = data.inPages;
 		this.records = data.records;
 		this.timeCosts = data.timeCosts;
-		this.alram = data.alram;
+		this.alarm = data.alarm;
 	}
 }
 

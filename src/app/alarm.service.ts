@@ -53,9 +53,9 @@ export class AlarmService {
   }
 
   changeAlarm(newAlarm: IAlarm): void {
-	  this.alarmConfigList.forEach(alram => {
-		  if (alram.alarmObject.id === newAlarm.id) {
-			  alram.alarmObject = newAlarm;
+	  this.alarmConfigList.forEach(alarm => {
+		  if (alarm.alarmObject.id === newAlarm.id) {
+			  alarm.alarmObject = newAlarm;
 			  return;
 		  }
 	  })
@@ -67,12 +67,12 @@ export class AlarmService {
 
   prepareAlarmConfigList(tickets: Array<Ticket>): void {
 	  tickets.forEach(t => {
-		  if (t.alram) {
+		  if (t.alarm) {
 			  const alarmConfig  = this.generateAlarmConfig(t);
 			  if (alarmConfig) {
 				  this.addAlaram(alarmConfig);
 			  } else {
-				  t.alram = null;
+				  t.alarm = null;
 			  }
 		  }
 	  });
@@ -85,21 +85,21 @@ export class AlarmService {
 	  alarm.message = ticket.summary;
 	  let result = -1;
 	  	  
-	  switch (ticket.alram.type) {
+	  switch (ticket.alarm.type) {
 		case ETicketRecurrencyType.once:
-			result = this.convertTicketOnceAlarm(ticket.alram);
+			result = this.convertTicketOnceAlarm(ticket.alarm);
 			break;
 		case ETicketRecurrencyType.day:
-			result = this.convertTicketDailyRecurrenyAlarm(ticket.alram);
+			result = this.convertTicketDailyRecurrenyAlarm(ticket.alarm);
 			break;
 		case ETicketRecurrencyType.week:
-			result = this.convertTicketWeeklyRecurrencyAlarm(ticket.alram);
+			result = this.convertTicketWeeklyRecurrencyAlarm(ticket.alarm);
 			break;
 		case ETicketRecurrencyType.monthDate:
-			result = this.convertTicketMonthlyDateRecurrencyAlarm(ticket.alram);
+			result = this.convertTicketMonthlyDateRecurrencyAlarm(ticket.alarm);
 			break;
 		case ETicketRecurrencyType.monthDay:
-			result = this.convertTicketMonthlyDayRecurrencyAlarm(ticket.alram);
+			result = this.convertTicketMonthlyDayRecurrencyAlarm(ticket.alarm);
 			break;
 	  }
 
