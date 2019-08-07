@@ -31,7 +31,9 @@ export class AlarmService {
   addAlaram(newAlarm: IAlarm): void {
 	  const that = this;
 	  if (newAlarm) {
-		  newAlarm.id = Helper.generateMd5Hash(newAlarm.at.toString());
+		  if (!newAlarm.id) {
+			newAlarm.id = Helper.generateMd5Hash(newAlarm.at.toString());
+		  }
 		  this.alarmConfigList.push({
 			  alarmObject: newAlarm,
 			  cancelFunction: Alarm(newAlarm.at,
@@ -39,7 +41,7 @@ export class AlarmService {
 				() => {
 				Helper.createAlert(that.dialog, {
 					title: 'Alarm',
-					message: '... ...'
+					message: newAlarm.message
 				});
 			  })
 			});
@@ -66,7 +68,12 @@ export class AlarmService {
   prepareAlarmConfigList(tickets: Array<Ticket>): void {
 	  tickets.forEach(t => {
 		  if (t.alram) {
-			  this.addAlaram(this.generateAlarmConfig(t));
+			  const alarmConfig  = this.generateAlarmConfig(t);
+			  if (alarmConfig) {
+				  this.addAlaram(alarmConfig);
+			  } else {
+				  t.alram = null;
+			  }
 		  }
 	  });
   }
@@ -76,26 +83,31 @@ export class AlarmService {
 	  alarm.id  = Helper.generateMd5Hash(Helper.generateCreatedAt() + 'alarm id');
 	  alarm.ticketID = ticket.id;
 	  alarm.message = ticket.summary;
+	  let result = -1;
 	  	  
-	//   switch (ticket.alram.type) {
-	// 	case ETicketRecurrencyType.once:
-	// 		alarm.at = this.calculateOnceAlarmTriggeredAt(ticket.alram);
-	// 		break;
-	// 	case ETicketRecurrencyType.day:
-	// 		alarm.at = this.calculateDailyRecurrenyTriggeredAt(ticket.alram);
-	// 		break;
-	// 	case ETicketRecurrencyType.week:
-	// 		alarm.at = this.calculateWeeklyRecurrencyTriggeredAt(ticket.alram);
-	// 		break;
-	// 	case ETicketRecurrencyType.monthDate:
-	// 		alarm.at = this.calculateMonthlyDateRecurrencyTriggeredAt(ticket.alram);
-	// 		break;
-	// 	case ETicketRecurrencyType.monthDay:
-	// 		alarm.at = this.calculateeMonthlyDayRecurrencyTriggeredAt(ticket.alram);
-	// 		break;
-	//   }
+	  switch (ticket.alram.type) {
+		case ETicketRecurrencyType.once:
+			result = this.convertTicketOnceAlarm(ticket.alram);
+			break;
+		case ETicketRecurrencyType.day:
+			result = this.convertTicketDailyRecurrenyAlarm(ticket.alram);
+			break;
+		case ETicketRecurrencyType.week:
+			result = this.convertTicketWeeklyRecurrencyAlarm(ticket.alram);
+			break;
+		case ETicketRecurrencyType.monthDate:
+			result = this.convertTicketMonthlyDateRecurrencyAlarm(ticket.alram);
+			break;
+		case ETicketRecurrencyType.monthDay:
+			result = this.convertTicketMonthlyDayRecurrencyAlarm(ticket.alram);
+			break;
+	  }
 
-	  return alarm;
+	  if (result !== -1) {
+		  return alarm
+	  } else {
+		  return null;
+	  }
   }
 
   // convert the ticket recurrency data

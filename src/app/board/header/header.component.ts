@@ -24,10 +24,6 @@ export class HeaderComponent implements OnInit {
 //   constructor(private store: Store<Ticket>) { }
 
   ngOnInit() {
-	  // TODO: test code for alram service
-	//   this.alarmService.addAlaram({
-	// 	  at: new Date().getTime() + 10000,
-	//   });
   }
 
   onSearch() {
