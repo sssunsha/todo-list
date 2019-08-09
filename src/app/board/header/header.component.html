@@ -48,8 +48,13 @@
         </div>
 	</div>
 	<div class="alarm-list" *ngIf="isShowAlarmList">
-		<div *ngFor="let item of this.alarmService.getalarmConfigList()">
-			<div>{{item.alarmObject.message}}</div>
-		</div>
+		<mat-list>
+			<mat-list-item *ngFor="let item of this.alarmService.getalarmConfigList()">
+				<div class="alarm-list-item">
+					<div>{{item.alarmObject.message}}</div>
+					<div>{{item.alarmObject.at | date: 'long'}}</div>
+				</div>
+			</mat-list-item>
+		</mat-list>
 	</div>
 </div>
