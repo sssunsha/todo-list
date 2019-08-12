@@ -3,10 +3,6 @@ import { IAlarm, Ticket, ETicketRecurrencyType, ITicketRecurrency, EDayOfWeek, E
 import { Helper } from './utils';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
-export interface IAlarmConfig {
-	cancelFunction: Function;
-	alarmObject: IAlarm;
-}
 
 const DAYINMS = 86400000;
 const WEEKINMS = 604800000;
@@ -21,11 +17,11 @@ const WEEKINMS = 604800000;
   providedIn: 'root'
 })
 export class AlarmService {
-	static alarmConfigList: Array<IAlarmConfig>;
+	alarmList: Array<IAlarm>;
 	worker: Worker;
 
   constructor(private dialog: MatDialog) { 
-	  AlarmService.alarmConfigList = [];
+	  this.alarmList = [];
 	  this.init();
   }
 
@@ -33,10 +29,8 @@ export class AlarmService {
 	  if (typeof Worker !== 'undefined') {
 		  this.worker = new Worker('./app.worker', {type: 'module'});
 		  this.worker.onmessage = ({data}) => {
-			  console.log(data);
+			  // TODO: now a alarm come now, need to handle it
 		  }
-
-		  this.worker.postMessage('start');
 	  } else {
 		  console.error('Web worker are not supported in this environment.');
 	  }
@@ -48,27 +42,38 @@ export class AlarmService {
 		  if (!newAlarm.id) {
 			newAlarm.id = Helper.generateMd5Hash(newAlarm.at.toString());
 		  }
+		  this.alarmList.push(newAlarm);
 	  }
   }
 
-  removeAlarm(id: string):void {
-	  AlarmService.alarmConfigList = AlarmService.alarmConfigList.filter(alarm => alarm.alarmObject.id !== id);
+//   removeAlarm(id: string):void {
+// 	  this.alarmList = this.alarmList.filter(alarm => alarm.id !== id);
+// 	  this.worker.postMessage({
+// 		command: 'update',
+// 		env: window,
+// 		alarms: this.alarmList
+// 	  });
+//   }
+
+//   changeAlarm(newAlarm: IAlarm): void {
+// 	  this.alarmList.forEach(alarm => {
+// 		  if (alarm.id === newAlarm.id) {
+// 			  alarm = newAlarm;
+// 			  return;
+// 		  }
+// 	  })
+// 	  this.worker.postMessage({
+// 		command: 'update',
+// 		env: window,
+// 		alarms: this.alarmList
+// 	  });
+//   }
+
+  getalarmList(): Array<IAlarm> {
+	  return this.alarmList;
   }
 
-  changeAlarm(newAlarm: IAlarm): void {
-	  AlarmService.alarmConfigList.forEach(alarm => {
-		  if (alarm.alarmObject.id === newAlarm.id) {
-			  alarm.alarmObject = newAlarm;
-			  return;
-		  }
-	  })
-  }
-
-  getalarmConfigList(): Array<IAlarmConfig> {
-	  return AlarmService.alarmConfigList;
-  }
-
-  prepareAlarmConfigList(tickets: Array<Ticket>): void {
+  prepareAlarmConfigListFromTickets(tickets: Array<Ticket>): void {
 	  tickets.forEach(t => {
 		  if (t.alarm) {
 			  const alarmConfig  = this.generateAlarmConfig(t);
@@ -78,6 +83,12 @@ export class AlarmService {
 				  t.alarm = null;
 			  }
 		  }
+	  });
+	  // after prepare alarm from ticket, post message to alarm worker
+	  this.worker.postMessage({
+		command: 'start',
+		env: window,
+		alarms: this.alarmList
 	  });
   }
 
