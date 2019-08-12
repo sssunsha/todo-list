@@ -1,9 +1,7 @@
 import { Injectable } from '@angular/core';
 import { IAlarm, Ticket, ETicketRecurrencyType, ITicketRecurrency, EDayOfWeek, EWeekOfMonth } from './app.model';
 import { Helper } from './utils';
-import * as Alarm from 'alarm';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import * as moment from 'moment';
 
 export interface IAlarmConfig {
 	cancelFunction: Function;
@@ -12,6 +10,7 @@ export interface IAlarmConfig {
 
 const DAYINMS = 86400000;
 const WEEKINMS = 604800000;
+
 
 /*
 	in alarm service, for recurrency alarm, everytime only one instance avaliable in the alarm COnfigList
@@ -22,11 +21,11 @@ const WEEKINMS = 604800000;
   providedIn: 'root'
 })
 export class AlarmService {
-	private alarmConfigList: Array<IAlarmConfig>;
+	static alarmConfigList: Array<IAlarmConfig>;
 	worker: Worker;
 
   constructor(private dialog: MatDialog) { 
-	  this.alarmConfigList = [];
+	  AlarmService.alarmConfigList = [];
 	  this.init();
   }
 
@@ -49,26 +48,15 @@ export class AlarmService {
 		  if (!newAlarm.id) {
 			newAlarm.id = Helper.generateMd5Hash(newAlarm.at.toString());
 		  }
-		  this.alarmConfigList.push({
-			  alarmObject: newAlarm,
-			  cancelFunction: Alarm(newAlarm.at,
-				// TODO: here is the draft callback function for test alarm features
-				() => {
-				Helper.createAlert(that.dialog, {
-					title: 'Alarm',
-					message: newAlarm.message
-				});
-			  })
-			});
 	  }
   }
 
   removeAlarm(id: string):void {
-	  this.alarmConfigList = this.alarmConfigList.filter(alarm => alarm.alarmObject.id !== id);
+	  AlarmService.alarmConfigList = AlarmService.alarmConfigList.filter(alarm => alarm.alarmObject.id !== id);
   }
 
   changeAlarm(newAlarm: IAlarm): void {
-	  this.alarmConfigList.forEach(alarm => {
+	  AlarmService.alarmConfigList.forEach(alarm => {
 		  if (alarm.alarmObject.id === newAlarm.id) {
 			  alarm.alarmObject = newAlarm;
 			  return;
@@ -77,7 +65,7 @@ export class AlarmService {
   }
 
   getalarmConfigList(): Array<IAlarmConfig> {
-	  return this.alarmConfigList;
+	  return AlarmService.alarmConfigList;
   }
 
   prepareAlarmConfigList(tickets: Array<Ticket>): void {

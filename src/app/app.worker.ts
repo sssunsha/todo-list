@@ -1,23 +1,27 @@
+import { AlarmService } from './alarm.service';
 /// <reference lib="webworker" />
 
 let clock: any;
 
 function clockCallback() {
-	postMessage('1 min past ...');
+	if (AlarmService.alarmConfigList.length > 0) {
+		const now = new Date();
+		AlarmService.alarmConfigList.forEach(a => {
+			// start to check if some alarm need to alarm up
+		});
+	}
 }
 
 function startClock() {
 	clock = setInterval(()=> {
 		clockCallback();
 	}, 60000); // tirgged every 1 minute
-	postMessage('Alarm worker stated ...');
 }
 
 function stopClock() {
 	if (clock) {
 		clearInterval(clock);
 	}
-	postMessage('Alarm worker stopped ...');
 }
 
 function handleAlarmMessage(data: any) {
