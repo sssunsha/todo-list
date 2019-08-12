@@ -23,9 +23,24 @@ const WEEKINMS = 604800000;
 })
 export class AlarmService {
 	private alarmConfigList: Array<IAlarmConfig>;
+	worker: Worker;
 
   constructor(private dialog: MatDialog) { 
 	  this.alarmConfigList = [];
+	  this.init();
+  }
+
+  init() {
+	  if (typeof Worker !== 'undefined') {
+		  this.worker = new Worker('./todo-list-worker.worker', {type: 'module'});
+		  this.worker.onmessage = ({data}) => {
+			  console.log('page got message: ' + data);
+		  }
+
+		  this.worker.postMessage('hello');
+	  } else {
+		  console.error('Web worker are not supported in this environment.');
+	  }
   }
 
   addAlaram(newAlarm: IAlarm): void {
