@@ -32,12 +32,12 @@ export class AlarmService {
 
   init() {
 	  if (typeof Worker !== 'undefined') {
-		  this.worker = new Worker('./todo-list-worker.worker', {type: 'module'});
+		  this.worker = new Worker('./app.worker', {type: 'module'});
 		  this.worker.onmessage = ({data}) => {
-			  console.log('page got message: ' + data);
+			  console.log(data);
 		  }
 
-		  this.worker.postMessage('hello');
+		  this.worker.postMessage('start');
 	  } else {
 		  console.error('Web worker are not supported in this environment.');
 	  }
