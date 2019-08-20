@@ -87,7 +87,6 @@ export class AlarmService {
 	  // after prepare alarm from ticket, post message to alarm worker
 	  this.worker.postMessage({
 		command: 'start',
-		env: window,
 		alarms: this.alarmList
 	  });
   }

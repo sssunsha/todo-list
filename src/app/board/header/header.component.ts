@@ -8,7 +8,6 @@ import {MatDialog} from '@angular/material/dialog';
 import { AppService } from '../../app.service';
 import { TicketDialogComponent } from '../../shared/ticket-dialog/ticket-dialog.component';
 import { AlarmService } from '../../alarm.service';
-import { mockAlarmConfigList } from '../../alarm.service.mock';
 
 @Component({
   selector: 'app-header',
@@ -18,7 +17,6 @@ import { mockAlarmConfigList } from '../../alarm.service.mock';
 export class HeaderComponent implements OnInit {
   query: string;
   isShowAlarmList: false;
-  _MOCKALARMCONFIGLIST = mockAlarmConfigList;
 
 
   constructor(private dialog: MatDialog,

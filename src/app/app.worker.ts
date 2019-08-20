@@ -7,7 +7,6 @@ interface IAlarm {
 }
 
 let clock: any;
-let w: any;
 let alarmList: Array<IAlarm>;
 
 function compareDateInMinutes(date1: Date, date2: Date): number {
@@ -33,26 +32,23 @@ function clockCallback() {
 }
 
 function startClock() {
-	clock = w.setInterval(()=> {
+	clock = setInterval(()=> {
 		clockCallback();
 	}, 60000); // tirgged every 1 minute
 }
 
 function stopClock() {
 	if (clock) {
-		w.clearInterval(clock);
+		clearInterval(clock);
 	}
 }
 
 function handleAlarmMessage(data: any) {
 	if (data.command === 'start') {
-		startClock();
-		if (data.env) {
-			w = data.env
-		}
 		if (data.alarms) {
 			alarmList = data.alarms;
 		}
+		startClock();
 	} else if (data.command === 'stop') {
 		stopClock();
 	} else if (data.command === 'update') {
