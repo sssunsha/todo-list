@@ -52,9 +52,11 @@ function handleAlarmMessage(data: any) {
 	} else if (data.command === 'stop') {
 		stopClock();
 	} else if (data.command === 'update') {
+		stopClock();
 		if (data.alarms) {
 			alarmList = data.alarms;
 		}
+		startClock();
 	}
 }
 

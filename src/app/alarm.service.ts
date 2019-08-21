@@ -36,38 +36,34 @@ export class AlarmService {
 	  }
   }
 
-  addAlaram(newAlarm: IAlarm): void {
-	  const that = this;
-	  if (newAlarm) {
-		  if (!newAlarm.id) {
-			newAlarm.id = Helper.generateMd5Hash(newAlarm.at.toString());
-		  }
-		  this.alarmList.push(newAlarm);
-	  }
+  createAlarm(alarm: IAlarm): void {
+	  this.addAlaram(alarm);
+	  this.worker.postMessage({
+		command: 'update',
+		alarms: this.alarmList
+	  });
   }
 
-//   removeAlarm(id: string):void {
-// 	  this.alarmList = this.alarmList.filter(alarm => alarm.id !== id);
-// 	  this.worker.postMessage({
-// 		command: 'update',
-// 		env: window,
-// 		alarms: this.alarmList
-// 	  });
-//   }
+  removeAlarm(id: string):void {
+	  this.alarmList = this.alarmList.filter(alarm => alarm.id !== id);
+	  this.worker.postMessage({
+		command: 'update',
+		alarms: this.alarmList
+	  });
+  }
 
-//   changeAlarm(newAlarm: IAlarm): void {
-// 	  this.alarmList.forEach(alarm => {
-// 		  if (alarm.id === newAlarm.id) {
-// 			  alarm = newAlarm;
-// 			  return;
-// 		  }
-// 	  })
-// 	  this.worker.postMessage({
-// 		command: 'update',
-// 		env: window,
-// 		alarms: this.alarmList
-// 	  });
-//   }
+  changeAlarm(newAlarm: IAlarm): void {
+	  this.alarmList.forEach(alarm => {
+		  if (alarm.id === newAlarm.id) {
+			  alarm = newAlarm;
+			  return;
+		  }
+	  })
+	  this.worker.postMessage({
+		command: 'update',
+		alarms: this.alarmList
+	  });
+  }
 
   getalarmList(): Array<IAlarm> {
 	  return this.alarmList;
@@ -90,6 +86,16 @@ export class AlarmService {
 		alarms: this.alarmList
 	  });
   }
+
+  private addAlaram(newAlarm: IAlarm): void {
+	const that = this;
+	if (newAlarm) {
+		if (!newAlarm.id) {
+		  newAlarm.id = Helper.generateMd5Hash(newAlarm.at.toString());
+		}
+		this.alarmList.push(newAlarm);
+	}
+}
 
   private generateAlarmConfig(ticket: Ticket): IAlarm {
 	  let alarm: IAlarm;
