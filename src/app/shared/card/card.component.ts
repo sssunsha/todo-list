@@ -4,6 +4,7 @@ import { AppService } from '../../app.service';
 import { Helper } from '../../utils';
 import { RecurrencyDialogComponent } from '../recurrency-dialog/recurrency-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { AlarmService } from '../../alarm.service';
 
 @Component({
   selector: 'app-card',
@@ -14,6 +15,7 @@ export class CardComponent implements OnInit {
 	@Input()
 	ticket: Ticket;
   constructor(private service: AppService,
+			private alarmService: AlarmService,
 			private dialog: MatDialog
 	) { }
 
@@ -45,9 +47,15 @@ export class CardComponent implements OnInit {
 
 	  dialogRef.afterClosed().subscribe(alarm => {
 		  if (alarm !== null) {
-			this.ticket.alarm = alarm;
-			this.service.updateIickets(this.ticket);
-			this.service.notifyTicketsChanged();
+			  const isCreatedAlarm = this.ticket.alarm ? false : true;
+			  this.ticket.alarm = alarm;
+			  this.service.updateIickets(this.ticket);
+			  this.service.notifyTicketsChanged();
+			  if (isCreatedAlarm) {
+				this.alarmService.createAlarm(this.ticket);
+			  } else {
+				  this.alarmService.changeAlarm(this.ticket);
+			  }
 		  }
 	  })
   }

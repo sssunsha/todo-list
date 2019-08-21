@@ -36,8 +36,8 @@ export class AlarmService {
 	  }
   }
 
-  createAlarm(alarm: IAlarm): void {
-	  this.addAlaram(alarm);
+  createAlarm(ticket: Ticket): void {
+	  this.addAlaram(this.generateAlarmConfig(ticket));
 	  this.worker.postMessage({
 		command: 'update',
 		alarms: this.alarmList
@@ -52,10 +52,10 @@ export class AlarmService {
 	  });
   }
 
-  changeAlarm(newAlarm: IAlarm): void {
+  changeAlarm(ticket: Ticket): void {
 	  this.alarmList.forEach(alarm => {
-		  if (alarm.id === newAlarm.id) {
-			  alarm = newAlarm;
+		  if (alarm.id === ticket.alarm.id) {
+			  alarm = this.generateAlarmConfig(ticket);
 			  return;
 		  }
 	  })
@@ -97,9 +97,9 @@ export class AlarmService {
 	}
 }
 
-  private generateAlarmConfig(ticket: Ticket): IAlarm {
+  generateAlarmConfig(ticket: Ticket): IAlarm {
 	  let alarm: IAlarm;
-	  alarm.id  = Helper.generateMd5Hash(Helper.generateCreatedAt() + 'alarm id');
+	  alarm.id  = ticket.alarm.id;
 	  alarm.ticketID = ticket.id;
 	  alarm.message = ticket.summary;
 	  let result = -1;
