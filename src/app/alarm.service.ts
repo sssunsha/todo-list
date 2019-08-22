@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Ticket, ETicketRecurrencyType, ITicketRecurrency, EDayOfWeek, EWeekOfMonth } from './app.model';
 import { Helper } from './utils';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { AppService } from './app.service';
+import { Subject } from 'rxjs';
 
 
 const DAYINMS = 86400000;
@@ -20,9 +20,10 @@ const WEEKINMS = 604800000;
 export class AlarmService {
 	alarmList: Array<ITicketRecurrency>;
 	worker: Worker;
+	ticketAlarmUpdateSubject: Subject<{alarm: ITicketRecurrency, action: string}> 
+		= new Subject<{alarm: ITicketRecurrency, action: string}>();
 
-  constructor(private dialog: MatDialog,
-			private service: AppService) { 
+  constructor(private dialog: MatDialog) { 
 	  this.alarmList = [];
 	  this.init();
   }
@@ -108,9 +109,10 @@ export class AlarmService {
 		if (result === -1) {
 			// should remove the alarm from alarmList
 			this.removeAlarm(alarm.id);
+			this.ticketAlarmUpdateSubject.next({alarm: alarm, action: 'delete'});
+		} else {
+			this.ticketAlarmUpdateSubject.next({alarm: alarm, action: 'update'});
 		}
-
-		// TODO: need sync to ticket 
 	}
 
   generateAlarmConfig(ticket: Ticket): ITicketRecurrency {

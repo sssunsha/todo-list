@@ -1,8 +1,8 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { EPageState, Ticket, TicketFile } from './app.model';
+import { EPageState, Ticket, TicketFile, ITicketRecurrency } from './app.model';
 import * as COS from 'cos-js-sdk-v5';
 import { cosConfig, appConfig } from './shared/app.config';
-import { Observable, Subject } from 'rxjs';
+import { Observable, Subject, Subscription } from 'rxjs';
 import { Helper } from './utils';
 import * as FileSaver from 'file-saver';
 import {MatSnackBar} from '@angular/material/snack-bar';
@@ -35,6 +35,9 @@ export class AppService implements OnDestroy{
   // autoSync handler
   autoSyncHandler = null;
 
+  // alarm service relative
+  ticketAlarmUpdateScription: Subscription;
+
   constructor(
 	  private _snackBar: MatSnackBar,
 	  private alarmService: AlarmService) {
@@ -48,9 +51,12 @@ export class AppService implements OnDestroy{
 		}
 	   this.initClient();
 	   this.startAutoSync();
+	   this.ticketAlarmUpdateScription = 
+	   	this.alarmService.ticketAlarmUpdateSubject.subscribe(data => this.ticketAlarmUpdateHandle(data.alarm, data.action));
    }
 
    ngOnDestroy() {
+	   this.ticketAlarmUpdateScription.unsubscribe();
    }
 // public mthod for private ticket member ===========================================================
    setTickets(tickets: Array<Ticket>): void {
@@ -107,7 +113,17 @@ export class AppService implements OnDestroy{
 	   });
    }
 // alarm methods =======================================================================================
-
+   ticketAlarmUpdateHandle(alarm: ITicketRecurrency, action: string) {
+	   this.tickets.forEach(t => {
+		   if(t.alarm && t.alarm.id === alarm.id) {
+			   if (action === 'delete') {
+				   t.alarm = null;
+			   } else if (action === 'update') {
+				   t.alarm = alarm;
+			   }
+		   }
+	   });
+   }
 // COS =================================================================================================
    initClient(): void {
 	   this.cos = new COS({
