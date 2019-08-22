@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Ticket, ETicketRecurrencyType, ITicketRecurrency, EDayOfWeek, EWeekOfMonth } from './app.model';
 import { Helper } from './utils';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
+import { AppService } from './app.service';
 
 
 const DAYINMS = 86400000;
@@ -20,7 +21,8 @@ export class AlarmService {
 	alarmList: Array<ITicketRecurrency>;
 	worker: Worker;
 
-  constructor(private dialog: MatDialog) { 
+  constructor(private dialog: MatDialog,
+			private service: AppService) { 
 	  this.alarmList = [];
 	  this.init();
   }
@@ -102,7 +104,32 @@ export class AlarmService {
 	private onAlarmFired(alarm: ITicketRecurrency): void {
 		let result = -1;
 		alarm.at = new Date(alarm.at);
-		switch (alarm.type) {
+		result = this.calculateNextRunAt(alarm);
+		if (result === -1) {
+			// should remove the alarm from alarmList
+			this.removeAlarm(alarm.id);
+		}
+
+		// TODO: need sync to ticket 
+	}
+
+  generateAlarmConfig(ticket: Ticket): ITicketRecurrency {
+	  ticket.alarm.message = ticket.summary;
+	  ticket.alarm.at = new Date(ticket.alarm.at);
+	  let result = -1;
+	  result = this.calculateNextRunAt(ticket.alarm);
+	  if (result !== -1) {
+		  return ticket.alarm;
+	  } else {
+		  // clear the ticket alarm
+		  ticket.alarm = null;
+		  return null;
+	  }
+  }
+
+  private calculateNextRunAt(alarm: ITicketRecurrency): number {
+	  let result = -1;
+	  switch (alarm.type) {
 		case ETicketRecurrencyType.once:
 			result = this.convertTicketOnceAlarm(alarm);
 			break;
@@ -120,43 +147,7 @@ export class AlarmService {
 			break;
 		}
 
-		if (result === -1) {
-			// should remove the alarm from alarmList
-			this.removeAlarm(alarm.id);
-			alarm = null;
-		}
-	}
-
-  generateAlarmConfig(ticket: Ticket): ITicketRecurrency {
-	  ticket.alarm.message = ticket.summary;
-	  ticket.alarm.at = new Date(ticket.alarm.at);
-	  let result = -1;
-	  	  
-	  switch (ticket.alarm.type) {
-		case ETicketRecurrencyType.once:
-			result = this.convertTicketOnceAlarm(ticket.alarm);
-			break;
-		case ETicketRecurrencyType.day:
-			result = this.convertTicketDailyRecurrenyAlarm(ticket.alarm);
-			break;
-		case ETicketRecurrencyType.week:
-			result = this.convertTicketWeeklyRecurrencyAlarm(ticket.alarm);
-			break;
-		case ETicketRecurrencyType.monthDate:
-			result = this.convertTicketMonthlyDateRecurrencyAlarm(ticket.alarm);
-			break;
-		case ETicketRecurrencyType.monthDay:
-			result = this.convertTicketMonthlyDayRecurrencyAlarm(ticket.alarm);
-			break;
-	  }
-
-	  if (result !== -1) {
-		  return ticket.alarm;
-	  } else {
-		  // clear the ticket alarm
-		  ticket.alarm = null;
-		  return null;
-	  }
+	return result;
   }
 
   // convert the ticket recurrency data
