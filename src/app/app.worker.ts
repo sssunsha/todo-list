@@ -1,13 +1,8 @@
+import { ITicketRecurrency } from './app.model';
 /// <reference lib="webworker" />
-interface IAlarm {
-	id?: string;
-	at: number; // timestamp
-	ticketID?: string;
-	message?: string;
-}
 
 let clock: any;
-let alarmList: Array<IAlarm>;
+let alarmList: Array<ITicketRecurrency>;
 
 function compareDateInMinutes(date1: Date, date2: Date): number {
 	const d1 = new Date(date1);
@@ -25,7 +20,9 @@ function clockCallback() {
 		alarmList.forEach(a => {
 			// start to check if some alarm need to alarm up
 			if (compareDateInMinutes(now, new Date(a.at)) >= 0) {
-				postMessage(a);
+				// TODO: continue work on how to post triggered message
+				// postMessage(a);
+				console.log('alarm is triggered ... ' + a.id);
 			}
 		});
 	}

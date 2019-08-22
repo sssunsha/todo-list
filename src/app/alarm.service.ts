@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IAlarm, Ticket, ETicketRecurrencyType, ITicketRecurrency, EDayOfWeek, EWeekOfMonth } from './app.model';
+import { Ticket, ETicketRecurrencyType, ITicketRecurrency, EDayOfWeek, EWeekOfMonth } from './app.model';
 import { Helper } from './utils';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
@@ -17,7 +17,7 @@ const WEEKINMS = 604800000;
   providedIn: 'root'
 })
 export class AlarmService {
-	alarmList: Array<IAlarm>;
+	alarmList: Array<ITicketRecurrency>;
 	worker: Worker;
 
   constructor(private dialog: MatDialog) { 
@@ -65,7 +65,7 @@ export class AlarmService {
 	  });
   }
 
-  getalarmList(): Array<IAlarm> {
+  getalarmList(): Array<ITicketRecurrency> {
 	  return this.alarmList;
   }
 
@@ -87,7 +87,7 @@ export class AlarmService {
 	  });
   }
 
-  private addAlaram(newAlarm: IAlarm): void {
+  private addAlaram(newAlarm: ITicketRecurrency): void {
 	const that = this;
 	if (newAlarm) {
 		if (!newAlarm.id) {
@@ -97,11 +97,8 @@ export class AlarmService {
 	}
 }
 
-  generateAlarmConfig(ticket: Ticket): IAlarm {
-	  let alarm: IAlarm;
-	  alarm.id  = ticket.alarm.id;
-	  alarm.ticketID = ticket.id;
-	  alarm.message = ticket.summary;
+  generateAlarmConfig(ticket: Ticket): ITicketRecurrency {
+	  ticket.alarm.message = ticket.summary;
 	  let result = -1;
 	  	  
 	  switch (ticket.alarm.type) {
@@ -123,8 +120,10 @@ export class AlarmService {
 	  }
 
 	  if (result !== -1) {
-		  return alarm
+		  return ticket.alarm;
 	  } else {
+		  // clear the ticket alarm
+		  ticket.alarm = null;
 		  return null;
 	  }
   }
@@ -135,7 +134,11 @@ export class AlarmService {
   private convertTicketOnceAlarm(t: ITicketRecurrency): number {
 	  const now = new Date().getTime();
 	  const alarmTimestamp = t.at.getTime();
-	  return alarmTimestamp > now ? alarmTimestamp : -1;
+	  if (alarmTimestamp > now) {		  
+		  return alarmTimestamp;
+	  }
+
+	  return -1;
   }
 
   private convertTicketDailyRecurrenyAlarm(t: ITicketRecurrency): number {

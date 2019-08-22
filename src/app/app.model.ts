@@ -176,6 +176,7 @@ export interface ITicketRecurrency {
 	dayOfWeek?: EDayOfWeek; // for weekly and month day
 	weekOfMonth?: EWeekOfMonth; // for month day
 	index?: number; // for month date
+	message?: string;
 }
 
 export enum EDayOfWeek {
@@ -257,11 +258,4 @@ export interface TicketFile {
 	version: number;
 	modifiedAt: string;
 	value: Array<Ticket>;
-}
-
-export interface IAlarm {
-	id?: string;
-	at: number; // timestamp
-	ticketID?: string;
-	message?: string;
 }
