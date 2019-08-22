@@ -42,9 +42,10 @@
 	
 	.alarm-list {
 		position: absolute;
+		z-index: 1;
 		background-color: $black-background;
 		top: 64px;
-		right: 0px;
+		right: 10px;
 		min-width: 300px;
 		min-height: 600px;
 		border-radius: 2px;
