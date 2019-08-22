@@ -30,6 +30,8 @@ export class AlarmService {
 		  this.worker = new Worker('./app.worker', {type: 'module'});
 		  this.worker.onmessage = ({data}) => {
 			  // TODO: now a alarm come now, need to handle it
+			  alert('It is time for: \n' + data.message);
+			  this.onAlarmFired(data);
 		  }
 	  } else {
 		  console.error('Web worker are not supported in this environment.');
@@ -97,8 +99,37 @@ export class AlarmService {
 	}
 }
 
+	private onAlarmFired(alarm: ITicketRecurrency): void {
+		let result = -1;
+		alarm.at = new Date(alarm.at);
+		switch (alarm.type) {
+		case ETicketRecurrencyType.once:
+			result = this.convertTicketOnceAlarm(alarm);
+			break;
+		case ETicketRecurrencyType.day:
+			result = this.convertTicketDailyRecurrenyAlarm(alarm);
+			break;
+		case ETicketRecurrencyType.week:
+			result = this.convertTicketWeeklyRecurrencyAlarm(alarm);
+			break;
+		case ETicketRecurrencyType.monthDate:
+			result = this.convertTicketMonthlyDateRecurrencyAlarm(alarm);
+			break;
+		case ETicketRecurrencyType.monthDay:
+			result = this.convertTicketMonthlyDayRecurrencyAlarm(alarm);
+			break;
+		}
+
+		if (result === -1) {
+			// should remove the alarm from alarmList
+			this.removeAlarm(alarm.id);
+			alarm = null;
+		}
+	}
+
   generateAlarmConfig(ticket: Ticket): ITicketRecurrency {
 	  ticket.alarm.message = ticket.summary;
+	  ticket.alarm.at = new Date(ticket.alarm.at);
 	  let result = -1;
 	  	  
 	  switch (ticket.alarm.type) {
@@ -146,12 +177,11 @@ export class AlarmService {
 	  if (t.interval > 0) {
 		  const dayInterval =  DAYINMS * t.interval;
 		  while(t.legs > 0 || t.legs === -1) {
-			let atTS = t.at.getTime();
-			if(atTS < now){
-				t.at = new Date(atTS + dayInterval);
+			if(t.at.getTime() < now){
+				t.at = new Date(t.at.getTime() + dayInterval);
 				t.legs = t.legs !== -1 ? t.legs -1 : -1;
 			} else {
-				return atTS;
+				return t.at.getTime();
 			}
 		  }
 	  }
@@ -187,7 +217,6 @@ export class AlarmService {
 					break;
 		  }
 
-		  let atTS = t.at.getTime();
 		  // first check the at day === dayOfWeek or not
 		  let dayGap = dayOfweekIndex - t.at.getDay();
 		  if (dayGap > 0) {
@@ -199,11 +228,11 @@ export class AlarmService {
 			}
 		
 		  while(t.legs > 0 || t.legs === -1) {
-			  if(atTS < now.getTime()) {
-				t.at = new Date(atTS + weekInterval);
+			  if(t.at.getTime() < now.getTime()) {
+				t.at = new Date(t.at.getTime() + weekInterval);
 				t.legs = t.legs !== -1 ? t.legs -1 : -1;
 			  } else {
-				  return atTS;
+				  return t.at.getTime();
 			  }
 		  }
 	  }
@@ -237,7 +266,6 @@ export class AlarmService {
   private convertTicketMonthlyDateRecurrencyAlarm(t: ITicketRecurrency): number {
 	const now = new Date();
 	if (t.interval > 0) {
-		let atTS = t.at.getTime();
 		if(t.index > t.at.getDate()) {
 			// shpuld move to the right date of current month
 			t.at.setDate(t.index);
@@ -248,7 +276,7 @@ export class AlarmService {
 			t.at.setDate(t.index);
 		}
 		while(t.legs > 0 || t.legs === -1) {
-			if(atTS < now.getTime()) {
+			if(t.at.getTime() < now.getTime()) {
 				switch(t.at.getMonth()) {
 					case 0: //Jan.
 						if (t.index > 29) {
@@ -322,7 +350,7 @@ export class AlarmService {
 				}
 			  t.legs = t.legs !== -1 ? t.legs -1 : -1;
 			} else {
-				return atTS;
+				return t.at.getTime();
 			}
 		}
 	}

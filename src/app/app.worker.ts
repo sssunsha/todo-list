@@ -20,9 +20,7 @@ function clockCallback() {
 		alarmList.forEach(a => {
 			// start to check if some alarm need to alarm up
 			if (compareDateInMinutes(now, new Date(a.at)) >= 0) {
-				// TODO: continue work on how to post triggered message
-				// postMessage(a);
-				console.log('alarm is triggered ... ' + a.id);
+				postMessage(a);
 			}
 		});
 	}
