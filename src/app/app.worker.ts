@@ -1,5 +1,12 @@
 import { ITicketRecurrency } from './app.model';
+import { appConfig } from './shared/app.config';
 /// <reference lib="webworker" />
+
+/*
+	here has a default timer to auto sync for tickets data to cloud
+*/
+let lastSyncedAt = new Date().getTime();
+
 
 let clock: any;
 let alarmList: Array<ITicketRecurrency>;
@@ -15,14 +22,19 @@ function compareDateInMinutes(date1: Date, date2: Date): number {
 }
 
 function clockCallback() {
+	const now = new Date();
 	if (alarmList.length > 0) {
-		const now = new Date();
 		alarmList.forEach(a => {
 			// start to check if some alarm need to alarm up
 			if (compareDateInMinutes(now, new Date(a.at)) >= 0) {
 				postMessage(a);
 			}
 		});
+	}
+	// for auto sync the tickets data to cloud
+	if (now.getTime() - lastSyncedAt >=  appConfig.syncInterval) {
+		postMessage('auto-sync');
+		lastSyncedAt = now.getTime();
 	}
 }
 

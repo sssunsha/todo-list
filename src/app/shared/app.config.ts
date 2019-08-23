@@ -9,5 +9,5 @@ export let cosConfig = {
 export let appConfig = {
 	isLiveMode: false,
 	isAutoSync: false,
-	syncInterval: 3600,
+	syncInterval: 3600000, // 1 hour
 }

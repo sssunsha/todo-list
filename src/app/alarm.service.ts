@@ -20,8 +20,8 @@ const WEEKINMS = 604800000;
 export class AlarmService {
 	alarmList: Array<ITicketRecurrency>;
 	worker: Worker;
-	ticketAlarmUpdateSubject: Subject<{alarm: ITicketRecurrency, action: string}> 
-		= new Subject<{alarm: ITicketRecurrency, action: string}>();
+	alarmNotificationSubject: Subject<{alarm: ITicketRecurrency, action: string} | string> 
+		= new Subject<{alarm: ITicketRecurrency, action: string} | string>();
 
   constructor(private dialog: MatDialog) { 
 	  this.alarmList = [];
@@ -32,9 +32,13 @@ export class AlarmService {
 	  if (typeof Worker !== 'undefined') {
 		  this.worker = new Worker('./app.worker', {type: 'module'});
 		  this.worker.onmessage = ({data}) => {
-			  // TODO: now a alarm come now, need to handle it
-			  alert('It is time for: \n' + data.message);
-			  this.onAlarmFired(data);
+			  if (data === 'auto-sync') {
+				  console.log(' start auto sync now ...');
+				  this.alarmNotificationSubject.next('auto-sync');
+			  } else {
+				alert('It is time for: \n' + data.message);
+				this.onAlarmFired(data);
+			  }
 		  }
 	  } else {
 		  console.error('Web worker are not supported in this environment.');
@@ -109,9 +113,9 @@ export class AlarmService {
 		if (result === -1) {
 			// should remove the alarm from alarmList
 			this.removeAlarm(alarm.id);
-			this.ticketAlarmUpdateSubject.next({alarm: alarm, action: 'delete'});
+			this.alarmNotificationSubject.next({alarm: alarm, action: 'delete'});
 		} else {
-			this.ticketAlarmUpdateSubject.next({alarm: alarm, action: 'update'});
+			this.alarmNotificationSubject.next({alarm: alarm, action: 'update'});
 		}
 	}
 
