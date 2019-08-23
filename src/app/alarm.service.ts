@@ -20,8 +20,8 @@ const WEEKINMS = 604800000;
 export class AlarmService {
 	alarmList: Array<ITicketRecurrency>;
 	worker: Worker;
-	alarmNotificationSubject: Subject<{alarm: ITicketRecurrency, action: string} | string> 
-		= new Subject<{alarm: ITicketRecurrency, action: string} | string>();
+	alarmNotificationSubject: Subject<{alarm?: ITicketRecurrency, action: string}> 
+		= new Subject<{alarm?: ITicketRecurrency, action: string}>();
 
   constructor(private dialog: MatDialog) { 
 	  this.alarmList = [];
@@ -34,7 +34,7 @@ export class AlarmService {
 		  this.worker.onmessage = ({data}) => {
 			  if (data === 'auto-sync') {
 				  console.log(' start auto sync now ...');
-				  this.alarmNotificationSubject.next('auto-sync');
+				  this.alarmNotificationSubject.next({action: 'auto-sync'});
 			  } else {
 				alert('It is time for: \n' + data.message);
 				this.onAlarmFired(data);

@@ -54,7 +54,7 @@ export class AppService implements OnDestroy{
 	   this.ticketAlarmUpdateScription = 
 		   this.alarmService.alarmNotificationSubject.subscribe(data => 
 			{
-				if (data === 'auto-sync') {
+				if (data.action === 'auto-sync') {
 					this.startAutoSync();
 				} else {
 					this.ticketAlarmUpdateHandle(data.alarm, data.action);
