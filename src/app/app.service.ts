@@ -50,12 +50,11 @@ export class AppService implements OnDestroy{
 			window.clearInterval(this.autoSyncHandler);
 		}
 	   this.initClient();
-	   this.startAutoSync();
 	   this.ticketAlarmUpdateScription = 
 		   this.alarmService.alarmNotificationSubject.subscribe(data => 
 			{
 				if (data.action === 'auto-sync') {
-					this.startAutoSync();
+					this.startSync();
 				} else {
 					this.ticketAlarmUpdateHandle(data.alarm, data.action);
 				}
@@ -191,15 +190,6 @@ export class AppService implements OnDestroy{
 		});
 	}
 
-// auto sync ===========================================================================================
-	startAutoSync(): void {
-		if(this.appConfig.isAutoSync && this.appConfig.syncInterval) {
-			this.autoSyncHandler = window.setInterval(() => {
-				// start the sync
-				this.startSync()
-			}, this.appConfig.syncInterval * 1000);
-		}
-	}
 // html5 local storage for backup========================================================================
 	startTicketsLocalStorageBackup(): void {
 		localStorage.setItem(Helper.generateTicketFilePath(this.appConfig.isLiveMode),
