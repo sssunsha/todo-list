@@ -36,12 +36,22 @@ export class CardComponent implements OnInit {
 	  this.ticket.ticketType = type;
 	  this.service.notifyTicketsChanged();
   }
+
+  handleTickeAlarmClear(): void {
+	  if (this.ticket.alarm && this.ticket.alarm.id) {
+		this.alarmService.removeAlarm(this.ticket.alarm.id);
+		this.ticket.alarm = null;
+		this.service.updateIickets(this.ticket);
+		this.service.notifyTicketsChanged();
+	  }
+  }
+
   handleTicketAlarmSet(type: ETicketRecurrencyType): void {
 	  const dialogRef = this.dialog.open(RecurrencyDialogComponent, {
 		  maxWidth: '1000px',
 		  data: {
 			  type: type,
-			  ticketAlarm: this.ticket.alarm
+			  ticketAlarm: Object.assign({}, this.ticket.alarm)
 		  }
 	  })
 

@@ -30,6 +30,7 @@
     </mat-menu>
 
     <mat-menu #alarm="matMenu">
+			<button mat-menu-item (click)="handleTickeAlarmClear()">Clear Alarm</button>
         <button mat-menu-item (click)="handleTicketAlarmSet('once')">Once</button>
         <button mat-menu-item (click)="handleTicketAlarmSet('day')">Daily</button>
         <button mat-menu-item (click)="handleTicketAlarmSet('week')">Weekly</button>
