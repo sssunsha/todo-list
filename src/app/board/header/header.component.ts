@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import * as fromRoot from '../../reducers/ticket';
 import * as TicketActions from '../../actions/ticket';
-import { Ticket, EPageState } from '../../app.model';
+import { Ticket, EPageState, ITicketRecurrency } from '../../app.model';
 import { Helper } from '../../utils';
 import {MatDialog} from '@angular/material/dialog';
 import { AppService } from '../../app.service';
@@ -68,6 +68,21 @@ export class HeaderComponent implements OnInit {
 
   goto(pageState: EPageState): void {
 	  this.service.currentPage = pageState;
+  }
+
+  onAlarmListClicked(item: ITicketRecurrency): void {
+	  // if the ticket relative alarm clicked, jump to the page has which
+	  let inPages: Array<EPageState> = [];
+	  this.service.getTickets().forEach(ticket => {
+		  if (ticket.alarm && ticket.alarm.id === item.id) {
+			  inPages = ticket.inPages;
+			  return;
+		  }
+	  });
+
+	  if (inPages.length >0) {
+		  this.service.currentPage = inPages[0];
+	  }
   }
 
 }
