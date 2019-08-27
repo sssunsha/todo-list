@@ -57,6 +57,7 @@ export class CardComponent implements OnInit {
 
 	  dialogRef.afterClosed().subscribe(alarm => {
 		  if (alarm !== null) {
+			  this.ticket.ticketType = ETicketType.reminder;
 			  const isCreatedAlarm = this.ticket.alarm ? false : true;
 			  this.ticket.alarm = alarm;
 			  this.service.updateIickets(this.ticket);
