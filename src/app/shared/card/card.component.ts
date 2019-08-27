@@ -41,6 +41,7 @@ export class CardComponent implements OnInit {
 	  if (this.ticket.alarm && this.ticket.alarm.id) {
 		this.alarmService.removeAlarm(this.ticket.alarm.id);
 		this.ticket.alarm = null;
+		this.ticket.ticketType = ETicketType.task; // task is the default type
 		this.service.updateIickets(this.ticket);
 		this.service.notifyTicketsChanged();
 	  }
