@@ -52,7 +52,7 @@ export class CardComponent implements OnInit {
 		  maxWidth: '1000px',
 		  data: {
 			  type: type,
-			  ticketAlarm: Object.assign({}, this.ticket.alarm)
+			  ticketAlarm: this.ticket.alarm ? Object.assign({}, this.ticket.alarm) : null
 		  }
 	  })
 

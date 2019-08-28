@@ -74,6 +74,20 @@ export class AlarmService {
 	  });
   }
 
+  private updateAlarm(alarm: ITicketRecurrency):void {
+	  this.alarmList.forEach(a =>{
+		  if (a.id === alarm.id) {
+			  a = alarm;
+			  return;
+		  }
+	  })
+
+	  this.worker.postMessage({
+		command: 'update',
+		alarms: this.alarmList
+	  });
+  }
+
   getalarmList(): Array<ITicketRecurrency> {
 	  return this.alarmList;
   }
@@ -115,6 +129,7 @@ export class AlarmService {
 			this.removeAlarm(alarm.id);
 			this.alarmNotificationSubject.next({alarm: alarm, action: 'delete'});
 		} else {
+			this.updateAlarm(alarm);
 			this.alarmNotificationSubject.next({alarm: alarm, action: 'update'});
 		}
 	}
