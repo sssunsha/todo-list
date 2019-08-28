@@ -63,9 +63,19 @@ export class AlarmService {
   }
 
   changeAlarm(ticket: Ticket): void {
-	  this.alarmList.forEach(alarm => {
-		  if (alarm.id === ticket.alarm.id) {
-			  alarm = this.generateAlarmConfig(ticket);
+	  this.alarmList.forEach(a => {
+		  if (a.id === ticket.alarm.id) {
+			  const alarm = this.generateAlarmConfig(ticket);
+			  if (alarm) {
+				a.at = alarm.at;
+				a.legs = alarm.legs;
+				a.interval = alarm.interval;
+				a.type = alarm.type;
+				a.dayOfWeek = alarm.dayOfWeek;
+				a.weekOfMonth = alarm.weekOfMonth;
+				a.index = alarm.index;
+				a.message = alarm.message;
+			  }
 			  return;
 		  }
 	  })
