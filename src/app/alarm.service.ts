@@ -3,7 +3,7 @@ import { Ticket, ETicketRecurrencyType, ITicketRecurrency, EDayOfWeek, EWeekOfMo
 import { Helper } from './utils';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Subject } from 'rxjs';
-
+import Swal from 'sweetalert2'
 
 const DAYINMS = 86400000;
 const WEEKINMS = 604800000;
@@ -36,7 +36,8 @@ export class AlarmService {
 				  console.log(' start auto sync now ...');
 				  this.alarmNotificationSubject.next({action: 'auto-sync'});
 			  } else {
-				alert('It is time for: \n' + data.message);
+				// alert('It is time for: \n' + data.message);
+				Swal.fire('Time is up !', data.message, 'warning');
 				this.onAlarmFired(data);
 			  }
 		  }
