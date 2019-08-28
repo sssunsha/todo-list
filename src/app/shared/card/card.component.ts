@@ -45,6 +45,11 @@ export class CardComponent implements OnInit {
 		this.service.updateIickets(this.ticket);
 		this.service.notifyTicketsChanged();
 	  }
+	  if (this.ticket.ticketType === ETicketType.reminder) {
+		this.ticket.ticketType = ETicketType.task; // task is the default type
+		this.service.updateIickets(this.ticket);
+		this.service.notifyTicketsChanged();
+	  }
   }
 
   handleTicketAlarmSet(type: ETicketRecurrencyType): void {

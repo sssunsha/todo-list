@@ -76,12 +76,19 @@ export class AlarmService {
   }
 
   private updateAlarm(alarm: ITicketRecurrency):void {
-	  this.alarmList.forEach(a =>{
-		  if (a.id === alarm.id) {
-			  a = alarm;
-			  return;
-		  }
-	  })
+	this.alarmList.forEach(a => {
+		if (a.id === alarm.id) {
+			a.at = alarm.at;
+			a.legs = alarm.legs;
+			a.interval = alarm.interval;
+			a.type = alarm.type;
+			a.dayOfWeek = alarm.dayOfWeek;
+			a.weekOfMonth = alarm.weekOfMonth;
+			a.index = alarm.index;
+			a.message = alarm.message;
+			return;
+		}
+	});
 
 	  this.worker.postMessage({
 		command: 'update',

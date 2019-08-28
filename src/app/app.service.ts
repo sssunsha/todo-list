@@ -1,5 +1,5 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { EPageState, Ticket, TicketFile, ITicketRecurrency } from './app.model';
+import { EPageState, Ticket, TicketFile, ITicketRecurrency, ETicketType } from './app.model';
 import * as COS from 'cos-js-sdk-v5';
 import { cosConfig, appConfig } from './shared/app.config';
 import { Observable, Subject, Subscription } from 'rxjs';
@@ -124,6 +124,7 @@ export class AppService implements OnDestroy{
 		   if(t.alarm && t.alarm.id === alarm.id) {
 			   if (action === 'delete') {
 				   t.alarm = null;
+				   t.ticketType = ETicketType.task;
 			   } else if (action === 'update') {
 				   t.alarm = alarm;
 			   }

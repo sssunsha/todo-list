@@ -125,6 +125,12 @@ export class RecurrencyDialogComponent implements OnInit {
 		  this.isError = true;
 		  this.notificationMsg = 'at is invalid';
 		  return false;
+	  } else {
+		  if (this.data.ticketAlarm.at < new Date()) {
+			  this.isError = true;
+			  this.notificationMsg = 'at is invalid';
+			  return false;
+		  }
 	  }
 	  return true;
   }
