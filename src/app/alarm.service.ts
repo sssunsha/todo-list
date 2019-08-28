@@ -301,7 +301,7 @@ export class AlarmService {
 			t.at.setDate(t.index);
 
 		} else if(t.index < t.at.getDate()) {
-			// shpuld move to the right date of next month
+			// should move to the right date of next month
 			t.at.setMonth(t.at.getMonth() + 1);
 			t.at.setDate(t.index);
 		}
@@ -312,70 +312,70 @@ export class AlarmService {
 						if (t.index > 29) {
 							if (t.at.getFullYear()%4 === 0) {
 								t.at.setDate(29);
-								t.at.setMonth(t.at.getMonth() + 1);
+								t.at.setMonth(t.at.getMonth() + t.interval);
 							} else {
 								t.at.setDate(28);
-								t.at.setMonth(t.at.getMonth() + 1);
+								t.at.setMonth(t.at.getMonth() + t.interval);
 							}
 						} else if(t.index === 29 && t.at.getFullYear() % 4 !== 0) {
 							t.at.setDate(28);
-							t.at.setMonth(t.at.getMonth() + 1);
+							t.at.setMonth(t.at.getMonth() + t.interval);
 						} else {
-							t.at.setMonth(t.at.getMonth() + 1);
+							t.at.setMonth(t.at.getMonth() + t.interval);
 						}
 						break;
 					case 1: // Feb.
-						t.at.setMonth(t.at.getMonth() + 1);
+						t.at.setMonth(t.at.getMonth() + t.interval);
 						break;
 					case 2: // March.
 						if(t.index === 31) {
 							t.at.setDate(30);
-							t.at.setMonth(t.at.getMonth() + 1);
+							t.at.setMonth(t.at.getMonth() + t.interval);
 						} else {
-							t.at.setMonth(t.at.getMonth() + 1);
+							t.at.setMonth(t.at.getMonth() + t.interval);
 						}
 						break;
 					case 3: // April
-						t.at.setMonth(t.at.getMonth() + 1);
+						t.at.setMonth(t.at.getMonth() + t.interval);
 						break;
 					case 4:
 						if(t.index === 31) {
 							t.at.setDate(30);
-							t.at.setMonth(t.at.getMonth() + 1);
+							t.at.setMonth(t.at.getMonth() + t.interval);
 						} else {
-							t.at.setMonth(t.at.getMonth() + 1);
+							t.at.setMonth(t.at.getMonth() + t.interval);
 						}
 						break;
 					case 5:
-						t.at.setMonth(t.at.getMonth() + 1);
+						t.at.setMonth(t.at.getMonth() + t.interval);
 						break;
 					case 6:
-						t.at.setMonth(t.at.getMonth() + 1);
+						t.at.setMonth(t.at.getMonth() + t.interval);
 						break;
 					case 7:
 						if(t.index === 31) {
 							t.at.setDate(30);
-							t.at.setMonth(t.at.getMonth() + 1);
+							t.at.setMonth(t.at.getMonth() + t.interval);
 						} else {
-							t.at.setMonth(t.at.getMonth() + 1);
+							t.at.setMonth(t.at.getMonth() + t.interval);
 						}
 						break;
 					case 8:
-						t.at.setMonth(t.at.getMonth() + 1);
+						t.at.setMonth(t.at.getMonth() + t.interval);
 						break;
 					case 9:
 						if(t.index === 31) {
 							t.at.setDate(30);
-							t.at.setMonth(t.at.getMonth() + 1);
+							t.at.setMonth(t.at.getMonth() + t.interval);
 						} else {
-							t.at.setMonth(t.at.getMonth() + 1);
+							t.at.setMonth(t.at.getMonth() + t.interval);
 						}
 						break;
 					case 10:
-						t.at.setMonth(t.at.getMonth() + 1);
+						t.at.setMonth(t.at.getMonth() + t.interval);
 						break;
 					case 11:
-						t.at.setMonth(t.at.getMonth() + 1);
+						t.at.setMonth(t.at.getMonth() + t.interval);
 						break;
 				}
 			  t.legs = t.legs !== -1 ? t.legs -1 : -1;
