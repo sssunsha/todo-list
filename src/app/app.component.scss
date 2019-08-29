@@ -5,7 +5,10 @@
     bottom: 0;
     left: 0;
     right: 0;
-	background: $default-background;
+	background-image: url("src/assets/img/Mirage.jpg");
+	background-attachment: fixed;
+	background-repeat: no-repeat;
+	background-size: cover;
     .app-pane {
         min-width: 100px;
         background-color: $black-background;
