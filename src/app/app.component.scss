@@ -11,10 +11,17 @@
 	background-size: cover;
     .app-pane {
         min-width: 100px;
-        background-color: $black-background;
+        background-image: url("src/assets/img/Royal.jpg");
+		background-attachment: fixed;
+		background-repeat: no-repeat;
+		background-size: cover;
+		transform:rotate(90deg);
     }
     .app-header {
-        background-color: $black-background;
+        background-image: url("src/assets/img/Royal.jpg");
+		background-attachment: fixed;
+		background-repeat: no-repeat;
+		background-size: cover;
         width: 100%;
         app-header {
             width: 100%;
