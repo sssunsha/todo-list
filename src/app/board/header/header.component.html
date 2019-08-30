@@ -53,6 +53,21 @@
 				<div class="alarm-list-item">
 					<div>{{item.message}}</div>
 					<div>{{item.at | date: 'short'}}</div>
+					<div *ngIf="item.type === 'once'">
+						Once
+					</div>
+					<div *ngIf="item.type === 'day'">
+						Daily, every {{item.interval}} days, {{item.legs}} round left
+					</div>
+					<div *ngIf="item.type === 'week'">
+						Weekly, every {{item.interval}} {{item.dayOfWeek}}, {{item.legs}} round left
+					</div>
+					<div *ngIf="item.type === 'monthDay'">
+						Monthly day, every {{item.interval}} {{item.weekOfMonth}} {{item.dayOfWeek}}, {{item.legs}} round left
+					</div>
+					<div *ngIf="item.type === 'monthDate'">
+						Monthly date, every {{item.interval}} at {{item.index}} of the monty, {{item.legs}} round left
+					</div>
 				</div>
 			</mat-list-item>
 		</mat-list>
