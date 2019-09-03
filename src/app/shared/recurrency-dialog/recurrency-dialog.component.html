@@ -39,7 +39,7 @@
 				<p></p>
                 <label>Day of week:</label>
                 <p></p>
-                <mat-select [(ngModel)]="data.ticketAlarm.daOfWeek" (selectionChange)="onChanged()">
+                <mat-select [(ngModel)]="data.ticketAlarm.dayOfWeek" (selectionChange)="onChanged()">
                     <mat-option *ngFor="let item of _DAYOFWEEK" [value]="item.value">
                         {{item.label}}
                     </mat-option>
