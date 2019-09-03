@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Ticket, ETicketRecurrencyType, ITicketRecurrency, EDayOfWeek, EWeekOfMonth } from './app.model';
+import { Ticket, ETicketRecurrencyType, ITicketRecurrency, EDayOfWeek, EWeekOfMonth, ETicketType } from './app.model';
 import { Helper } from './utils';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Subject } from 'rxjs';
@@ -116,6 +116,7 @@ export class AlarmService {
 			  const alarmConfig  = this.generateAlarmConfig(t);
 			  if (alarmConfig) {
 				  this.addAlaram(alarmConfig);
+				  t.ticketType = ETicketType.reminder;
 			  } else {
 				  t.alarm = null;
 			  }
@@ -272,19 +273,15 @@ export class AlarmService {
 
   private convertTicketMonthlyDayRecurrencyAlarm(t: ITicketRecurrency): number {
 	const now = new Date();
-	now.setHours(t.at.getHours());
-	now.setMinutes(t.at.getMinutes());
-	now.setSeconds(t.at.getSeconds());
-	now.setMilliseconds(t.at.getMilliseconds());
 	const DayInNowMonth = this.caculateMatchedMonthlyDay(now, t.weekOfMonth, t.dayOfWeek);
-	t.at = this.caculateMatchedMonthlyDay(t.at, t.weekOfMonth, t.dayOfWeek);
 	if(t.interval > 0) {
 		while(t.legs > 0 || t.legs === -1) {
-			if (t.at.getTime() < DayInNowMonth.getTime()) {
-				// move to the right day of next week
+			if (t.at && DayInNowMonth && t.at.getTime() < DayInNowMonth.getTime()) {
+				// move to the right day of next matched month
 				t.at.setDate(1);
-				t.at.setMonth(t.at.getMonth() + 1);
+				t.at.setMonth(t.at.getMonth() + t.interval);
 				t.at = this.caculateMatchedMonthlyDay(t.at, t.weekOfMonth, t.dayOfWeek);
+				t.legs = t.legs !== -1 ? t.legs -1 : -1;
 			} else {
 				return t.at.getTime();
 			}
@@ -440,12 +437,17 @@ export class AlarmService {
 		// set newAt to the first day of the month
 		newAt.setDate(1);
 		let dayOfWeekNewAt = newAt.getDay();
-		let weekOfMonthNewAt = 1;
+		let weekOfMonthNewAt = 0;
 		while (newAt.getMonth() === currentMonth) {
+			if (dayOfWeekNewAt === dayOfweekIndex) {
+				weekOfMonthNewAt++;
+			}
 			if(dayOfWeekNewAt === dayOfweekIndex && weekOfMonthNewAt === weekOfMonth) {
 				matchedDate = newAt;
+				break;
 			} else {
 				newAt.setDate(newAt.getDate() + 1);
+				dayOfWeekNewAt = newAt.getDay();
 			}
 		}
 	} else { // for EWeekOfMonth.last
@@ -457,8 +459,10 @@ export class AlarmService {
 		while(newAt.getMonth() == currentMonth) {
 			if (dayOfWeekNewAt === dayOfweekIndex) {
 				matchedDate = newAt;
+				break;
 			} else {
 				newAt.setDate(newAt.getDate() - 1);
+				dayOfWeekNewAt = newAt.getDay();
 			}
 		}
 	}
