@@ -22,3 +22,6 @@ https://fullcalendar.io/
 
 7. sync alarm config data to SOC, and init everytime re-start the todo-list app
 
+8. enhance the report based on different ticket type
+
+9. think about how to collect idea and want to do things for future
