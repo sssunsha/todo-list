@@ -25,3 +25,5 @@ https://fullcalendar.io/
 8. enhance the report based on different ticket type
 
 9. think about how to collect idea and want to do things for future
+
+10. learn https://github.com/nhn?q=tui NHN ui framework lib, it has a lot of good ui libs
