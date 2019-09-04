@@ -19,8 +19,6 @@
         @include text-max-lines(5);
         margin: 0 5px;
     }
-	.card-actions {}
-	
 }
 
 .high {
@@ -42,4 +40,8 @@
 .reminder-icon,
 .event-icon {
     color: black;
+}
+
+.card-checked {
+	border: 5px solid $low-light;
 }

@@ -33,26 +33,36 @@ export class CardComponent implements OnInit {
   }
 
   handleTicketTypeChanged(type: ETicketType): void {
-	  this.ticket.ticketType = type;
+	  if (type === ETicketType.reminder) {
+		  // add or set the alarm
+		  this.handleTicketAlarmSet();
+	  } else {
+		  if (this.ticket.ticketType === ETicketType.reminder) {
+			  // clear the alarm
+			  this.handleTickeAlarmClear(type);
+		  } else {
+			this.ticket.ticketType = type;
+		  }
+	  }
 	  this.service.notifyTicketsChanged();
   }
 
-  handleTickeAlarmClear(): void {
+  handleTickeAlarmClear(newTicketType: ETicketType = ETicketType.task): void {
 	  if (this.ticket.alarm && this.ticket.alarm.id) {
 		this.alarmService.removeAlarm(this.ticket.alarm.id);
 		this.ticket.alarm = null;
-		this.ticket.ticketType = ETicketType.task; // task is the default type
+		this.ticket.ticketType = newTicketType; // task is the default type
 		this.service.updateIickets(this.ticket);
 		this.service.notifyTicketsChanged();
 	  }
 	  if (this.ticket.ticketType === ETicketType.reminder) {
-		this.ticket.ticketType = ETicketType.task; // task is the default type
+		this.ticket.ticketType = newTicketType; // task is the default type
 		this.service.updateIickets(this.ticket);
 		this.service.notifyTicketsChanged();
 	  }
   }
 
-  handleTicketAlarmSet(type: ETicketRecurrencyType): void {
+  handleTicketAlarmSet(type: ETicketRecurrencyType = ETicketRecurrencyType.once): void {
 	  const dialogRef = this.dialog.open(RecurrencyDialogComponent, {
 		  maxWidth: '1000px',
 		  data: {

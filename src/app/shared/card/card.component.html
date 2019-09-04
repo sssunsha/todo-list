@@ -24,36 +24,49 @@
     </mat-menu>
 
     <mat-menu #priority="matMenu">
-        <button mat-menu-item (click)="handlePriorityChanged('high')">High</button>
-        <button mat-menu-item (click)="handlePriorityChanged('intermediate')">Intermediate</button>
-        <button mat-menu-item (click)="handlePriorityChanged('low')">Low</button>
+        <button mat-menu-item [ngClass]="{'card-checked': this.ticket.priority === 'high'}" (click)="handlePriorityChanged('high')">High</button>
+        <button mat-menu-item [ngClass]="{'card-checked': this.ticket.priority === 'intermediate'}" (click)="handlePriorityChanged('intermediate')">Intermediate</button>
+        <button mat-menu-item [ngClass]="{'card-checked': this.ticket.priority === 'low'}" (click)="handlePriorityChanged('low')">Low</button>
     </mat-menu>
 
     <mat-menu #alarm="matMenu">
 			<button mat-menu-item (click)="handleTickeAlarmClear()">Clear Alarm</button>
-        <button mat-menu-item (click)="handleTicketAlarmSet('once')">Once</button>
-        <button mat-menu-item (click)="handleTicketAlarmSet('day')">Daily</button>
-        <button mat-menu-item (click)="handleTicketAlarmSet('week')">Weekly</button>
-        <button mat-menu-item [matMenuTriggerFor]="setAlarMonthly">Monthly</button>
+		<button mat-menu-item
+			[ngClass]="{'card-checked': this.ticket.ticketType === 'reminder'&& this.ticket.alarm && this.ticket.alarm.type === 'once'}"
+			(click)="handleTicketAlarmSet('once')">Once</button>
+		<button mat-menu-item
+			[ngClass]="{'card-checked': this.ticket.ticketType === 'reminder'&& this.ticket.alarm && this.ticket.alarm.type === 'day'}"
+			(click)="handleTicketAlarmSet('day')">Daily</button>
+		<button mat-menu-item
+			[ngClass]="{'card-checked': this.ticket.ticketType === 'reminder'&& this.ticket.alarm && this.ticket.alarm.type === 'week'}"
+			(click)="handleTicketAlarmSet('week')">Weekly</button>
+		<button mat-menu-item
+			[ngClass]="{'card-checked': this.ticket.ticketType === 'reminder'&& this.ticket.alarm
+			&& (this.ticket.alarm.type === 'monthDay' || this.ticket.alarm.type === 'monthDate')}"
+			[matMenuTriggerFor]="setAlarMonthly">Monthly</button>
     </mat-menu>
 
 	<mat-menu #setAlarMonthly="matMenu">
-		<button mat-menu-item (click)="handleTicketAlarmSet('monthDate')">Monthly Date</button>
-		<button mat-menu-item (click)="handleTicketAlarmSet('monthDay')">Monthly Day</button>
+		<button mat-menu-item
+			[ngClass]="{'card-checked': this.ticket.ticketType === 'reminder'&& this.ticket.alarm && this.ticket.alarm.type === 'monthDate'}"
+			(click)="handleTicketAlarmSet('monthDate')">Monthly Date</button>
+		<button mat-menu-item
+			[ngClass]="{'card-checked': this.ticket.ticketType === 'reminder'&& this.ticket.alarm && this.ticket.alarm.type === 'monthDay'}"
+			(click)="handleTicketAlarmSet('monthDay')">Monthly Day</button>
 	</mat-menu>
 
     <mat-menu #moveTo="matMenu">
-        <button mat-menu-item (click)="handleMovetoChanged('today')">Today</button>
-        <button mat-menu-item (click)="handleMovetoChanged('week')">This week</button>
-        <button mat-menu-item (click)="handleMovetoChanged('life')">This month</button>
-        <button mat-menu-item (click)="handleMovetoChanged('future')">Future</button>
+        <button mat-menu-item [ngClass]="{'card-checked': this.ticket.inPages.includes('today')}" (click)="handleMovetoChanged('today')">Today</button>
+        <button mat-menu-item [ngClass]="{'card-checked': this.ticket.inPages.includes('week')}" (click)="handleMovetoChanged('week')">This week</button>
+        <button mat-menu-item [ngClass]="{'card-checked': this.ticket.inPages.includes('month')}" (click)="handleMovetoChanged('month')">This month</button>
+        <button mat-menu-item [ngClass]="{'card-checked': this.ticket.inPages.includes('future')}" (click)="handleMovetoChanged('future')">Future</button>
     </mat-menu>
 
     <mat-menu #changeType="matMenu">
-        <button mat-menu-item (click)="handleTicketTypeChanged('task')">Task</button>
-        <button mat-menu-item (click)="handleTicketTypeChanged('note')">Note</button>
-        <button mat-menu-item (click)="handleTicketTypeChanged('event')">Event</button>
-        <button mat-menu-item (click)="handleTicketTypeChanged('reminder')">Reminder</button>
+        <button mat-menu-item [ngClass]="{'card-checked': this.ticket.ticketType === 'task'}" (click)="handleTicketTypeChanged('task')">Task</button>
+        <button mat-menu-item [ngClass]="{'card-checked': this.ticket.ticketType === 'note'}" (click)="handleTicketTypeChanged('note')">Note</button>
+        <button mat-menu-item [ngClass]="{'card-checked': this.ticket.ticketType === 'event'}" (click)="handleTicketTypeChanged('event')">Event</button>
+        <button mat-menu-item [ngClass]="{'card-checked': this.ticket.ticketType === 'reminder'}" (click)="handleTicketTypeChanged('reminder')">Reminder</button>
     </mat-menu>
 
 </mat-card>

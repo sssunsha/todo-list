@@ -31,7 +31,7 @@
     </div>
     <div class="right-header">
         <div class='header-notification'>
-			<div class="alarm-button" (click)="isShowAlarmList = !isShowAlarmList"><mat-icon>alarm</mat-icon></div>
+			<div matBadgePosition="after" matBadgeColor="accent" [matBadge]="this.alarmService.getalarmList().length" class="alarm-button" (click)="isShowAlarmList = !isShowAlarmList"><mat-icon>alarm</mat-icon></div>
             <span matBadgeOverlap="false" [matBadge]="getInboxTicketSize()" (click)="goto('inbox')">Inbox</span>
             <span matBadgePosition="after" matBadgeColor="warn" (click)="goto('today')" [matBadge]="getTodayTicketSize()">Today</span>
         </div>
@@ -52,7 +52,7 @@
 			<mat-list-item *ngFor="let item of this.alarmService.getalarmList()" (click)="onAlarmListClicked(item)">
 				<div class="alarm-list-item">
 					<div>{{item.message}}</div>
-					<div>{{item.at | date: 'short'}}</div>
+					<div>{{item.at | date: 'yyyy-M-d h:mm a'}}</div>
 					<div *ngIf="item.type === 'once'">
 						Once
 					</div>
