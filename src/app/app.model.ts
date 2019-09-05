@@ -259,3 +259,9 @@ export interface TicketFile {
 	modifiedAt: string;
 	value: Array<Ticket>;
 }
+
+export enum ECalendarType {
+	day = 'day',
+	week = 'week',
+	month = 'month'
+}

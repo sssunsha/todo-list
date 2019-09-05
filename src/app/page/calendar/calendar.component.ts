@@ -1,9 +1,6 @@
 import { Component, OnInit, ElementRef, ViewChild, AfterViewInit } from '@angular/core';
-// import * as Calendar from 'tui-calendar';
-declare const require: any;
-var Calendar = require('tui-calendar');
-
-// reference wiki: https://nhn.github.io/tui.calendar/latest/tutorial-example00-basic
+import { ECalendarType } from '../../app.model';
+import { MatTabChangeEvent } from '@angular/material';
 
 @Component({
   selector: 'app-calendar',
@@ -11,9 +8,9 @@ var Calendar = require('tui-calendar');
   styleUrls: ['./calendar.component.scss']
 })
 export class CalendarComponent implements OnInit, AfterViewInit  {
-	@ViewChild('calendarDaily', {static: false}) calendarDaily: ElementRef;
-	@ViewChild('calendarWeekly', {static: false}) calendarWeekly: ElementRef;
-	@ViewChild('calendarMonthly', {static: false}) calendarMonthly: ElementRef;
+	type: ECalendarType = ECalendarType.day;
+
+	@ViewChild('tabGroup', {static: false}) tabGroup;
 
   constructor() { }
 
@@ -21,41 +18,15 @@ export class CalendarComponent implements OnInit, AfterViewInit  {
   }
 
   ngAfterViewInit() {
-	  this.calendarMonthly = new Calendar('#calendar-montly', {
-			defaultView: 'month',
-			taskView: true,
-			template: {
-				monthGridHeader: function(model) {
-				var date = new Date(model.date);
-				var template = '<span class="tui-full-calendar-weekday-grid-date">' + date.getDate() + '</span>';
-				return template;
-				}
-			}
-		});
+	console.log(this.tabGroup.selectedIndex);
+	}
 
-		this.calendarWeekly = new Calendar('#calendar-weekly', {
-			defaultView: 'week',
-			taskView: true,
-			template: {
-				monthGridHeader: function(model) {
-				var date = new Date(model.date);
-				var template = '<span class="tui-full-calendar-weekday-grid-date">' + date.getDate() + '</span>';
-				return template;
-				}
-			}
-		});
+	onSelectedTabChange(event: any) {
+		console.log(event);
+	}
 
-		this.calendarDaily = new Calendar('#calendar-daily', {
-			defaultView: 'day',
-			taskView: true,
-			template: {
-				monthGridHeader: function(model) {
-				var date = new Date(model.date);
-				var template = '<span class="tui-full-calendar-weekday-grid-date">' + date.getDate() + '</span>';
-				return template;
-				}
-			}
-		});
+	onFocusChange(event: any) {
+		console.log(event);
 	}
 
 }

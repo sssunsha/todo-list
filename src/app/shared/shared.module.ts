@@ -41,12 +41,14 @@ import { CalendarBoardComponent } from './calendar-board/calendar-board.componen
 		AlertComponent,
 		TicketDialogComponent,
 		RecurrencyDialogComponent,
+		CalendarBoardComponent,
 	],
 	entryComponents: [
 		BottomSheetComponent,
 		AlertComponent,
 		TicketDialogComponent,
 		RecurrencyDialogComponent,
+		CalendarBoardComponent,
 	],
 })
 export class SharedComponentModule {}

@@ -1,5 +1,17 @@
-<mat-tab-group>
-  <mat-tab label="Daily"><div id="calendar-daily" #calendarDaily></div></mat-tab>
-  <mat-tab label="Weekly"><div id="calendar-weekly" #calendarWeekly></div></mat-tab>
-  <mat-tab label="Monthly"><div id="calendar-monthly" #calendarMonthly></div></mat-tab>
+<mat-tab-group #tabGroup
+	[selectedIndex]="1"
+	(selectedTabChange)="onSelectedTabChange(event)"
+	(focusChange)="onFocusChange(event)">
+  <mat-tab label="Day">
+	  <label>Day</label>
+		<app-calendar-board [type]="type" *ngIf="this.type === 'day'"></app-calendar-board>
+  </mat-tab>
+  <mat-tab label="Week">
+		<label>Week</label>
+		<app-calendar-board [type]="type" *ngIf="this.type === 'week'"></app-calendar-board>
+  </mat-tab>
+  <mat-tab label="Month">
+		<label>Month</label>
+		<app-calendar-board [type]="type" *ngIf="this.type === 'month'"></app-calendar-board>
+  </mat-tab>
 </mat-tab-group>
