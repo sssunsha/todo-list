@@ -11,6 +11,7 @@ import { AlertComponent } from './alert/alert.component';
 import { TicketDialogComponent } from './ticket-dialog/ticket-dialog.component';
 import { RecurrencyDialogComponent } from './recurrency-dialog/recurrency-dialog.component';
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
+import { CalendarBoardComponent } from './calendar-board/calendar-board.component';
 
 @NgModule({
 	imports: [
@@ -30,6 +31,7 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 		AlertComponent,
 		TicketDialogComponent,
 		RecurrencyDialogComponent,
+		CalendarBoardComponent,
 	],
 	exports: [
 		TableComponent,
