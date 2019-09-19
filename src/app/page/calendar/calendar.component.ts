@@ -8,7 +8,6 @@ import { MatTabChangeEvent } from '@angular/material';
   styleUrls: ['./calendar.component.scss']
 })
 export class CalendarComponent implements OnInit, AfterViewInit  {
-	type: ECalendarType = ECalendarType.day;
 
 	@ViewChild('tabGroup', {static: false}) tabGroup;
 

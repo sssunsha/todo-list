@@ -4,6 +4,8 @@ import { ECalendarType } from '../../app.model';
 declare const require: any;
 var Calendar = require('tui-calendar');
 
+import { NgxTuiCalendarComponent } from 'ngx-tui-calendar';
+
 // reference wiki: https://nhn.github.io/tui.calendar/latest/tutorial-example00-basic
 
 
@@ -13,7 +15,7 @@ var Calendar = require('tui-calendar');
   styleUrls: ['./calendar-board.component.scss']
 })
 export class CalendarBoardComponent implements OnInit, AfterViewInit {
-	@ViewChild('calendarBoard', {static: false}) calendarBoard: ElementRef;
+	@ViewChild('calendarBoard', {static: false}) calendarBoard: NgxTuiCalendarComponent;
 	@Input()
 	type: ECalendarType;
 
@@ -23,18 +25,15 @@ export class CalendarBoardComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit() {
-	this.calendarBoard = new Calendar('#calendar-board', {
-		defaultView: this.type,
-		taskView: true,
-		template: {
-			monthGridHeader: function(model) {
-			var date = new Date(model.date);
-			var template = '<span class="tui-full-calendar-weekday-grid-date">' + date.getDate() + '</span>';
-			return template;
-			}
-		}
-	});
   }
+
+  onTuiCalendarCreate($event) {
+	/* at this point the calendar has been created and it's methods are available via the ViewChild defined above, so for example you can do: */
+	this.calendarBoard.createSchedules([]);
+	}
 
 
 }
+
+
+//https://github.com/nhn/tui.ngx-calendar
