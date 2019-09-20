@@ -20,6 +20,7 @@ export class CalendarBoardComponent implements OnInit, AfterViewInit, AfterViewC
 	type: ECalendarType;
 
 	schedules: Schedule[]; // Schedule not exported by ngx-tui-calendar, so copy into app.model
+	focusedDateStr: string;
 
   constructor() { }
 
@@ -66,6 +67,14 @@ export class CalendarBoardComponent implements OnInit, AfterViewInit, AfterViewC
 	}
 
 	onBeforeCreateSchedule(event: any) {
+	}
+
+	onCalendarNext() {
+		this.calendarBoard.next();
+	}
+
+	onCalendarPrev() {
+		this.calendarBoard.prev();
 	}
 
 

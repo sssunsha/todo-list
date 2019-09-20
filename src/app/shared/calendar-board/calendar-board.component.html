@@ -1,3 +1,11 @@
+<button mat-icon-button (click)="onCalendarPrev()">
+	<mat-icon>navigate_before</mat-icon>
+</button>
+<input type="date" name="date" id="date" (change)="onDateChange($event)">
+<button mat-icon-button (click)="onCalendarNext()">
+	<mat-icon>navigate_next</mat-icon>
+</button>
+<label>{{focusedDateStr}}</label>
 <ngx-tui-calendar #calendarBoard
 	id="calendar-board"
 	[defaultView]="type"

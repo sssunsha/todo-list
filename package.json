@@ -36,7 +36,6 @@
         "rxjs": "^6.5.2",
         "sweetalert2": "^8.16.3",
         "ts-md5": "^1.2.4",
-        "tui-calendar": "^1.12.3",
         "tui-editor": "^1.4.6",
         "web-animations-js": "2.3.2",
         "zone.js": "~0.9.1"
