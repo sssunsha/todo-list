@@ -1,1 +1,10 @@
-<ngx-tui-calendar #calendarBoard id="calendar-board" (tuiCalendarCreated)="onTuiCalendarCreate($event)"></ngx-tui-calendar>
+<ngx-tui-calendar #calendarBoard
+	id="calendar-board"
+	[defaultView]="type"
+	(dayNameClicked)="onDate($event)"
+	(timeClicked)="onTime($event)"
+	(scheduleClicked)="onSchedule($event)"
+	(beforeCreateSchedule)="onBeforeCreateSchedule($event)"
+	[schedules]="schedules"
+	(tuiCalendarCreated)="onTuiCalendarCreate($event)">
+</ngx-tui-calendar>

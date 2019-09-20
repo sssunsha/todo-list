@@ -17,15 +17,12 @@ export class CalendarComponent implements OnInit, AfterViewInit  {
   }
 
   ngAfterViewInit() {
-	console.log(this.tabGroup.selectedIndex);
 	}
 
 	onSelectedTabChange(event: any) {
-		console.log(event);
 	}
 
 	onFocusChange(event: any) {
-		console.log(event);
 	}
 
 }
