@@ -3,12 +3,12 @@
 	(selectedTabChange)="onSelectedTabChange(event)"
 	(focusChange)="onFocusChange(event)">
   <mat-tab label="Day">
-		<app-calendar-board [type]="'day'"></app-calendar-board>
+		<app-calendar-board [type]="'day'" *ngIf="selectedTabIndex === 0"></app-calendar-board>
   </mat-tab>
   <mat-tab label="Week">
-		<app-calendar-board [type]="'week'"></app-calendar-board>
+		<app-calendar-board [type]="'week'" *ngIf="selectedTabIndex === 1"></app-calendar-board>
   </mat-tab>
   <mat-tab label="Month">
-		<app-calendar-board [type]="'month'"></app-calendar-board>
+		<app-calendar-board [type]="'month'" *ngIf="selectedTabIndex === 2"></app-calendar-board>
   </mat-tab>
 </mat-tab-group>

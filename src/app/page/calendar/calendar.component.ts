@@ -10,6 +10,7 @@ import { MatTabChangeEvent } from '@angular/material';
 export class CalendarComponent implements OnInit, AfterViewInit  {
 
 	@ViewChild('tabGroup', {static: false}) tabGroup;
+	selectedTabIndex: number;
 
   constructor() { }
 
@@ -20,6 +21,7 @@ export class CalendarComponent implements OnInit, AfterViewInit  {
 	}
 
 	onSelectedTabChange(event: any) {
+		this.selectedTabIndex = this.tabGroup.selectedIndex;
 	}
 
 	onFocusChange(event: any) {
