@@ -1,6 +1,9 @@
 :host {
 	height: 100%;
 	::ng-deep .mat-tab-body-wrapper {
-		min-height: 600px;
+		position: absolute;
+		top: 115px;
+		width: 100%;
+		bottom: 0px;
 	}
 }

@@ -50,19 +50,15 @@ export class CalendarBoardComponent implements OnInit, AfterViewInit, AfterViewC
 
   onTuiCalendarCreate($event) {
 	/* at this point the calendar has been created and it's methods are available via the ViewChild defined above, so for example you can do: */
-	// this.calendarBoard.createSchedules([]);
 	}
 
 	onDate(date) {
-		console.log('onDate', date);
 	}
 
 	onTime(dateTime) {
-		console.log('dateTime', dateTime);
 	}
 
 	onSchedule(schedule) {
-		console.log('schedule', schedule);
 	}
 
 	onDateChange($event) {
@@ -70,13 +66,9 @@ export class CalendarBoardComponent implements OnInit, AfterViewInit, AfterViewC
 	}
 
 	onBeforeCreateSchedule(event: any) {
-		console.log('beforeCreateScheduleEvent', event);
 	}
 
 
 
 
 }
-
-
-//https://github.com/nhn/tui.ngx-calendar

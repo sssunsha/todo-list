@@ -15,6 +15,7 @@ export class CalendarComponent implements OnInit, AfterViewInit  {
   constructor() { }
 
   ngOnInit() {
+	  this.selectedTabIndex = 0;
   }
 
   ngAfterViewInit() {

@@ -1,5 +1,6 @@
 <mat-tab-group #tabGroup
-	[selectedIndex]="1"
+	[dynamicHeight]="true"
+	[selectedIndex]="0"
 	(selectedTabChange)="onSelectedTabChange(event)"
 	(focusChange)="onFocusChange(event)">
   <mat-tab label="Day">
