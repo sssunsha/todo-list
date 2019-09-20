@@ -77,6 +77,10 @@ export class CalendarBoardComponent implements OnInit, AfterViewInit, AfterViewC
 		this.calendarBoard.prev();
 	}
 
+	onToday() {
+		this.calendarBoard.setDate(new Date());
+	}
+
 
 
 
