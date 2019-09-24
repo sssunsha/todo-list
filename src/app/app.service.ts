@@ -38,6 +38,9 @@ export class AppService implements OnDestroy{
   // alarm service relative
   ticketAlarmUpdateScription: Subscription;
 
+  // mark now working on ticket
+  private currentWorkingOnTicketId: string = '';
+
   constructor(
 	  private _snackBar: MatSnackBar,
 	  private alarmService: AlarmService) {
@@ -64,6 +67,7 @@ export class AppService implements OnDestroy{
    ngOnDestroy() {
 	   this.ticketAlarmUpdateScription.unsubscribe();
    }
+
 // public mthod for private ticket member ===========================================================
    setTickets(tickets: Array<Ticket>): void {
 	   this.tickets  = tickets;
@@ -105,6 +109,31 @@ export class AppService implements OnDestroy{
 
    notifyWorkingOnTicketsChanged(): void {
 	   this.workingOnTicketsSubject.next('workingOnTicket notified updated');
+   }
+
+   setCurrentWorkingOnTicket(id: string): void {
+	   if (id) {
+		   this.currentWorkingOnTicketId = id;
+		   this.tickets.forEach(t => {
+			   if (t.id === id) {
+				   t.isWorkingOn = true;
+			   } else {
+				   t.isWorkingOn = false;
+			   }
+		   })
+	   }
+   }
+
+   closeCurrentWorkingOnTicket(): void {
+	   this.currentWorkingOnTicketId = '';
+	   this.tickets.forEach(t => {
+		   t.isWorkingOn = false;
+	   })
+
+   }
+
+   getCurrentWorkingOnTicketId(): string {
+	   return this.currentWorkingOnTicketId;
    }
 
    private sortTicketByPriority(): void {

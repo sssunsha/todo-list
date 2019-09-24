@@ -124,6 +124,7 @@ export class Ticket {
 	inPages?: Array<EPageState>;
 	records?: Array<string>;
 	timeCosts?: Array<ITicketTimeCost>; // for every tickets, can be finished with some group of time
+	isWorkingOn?: boolean = false;
 	alarm?: ITicketRecurrency;
 	constructor(data: Partial<Ticket>) {
 		this.id = data.id;
@@ -138,6 +139,7 @@ export class Ticket {
 		this.records = data.records;
 		this.timeCosts = data.timeCosts;
 		this.alarm = data.alarm;
+		this.isWorkingOn = data.isWorkingOn;
 	}
 }
 
@@ -252,6 +254,7 @@ export const defaultTicket:Ticket = {
 	ticketType: ETicketType.task,
 	effort: ETicketEffort.half_hour,
 	inPages: [],
+	isWorkingOn: false,
 }
 
 export interface TicketFile {
