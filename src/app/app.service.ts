@@ -19,9 +19,6 @@ export class AppService implements OnDestroy{
   // store tickets data here
   private tickets: Array<Ticket> = [];
   ticketsSubject: Subject<any> = new Subject<any>();
-  // mark the current working on tickets
-  private workingOnTickets: Array<Ticket> = [];
-  workingOnTicketsSubject: Subject<any> = new Subject<any>();
 
   // config data
   cosConfig = cosConfig;
@@ -79,6 +76,15 @@ export class AppService implements OnDestroy{
 	   return this.tickets;
    }
 
+   getTicketById(id: string): Ticket {
+	   for (const t of this.tickets) {
+		   if (t.id === id) {
+			   return t;
+		   }
+	   }
+	   return null;
+   }
+
    pushIntoTickets(ticket: Ticket): void {
 	   this.tickets.push(ticket);
 	   this.sortTicketByPriority();
@@ -93,28 +99,14 @@ export class AppService implements OnDestroy{
 	   }
    }
 
-   setWorkingOnTickets(tickets: Array<Ticket>): void {
-	   this.workingOnTickets = tickets;
-	   this.workingOnTicketsSubject.next('workingOnTicket set updated');
-   }
-
-   pushIntoWorkingOnTicket(ticket: Ticket): void {
-	   this.workingOnTickets.push(ticket);
-	   this.workingOnTicketsSubject.next('workingOnTicket push updated');
-   }
-
    notifyTicketsChanged(): void {
 	   this.ticketsSubject.next('ticket notified updated');
-   }
-
-   notifyWorkingOnTicketsChanged(): void {
-	   this.workingOnTicketsSubject.next('workingOnTicket notified updated');
    }
 
    startCurrentWorkingOnTicket(id: string): void {
 	   if (id) {
 		   this.currentWorkingOnTicketId = id;
-		   this.tickets.forEach(t => {
+		   for (const t of this.tickets) {
 			   if (t.id === id) {
 				   t.isWorkingOn = true;
 				   // save the 'from' for time cost
@@ -122,28 +114,37 @@ export class AppService implements OnDestroy{
 					   from: new Date().getTime(),
 					   to: 0
 				   }
+				   if (!Array.isArray(t.timeCosts)) {
+					   t.timeCosts = [];
+				   }
 				   t.timeCosts.push(timeCost);
 			   } else {
 				   t.isWorkingOn = false;
 			   }
-		   })
+		   }
+
+		   this.notifyTicketsChanged();
 	   }
    }
 
    stopCurrentWorkingOnTicket(): void {
 	   this.currentWorkingOnTicketId = '';
-	   this.tickets.forEach(t => {
-		   t.isWorkingOn = false;
-		   if (this.currentWorkingOnTicketId === t.id) {
-			   if (t.timeCosts.length > 0) {
-				   // get the last item and save the timestamp to 'to'
-				   if (t.timeCosts[t.timeCosts.length - 1].to === 0 && t.timeCosts[t.timeCosts.length - 1].from > 0) {
-					   t.timeCosts[t.timeCosts.length - 1].to = new Date().getTime();
-				   }
-			   }
-		   }
-	   })
+	   for (const t of this.tickets) {
+			t.isWorkingOn = false;
+			if (this.currentWorkingOnTicketId === t.id) {
+				if (!Array.isArray(t.timeCosts)) {
+					t.timeCosts = [];
+				}
+				if (t.timeCosts.length > 0) {
+					// get the last item and save the timestamp to 'to'
+					if (t.timeCosts[t.timeCosts.length - 1].to === 0 && t.timeCosts[t.timeCosts.length - 1].from > 0) {
+						t.timeCosts[t.timeCosts.length - 1].to = new Date().getTime();
+					}
+				}
+			}
+	   }
 
+	   this.notifyTicketsChanged();
    }
 
    getCurrentWorkingOnTicketId(): string {

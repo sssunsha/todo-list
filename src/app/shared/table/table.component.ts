@@ -48,4 +48,12 @@ export class TableComponent implements OnInit {
 		  return ''
 	  }
   }
+
+  handleCurrentWorkingOnSwitch(id: string, isStop: boolean): void {
+	  if (isStop) {
+		  this.service.stopCurrentWorkingOnTicket();
+	  } else {
+		  this.service.startCurrentWorkingOnTicket(id);
+	  }
+  }
 }

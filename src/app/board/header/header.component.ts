@@ -85,4 +85,12 @@ export class HeaderComponent implements OnInit {
 	  }
   }
 
+  stopCurrentWorkingOnTicket() {
+	  this.service.stopCurrentWorkingOnTicket();
+  }
+
+  getCurrentWorkingOnTicketSummary(): string {
+	  return this.service.getTicketById(this.service.getCurrentWorkingOnTicketId()).summary;
+  }
+
 }

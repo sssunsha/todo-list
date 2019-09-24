@@ -5,5 +5,6 @@ export const LISTCONFIG = [
 	'createdAt',
 	'effort',
 	'progress',
+	'focused',
 	'more'
 ];

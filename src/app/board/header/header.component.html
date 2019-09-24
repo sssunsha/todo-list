@@ -29,10 +29,10 @@
             <label class="small">{{service.modifiedAt}}</label>
         </div>
 	</div>
-	<div class="middle-header">
+	<div class="middle-header" *ngIf="service.getCurrentWorkingOnTicketId()">
 		<div>
 			<span>Now working on:</span>
-			<span>12345678901234567890123456789012345678901234567890abdefghijklmnopqrstuvwxyzabdefghijklmnopqrstuvwxyzabdefghijklmnopqrstuvwxyz</span>
+			<span>{{getCurrentWorkingOnTicketSummary()}}</span>
 		</div>
 		<div>
 			<button mat-icon-button (click)="stopCurrentWorkingOnTicket()">
