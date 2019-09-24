@@ -255,6 +255,7 @@ export const defaultTicket:Ticket = {
 	effort: ETicketEffort.half_hour,
 	inPages: [],
 	isWorkingOn: false,
+	timeCosts: [],
 }
 
 export interface TicketFile {

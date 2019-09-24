@@ -1,5 +1,5 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { EPageState, Ticket, TicketFile, ITicketRecurrency, ETicketType } from './app.model';
+import { EPageState, Ticket, TicketFile, ITicketRecurrency, ETicketType, ITicketTimeCost } from './app.model';
 import * as COS from 'cos-js-sdk-v5';
 import { cosConfig, appConfig } from './shared/app.config';
 import { Observable, Subject, Subscription } from 'rxjs';
@@ -111,12 +111,18 @@ export class AppService implements OnDestroy{
 	   this.workingOnTicketsSubject.next('workingOnTicket notified updated');
    }
 
-   setCurrentWorkingOnTicket(id: string): void {
+   startCurrentWorkingOnTicket(id: string): void {
 	   if (id) {
 		   this.currentWorkingOnTicketId = id;
 		   this.tickets.forEach(t => {
 			   if (t.id === id) {
 				   t.isWorkingOn = true;
+				   // save the 'from' for time cost
+				   const timeCost: ITicketTimeCost = {
+					   from: new Date().getTime(),
+					   to: 0
+				   }
+				   t.timeCosts.push(timeCost);
 			   } else {
 				   t.isWorkingOn = false;
 			   }
@@ -124,10 +130,18 @@ export class AppService implements OnDestroy{
 	   }
    }
 
-   closeCurrentWorkingOnTicket(): void {
+   stopCurrentWorkingOnTicket(): void {
 	   this.currentWorkingOnTicketId = '';
 	   this.tickets.forEach(t => {
 		   t.isWorkingOn = false;
+		   if (this.currentWorkingOnTicketId === t.id) {
+			   if (t.timeCosts.length > 0) {
+				   // get the last item and save the timestamp to 'to'
+				   if (t.timeCosts[t.timeCosts.length - 1].to === 0 && t.timeCosts[t.timeCosts.length - 1].from > 0) {
+					   t.timeCosts[t.timeCosts.length - 1].to = new Date().getTime();
+				   }
+			   }
+		   }
 	   })
 
    }

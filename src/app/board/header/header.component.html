@@ -28,7 +28,18 @@
             <label class='small'>{{service.cosFileVersion}}</label>
             <label class="small">{{service.modifiedAt}}</label>
         </div>
-    </div>
+	</div>
+	<div class="middle-header">
+		<div>
+			<span>Now working on:</span>
+			<span>12345678901234567890123456789012345678901234567890abdefghijklmnopqrstuvwxyzabdefghijklmnopqrstuvwxyzabdefghijklmnopqrstuvwxyz</span>
+		</div>
+		<div>
+			<button mat-icon-button (click)="stopCurrentWorkingOnTicket()">
+				<mat-icon>close</mat-icon>
+			</button>
+		</div>
+	</div>
     <div class="right-header">
         <div class='header-notification'>
 			<div matBadgePosition="after" matBadgeColor="accent" [matBadge]="this.alarmService.getalarmList().length" class="alarm-button" (click)="isShowAlarmList = !isShowAlarmList"><mat-icon>alarm</mat-icon></div>
