@@ -38,8 +38,11 @@ export class AppService implements OnDestroy{
   // mark now working on ticket
   private currentWorkingOnTicketId: string = '';
 
+  // flag for sync
+  isInSync = false;
+
   constructor(
-	  private _snackBar: MatSnackBar,
+	  public _snackBar: MatSnackBar,
 	  private alarmService: AlarmService) {
 	  this.init();
    }
@@ -192,6 +195,7 @@ export class AppService implements OnDestroy{
 	}
 
 	startSync(): Observable<any> {
+		this.isInSync = true;
 		var subject = new Subject();
 		this.uploadTicketFileToSOC(subject);
 		return subject.asObservable();
@@ -231,6 +235,7 @@ export class AppService implements OnDestroy{
 				}
 				subject.next(1);
 				subject.complete();
+				this.isInSync = false;
 		});
 	}
 
