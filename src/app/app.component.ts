@@ -28,11 +28,9 @@ export class AppComponent implements OnInit{
 	@HostListener('window:beforeunload', ['$event'])
 	handleBeforeClose(event) {
 		if (!this.service.isNeedToClose) {
-			this.service.isNeedToClose = true;
-			this.service.startSync();
-			Helper.openSnackBar(this.service._snackBar, 'sync before leave ...');
+			this.service.beforeUnloadHnadler();
 			event.preventDefault();
-			event.returnValue = 'We need to sync local data to cloud, before leave ...';
+			event.returnValue = 'do something before leave ...';
 			return event;
 		} 
 	}

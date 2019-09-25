@@ -44,7 +44,7 @@ export class AppService implements OnDestroy{
   syncSubject: Subject<any> = new Subject<any>();
 
   constructor(
-	  public _snackBar: MatSnackBar,
+	  private _snackBar: MatSnackBar,
 	  private alarmService: AlarmService) {
 	  this.init();
    }
@@ -267,5 +267,12 @@ export class AppService implements OnDestroy{
 	startSaveASFile(): void {
 		let blob = new Blob([JSON.stringify(Helper.generateTicketFile(this.getTickets()))], {type: "application/json;charset=utf-8"});
 		FileSaver.saveAs(blob, `${Helper.generateTicketFileName()}`);
+	}
+
+	// do something before window close
+	beforeUnloadHnadler(): void {
+		this.isNeedToClose = true;
+		this.startSync();
+		Helper.openSnackBar(this._snackBar, 'sync before leave ...');
 	}
 }
