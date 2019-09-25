@@ -16,10 +16,6 @@ export class AppComponent {
 
 	@HostListener('window:beforeunload', ['$event'])
 	handleBeforeClose(event) {
-		Helper.openSnackBar(this.service._snackBar, 'please sync local data to cloud before leave');
-		event.preventDefault();
-		event.returnValue = 'We need to sync local data to cloud, before leave ...';
-		return event;
 	}
 
 }
