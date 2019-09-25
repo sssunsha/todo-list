@@ -128,7 +128,6 @@ export class AppService implements OnDestroy{
    }
 
    stopCurrentWorkingOnTicket(): void {
-	   this.currentWorkingOnTicketId = '';
 	   for (const t of this.tickets) {
 			t.isWorkingOn = false;
 			if (this.currentWorkingOnTicketId === t.id) {
@@ -143,7 +142,7 @@ export class AppService implements OnDestroy{
 				}
 			}
 	   }
-
+	   this.currentWorkingOnTicketId = '';
 	   this.notifyTicketsChanged();
    }
 

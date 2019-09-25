@@ -19,8 +19,8 @@
             <app-star *ngIf="column === 'effort'" [effort]="element[column]"></app-star>
 			<app-progress *ngIf="column === 'progress'" [progress]="element.progress"></app-progress>
 			<mat-icon *ngIf="column === 'more'" (click)="expandedElement = expandedElement === element ? null : element">expand_more</mat-icon>
-			<mat-icon *ngIf="column === 'focused' && !column.isWorkingOn" (click)="handleCurrentWorkingOnSwitch(element.id, false)">play_arrow</mat-icon>
-			<mat-icon *ngIf="column === 'focused' && column.isWorkingOn" (click)="handleCurrentWorkingOnSwitch(element.id, true)">stop</mat-icon>
+			<mat-icon *ngIf="column === 'focused' && !element.isWorkingOn" (click)="handleCurrentWorkingOnSwitch(element.id, false)">play_arrow</mat-icon>
+			<mat-icon *ngIf="column === 'focused' && element.isWorkingOn" (click)="handleCurrentWorkingOnSwitch(element.id, true)">stop</mat-icon>
         </td>
     </ng-container>
 
