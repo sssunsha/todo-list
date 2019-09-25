@@ -40,6 +40,8 @@ export class AppService implements OnDestroy{
 
   // flag for sync
   isInSync = false;
+  isNeedToClose = false;
+  syncSubject: Subject<any> = new Subject<any>();
 
   constructor(
 	  public _snackBar: MatSnackBar,
@@ -230,12 +232,15 @@ export class AppService implements OnDestroy{
 			Body: JSON.stringify(Helper.generateTicketFile(this.getTickets()))}, (err, data) => {
 				if(!err) {
 					Helper.openSnackBar(this._snackBar, 'upload ticket file finished');
+					this.isInSync = false;
+					this.syncSubject.next(true) // sync finished
 				} else {
 					console.error(err);
+					this.isInSync = false;
+					this.syncSubject.next(false) // sync failed
 				}
 				subject.next(1);
 				subject.complete();
-				this.isInSync = false;
 		});
 	}
 

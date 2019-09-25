@@ -5,11 +5,12 @@
     "scripts": {
         "ng": "ng",
 		"start": "ng serve --port 9527",
+		"e": "electron .",
         "build": "ng build",
         "test": "ng test",
         "lint": "ng lint",
 		"e2e": "ng e2e",
-		"e": "ng build --base-href ./ && electron .",
+		"ee": "ng build --base-href ./ && electron .",
 		"e-aot": "ng build --prod --base-href ./ && electron ."
     },
     "private": true,
