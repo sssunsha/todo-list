@@ -4,7 +4,7 @@
 	"main": "main.js",
     "scripts": {
         "ng": "ng",
-        "start": "ng serve --port 9527",
+		"start": "ng serve --port 9527",
         "build": "ng build",
         "test": "ng test",
         "lint": "ng lint",
