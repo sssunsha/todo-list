@@ -50,10 +50,10 @@ export const TICKETPRIORITYSELECTCONFIG: Array<ISelectConfig> = [
 ];
 
 export enum ETicketType {
-	task = 'task',
-	note = 'note',
-	reminder = 'reminder',
-	event = 'event',
+	task = 'task', // task in plan should be done
+	note = 'note', // others, maybe just an idea or others, can be split to tasks
+	reminder = 'reminder', // task should be done in certain time
+	event = 'event', // meeting, or some other things which occured but not in plan
 }
 
 export const TICKETTYPESELECTCONFIG: Array<ISelectConfig> = [
@@ -143,20 +143,6 @@ export class Ticket {
 	}
 }
 
-export class Task extends Ticket {
-	constructor(data: Partial<Task>) {
-		super(data);
-		this.ticketType = ETicketType.task;
-	}
-}
-
-export class Note extends Ticket {
-	constructor(data: Partial<Note>) {
-		super(data);
-		this.ticketType = ETicketType.note;
-	}
-}
-
 export enum ETicketRecurrencyType {
 	once = 'once',
 	day =  'day',
@@ -230,19 +216,6 @@ export const TICKEALARMTYPESELECTCONFIG: Array<ISelectConfig> = [
 	{label: 'Monthly Day', value: ETicketRecurrencyType.monthDay},
 ];
 
-export class Reminder extends Ticket {
-	constructor(data: Partial<Reminder>) {
-		super(data);
-		this.ticketType = ETicketType.reminder;
-	}
-}
-
-export class Event extends Ticket {
-	constructor(data: Partial<Event>) {
-		super(data);
-		this.ticketType = ETicketType.event;
-	}
-}
 
 export const defaultTicket:Ticket = {
 	id: '',
