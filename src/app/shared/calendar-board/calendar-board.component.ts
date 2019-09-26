@@ -7,6 +7,7 @@ var Calendar = require('tui-calendar');
 import { NgxTuiCalendarComponent} from 'ngx-tui-calendar';
 import { mockSchedules } from '../../mock/calendar.mock';
 import { Arr } from 'tern';
+import { AppService } from '../../app.service';
 
 // reference wiki: https://nhn.github.io/tui.calendar/latest/tutorial-example00-basic
 
@@ -24,11 +25,11 @@ export class CalendarBoardComponent implements OnInit, AfterViewInit, AfterViewC
 	schedules: Array<Schedule>; // Schedule not exported by ngx-tui-calendar, so copy into app.model
 	focusedDateStr: string;
 
-  constructor() { }
+  constructor(private service: AppService) { }
 
   ngOnInit() {
 	  // sample schedules
-	  this.schedules = this.parseSchedulesToSchedules(mockSchedules);
+	this.schedules = this.parseSchedulesToSchedules(this.parseTicketsToSchedules(this.service.getTickets()));
   }
 
   ngAfterViewInit() {
@@ -78,12 +79,15 @@ export class CalendarBoardComponent implements OnInit, AfterViewInit, AfterViewC
 			switch(s.ticketType) {
 				case ETicketType.task:
 					s.bgColor = '#B35C37';
+					s.color = 'white';
 					break;
 				case ETicketType.reminder:
 					s.bgColor = 'darkorchid';
+					s.color = 'white';
 					break;
 				case ETicketType.note:
 					s.bgColor = '#7BA23F';
+					s.color = 'white';
 					break;
 				case ETicketType.event:
 					s.bgColor = '#BAF4FF';
@@ -96,10 +100,23 @@ export class CalendarBoardComponent implements OnInit, AfterViewInit, AfterViewC
 	}
 
 	parseTicketsToSchedules(tickets: Array<Ticket>): Array<Schedule> {
-		return null;
+		const schedules: Array<Schedule> = [];
+		for (const t of tickets) {
+			if (t.timeCosts && t.timeCosts.length > 0) {
+				for (const c of t.timeCosts) {
+					let s: Schedule = {
+						id: t.id,
+						calendarId: t.id,
+						start: new Date(c.from),
+						end: new Date(c.to),
+						title: t.summary,
+						category: EScheduleCategory.time,
+						ticketType: t.ticketType,
+					};
+					schedules.push(s);
+				}
+			}
+		}
+		return schedules;
 	}
-
-
-
-
 }
