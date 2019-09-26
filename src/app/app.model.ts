@@ -246,28 +246,36 @@ export enum ECalendarType {
 	month = 'month'
 }
 
+export enum EScheduleCategory {
+	milestone = 'milestone',
+	task = 'task',
+	allday = 'allday',
+	time = 'time',
+}
+
 export interface Schedule {
-	id: string
-	calendarId: string
-	title: string
-	start: string | Date
-	end: string | Date
-	isAllDay?: boolean
-	category: "milestone" | "task" | "allday" | "time";
-	dueDateClass?: string
-	location?: string
-	attendees?: Array<string>
-	recurrenceRule?: any
-	isPending?: boolean
-	isFocused?: boolean
-	isVisible?: boolean
-	isReadOnly?: boolean
-	isPrivate?: boolean
-	color?: string
-	bgColor?: string
-	dragBgColor?: string
-	borderColor?: string
-	customStyle?: string
-	raw?: any
+	id: string,
+	calendarId: string,
+	title: string,
+	start: string | Date,
+	end: string | Date,
+	isAllDay?: boolean,
+	category?: EScheduleCategory,
+	dueDateClass?: string,
+	location?: string,
+	attendees?: Array<string>,
+	recurrenceRule?: any,
+	isPending?: boolean,
+	isFocused?: boolean,
+	isVisible?: boolean,
+	isReadOnly?: boolean,
+	isPrivate?: boolean,
+	color?: string,
+	bgColor?: string,
+	dragBgColor?: string,
+	borderColor?: string,
+	customStyle?: string,
+	raw?: any,
+	ticketType?: ETicketType;
   }
   

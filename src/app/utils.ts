@@ -23,6 +23,12 @@ export class Helper {
 
 	}
 
+	// generate the Date later  than base date, defult is now
+	// if the timeLate is negative number, the return date will be before than base date
+	static generateDateLate(timeLate: number, base: Date = new Date()): Date {
+		return new Date(base.getTime() + timeLate);
+	}
+
 	static updateArrayData(array: Array<any>, data: any, isAdd: boolean): Array<any> {
 		if (isAdd) {
 			array.push(data);

@@ -1,10 +1,12 @@
 import { Component, OnInit, ElementRef, ViewChild, AfterViewInit, Input, AfterViewChecked, AfterContentChecked } from '@angular/core';
 // import * as Calendar from 'tui-calendar';
-import { ECalendarType, Schedule } from '../../app.model';
+import { ECalendarType, Schedule, Ticket, ETicketType, EScheduleCategory } from '../../app.model';
 declare const require: any;
 var Calendar = require('tui-calendar');
 
 import { NgxTuiCalendarComponent} from 'ngx-tui-calendar';
+import { mockSchedules } from '../../mock/calendar.mock';
+import { Arr } from 'tern';
 
 // reference wiki: https://nhn.github.io/tui.calendar/latest/tutorial-example00-basic
 
@@ -19,24 +21,14 @@ export class CalendarBoardComponent implements OnInit, AfterViewInit, AfterViewC
 	@Input()
 	type: ECalendarType;
 
-	schedules: Schedule[]; // Schedule not exported by ngx-tui-calendar, so copy into app.model
+	schedules: Array<Schedule>; // Schedule not exported by ngx-tui-calendar, so copy into app.model
 	focusedDateStr: string;
 
   constructor() { }
 
   ngOnInit() {
 	  // sample schedules
-	  this.schedules = [
-		  {
-			  id: '1',
-			  calendarId: '1',
-			  title: 'my schedule',
-			  category: 'time',
-			  dueDateClass: '',
-			  start: (new Date()),
-			  end: (new Date())
-			}
-		];
+	  this.schedules = this.parseSchedulesToSchedules(mockSchedules);
   }
 
   ngAfterViewInit() {
@@ -79,6 +71,32 @@ export class CalendarBoardComponent implements OnInit, AfterViewInit, AfterViewC
 
 	onToday() {
 		this.calendarBoard.setDate(new Date());
+	}
+
+	parseSchedulesToSchedules(schedules: Array<Schedule>): Array<Schedule> {
+		for (const s of schedules) {
+			switch(s.ticketType) {
+				case ETicketType.task:
+					s.bgColor = '#B35C37';
+					break;
+				case ETicketType.reminder:
+					s.bgColor = 'darkorchid';
+					break;
+				case ETicketType.note:
+					s.bgColor = '#7BA23F';
+					break;
+				case ETicketType.event:
+					s.bgColor = '#BAF4FF';
+					break;
+			}
+			s.category = EScheduleCategory.time;
+		}
+
+		return schedules;
+	}
+
+	parseTicketsToSchedules(tickets: Array<Ticket>): Array<Schedule> {
+		return null;
 	}
 
 
