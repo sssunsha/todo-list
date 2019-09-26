@@ -110,6 +110,9 @@ export class AppService implements OnDestroy{
 
    startCurrentWorkingOnTicket(id: string): void {
 	   if (id) {
+		   // first stop other now working on ticket
+		   this.stopCurrentWorkingOnTicket();
+
 		   this.currentWorkingOnTicketId = id;
 		   for (const t of this.tickets) {
 			   if (t.id === id) {
