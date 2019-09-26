@@ -86,4 +86,8 @@ export class CardComponent implements OnInit {
 		  }
 	  })
   }
+
+  handleTicketDelete():void {
+	  this.service.deleteTicketById(this.ticket.id);
+  }
 }

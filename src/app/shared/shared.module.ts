@@ -13,6 +13,7 @@ import { RecurrencyDialogComponent } from './recurrency-dialog/recurrency-dialog
 import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { CalendarBoardComponent } from './calendar-board/calendar-board.component';
 import { NgxTuiCalendarModule } from 'ngx-tui-calendar';
+import { BasicDialogComponent } from './basic-dialog/basic-dialog.component';
 
 @NgModule({
 	imports: [
@@ -34,6 +35,7 @@ import { NgxTuiCalendarModule } from 'ngx-tui-calendar';
 		TicketDialogComponent,
 		RecurrencyDialogComponent,
 		CalendarBoardComponent,
+		BasicDialogComponent,
 	],
 	exports: [
 		TableComponent,

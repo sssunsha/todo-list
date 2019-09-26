@@ -20,7 +20,8 @@
         <button mat-menu-item [matMenuTriggerFor]="moveTo">Move to</button>
         <button mat-menu-item [matMenuTriggerFor]="priority">Piority</button>
         <button mat-menu-item [matMenuTriggerFor]="alarm">Set alarm</button>
-        <button mat-menu-item [matMenuTriggerFor]="changeType">Change type</button>
+		<button mat-menu-item [matMenuTriggerFor]="changeType">Change type</button>
+		<button mat-menu-item (click)="handleTicketDelete()">Delete</button>
     </mat-menu>
 
     <mat-menu #priority="matMenu">
@@ -67,6 +68,5 @@
         <button mat-menu-item [ngClass]="{'card-checked': this.ticket.ticketType === 'note'}" (click)="handleTicketTypeChanged('note')">Note</button>
         <button mat-menu-item [ngClass]="{'card-checked': this.ticket.ticketType === 'event'}" (click)="handleTicketTypeChanged('event')">Event</button>
         <button mat-menu-item [ngClass]="{'card-checked': this.ticket.ticketType === 'reminder'}" (click)="handleTicketTypeChanged('reminder')">Reminder</button>
-    </mat-menu>
-
+	</mat-menu>
 </mat-card>

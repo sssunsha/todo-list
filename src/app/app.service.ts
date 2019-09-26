@@ -81,6 +81,18 @@ export class AppService implements OnDestroy{
 	   return this.tickets;
    }
 
+   deleteTicketById(id: string): void {
+	   let index = 0;
+	   for (const t of this.tickets) {
+		   if (t.id === id) {
+			   this.tickets.splice(index, 1);
+			   this.ticketsSubject.next('tickets set updated');
+			   return;
+		   }
+		   index++;
+	   }
+   }
+
    getTicketById(id: string): Ticket {
 	   for (const t of this.tickets) {
 		   if (t.id === id) {
