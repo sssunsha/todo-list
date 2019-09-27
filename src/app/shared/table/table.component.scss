@@ -39,7 +39,8 @@ tr.example-element-row:not(.example-expanded-row):active {
 
 .example-element-detail {
     overflow: hidden;
-    display: flex;
+	display: flex;
+	justify-content: space-between;
 }
 
 .example-element-diagram {
@@ -51,14 +52,18 @@ tr.example-element-row:not(.example-expanded-row):active {
     display: flex;
     flex-direction: column;
     .expand-text {
-        color: $high-light;
+        color: lightblue;
     }
 }
 
 .example-element-description {
     padding: 16px;
     display: flex;
-    flex-direction: column;
+	flex-direction: column;
+	.title {
+		color: lightblue;
+		font-size: 16px;
+	}
     div {
         padding: 3px 0;
     }

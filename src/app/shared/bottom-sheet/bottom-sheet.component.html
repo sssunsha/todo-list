@@ -51,7 +51,7 @@
     </div>
     <div>
         <label>Records:</label>
-        <div *ngFor="let record of ticket.records" class="record">
+        <div *ngFor="let record of ticket.records; let i = index" class="record">
             <input type="text" matInput [(ngModel)]="record">
         </div>
     </div>

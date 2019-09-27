@@ -100,6 +100,6 @@ export class CardComponent implements OnInit {
 		  if (isOk) {
 			  this.service.deleteTicketById(this.ticket.id);
 		  }
-	  })
+	  });
   }
 }

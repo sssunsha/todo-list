@@ -5,6 +5,8 @@ import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-shee
 import {BottomSheetComponent} from '../bottom-sheet/bottom-sheet.component';
 import { Helper } from 'src/app/utils';
 import { AppService } from '../../app.service';
+import { MatDialog } from '@angular/material/dialog';
+import { BasicDialogComponent } from '../basic-dialog/basic-dialog.component';
 
 @Component({
   selector: 'app-table',
@@ -27,7 +29,8 @@ export class TableComponent implements OnInit {
 	bottomSheetRef: MatBottomSheetRef;
   constructor(
 	private _bottomSheet: MatBottomSheet,
-	private service: AppService
+	private service: AppService,
+	private dialog: MatDialog
   ) { }
 
   ngOnInit() {
@@ -55,5 +58,20 @@ export class TableComponent implements OnInit {
 	  } else {
 		  this.service.startCurrentWorkingOnTicket(id);
 	  }
+  }
+
+  handleTicketDelete(ticket: Ticket): void {
+	  const dialogRef = this.dialog.open(BasicDialogComponent, {
+		  width: '400px',
+		  data: {
+			title: 'Delete this ticket?',
+			content: `Are you sure want to delete the ticket ${ticket.summary} ?`
+		}
+	  });
+	  dialogRef.afterClosed().subscribe(isOk => {
+		if (isOk) {
+			this.service.deleteTicketById(ticket.id);
+		}
+	});
   }
 }

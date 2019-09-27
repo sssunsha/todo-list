@@ -35,11 +35,16 @@
                     <div><b>Time cost: </b><label class="expand-text">{{calculateTimeCost(element)}}</label></div>
                 </div>
                 <div class="example-element-description">
+					<span class="title">Records:</span>
                     <div *ngFor="let record of element.records">
-                        <div>{{record}}</div>
-                        <span class="example-element-description-attribution"></span>
+                        <span>{{record}}</span>
                     </div>
-                </div>
+				</div>
+				<div class="example-element-description">
+					<button mat-icon-button (click)="handleTicketDelete(element)">
+						<mat-icon>delete</mat-icon>
+					</button>
+				</div>
             </div>
         </td>
     </ng-container>
