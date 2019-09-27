@@ -279,3 +279,8 @@ export interface Schedule {
 	ticketType?: ETicketType;
   }
   
+
+  export interface IBasicDialogConfig {
+	  title: string;
+	  content: string;
+  }

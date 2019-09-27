@@ -53,6 +53,7 @@ import { BasicDialogComponent } from './basic-dialog/basic-dialog.component';
 		TicketDialogComponent,
 		RecurrencyDialogComponent,
 		CalendarBoardComponent,
+		BasicDialogComponent,
 	],
 })
 export class SharedComponentModule {}

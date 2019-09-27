@@ -5,6 +5,7 @@ import { Helper } from '../../utils';
 import { RecurrencyDialogComponent } from '../recurrency-dialog/recurrency-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
 import { AlarmService } from '../../alarm.service';
+import { BasicDialogComponent } from '../basic-dialog/basic-dialog.component';
 
 @Component({
   selector: 'app-card',
@@ -88,6 +89,17 @@ export class CardComponent implements OnInit {
   }
 
   handleTicketDelete():void {
-	  this.service.deleteTicketById(this.ticket.id);
+	  const dialogRef = this.dialog.open(BasicDialogComponent, {
+		  width: '400px',
+		  data: {
+			  title: 'Delete this ticket?',
+			  content: `Are you sure want to delete the ticket ${this.ticket.summary} ?`
+		  }
+	  });
+	  dialogRef.afterClosed().subscribe(isOk => {
+		  if (isOk) {
+			  this.service.deleteTicketById(this.ticket.id);
+		  }
+	  })
   }
 }
