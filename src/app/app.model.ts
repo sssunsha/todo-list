@@ -13,6 +13,14 @@ export enum EPageState {
 	calendar = 'calendar'
 }
 
+export enum ETicketCategory {
+	work = 'work',
+	life = 'life',
+	study = 'study',
+	entertainment = 'entertainment',
+	physicalTraining = 'physical-training'
+}
+
 export const PAGELIST = [
 	EPageState.inbox,
 	EPageState.today,
@@ -116,6 +124,7 @@ export class Ticket {
 	summary: string;
 	description: string;
 	priority?: EPriority;
+	category?: ETicketCategory = ETicketCategory.work;
 	createdAt: string;
 	modifiedAt: string;
 	ticketType: ETicketType;
@@ -140,6 +149,7 @@ export class Ticket {
 		this.timeCosts = data.timeCosts;
 		this.alarm = data.alarm;
 		this.isWorkingOn = data.isWorkingOn;
+		this.category = data.category;
 	}
 }
 
