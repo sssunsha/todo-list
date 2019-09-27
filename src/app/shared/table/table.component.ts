@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
-import { Ticket } from '../../app.model';
+import { Ticket, ETicktProgress } from '../../app.model';
 import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import {BottomSheetComponent} from '../bottom-sheet/bottom-sheet.component';
 import { Helper } from 'src/app/utils';
@@ -73,5 +73,23 @@ export class TableComponent implements OnInit {
 			this.service.deleteTicketById(ticket.id);
 		}
 	});
+  }
+
+  handleTicketDone(ticket: Ticket): void {
+	  if(!ticket.timeCosts || ticket.timeCosts.length === 0) {
+		const dialogRef = this.dialog.open(BasicDialogComponent, {
+				width: '400px',
+				data: {
+				title: 'Forget fill timeCost?',
+				content: `Have you forget to fill the timeCost for ${ticket.summary} ?`,
+				isOnlyOk: true
+			}
+		});
+		dialogRef.afterClosed().subscribe(isOk => {
+		});  
+	  } else {
+		  ticket.progress = ETicktProgress.finished;
+		  this.service.doneTicketById(ticket.id);
+	  }
   }
 }

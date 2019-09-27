@@ -293,4 +293,5 @@ export interface Schedule {
   export interface IBasicDialogConfig {
 	  title: string;
 	  content: string;
+	  isOnlyOk?: boolean;
   }

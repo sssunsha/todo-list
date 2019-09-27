@@ -42,7 +42,7 @@
         </div>
         <div>
             <label>Progress:</label>
-            <mat-select [(ngModel)]="ticket.progress">
+            <mat-select [(ngModel)]="ticket.progress" (selectionChange)="handleProgressChanged()">
                 <mat-option *ngFor="let item of _TICKETPROGRESSSELECTCONFIG" [value]="item.value">
                     {{item.label}}
                 </mat-option>

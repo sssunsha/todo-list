@@ -3,6 +3,6 @@
   <p>{{data.content}}</p>
 </div>
 <div mat-dialog-actions>
-  <button mat-button (click)="handleClick(false)">No Thanks</button>
+  <button mat-button (click)="handleClick(false)" *ngIf="!data.isOnlyOk">No Thanks</button>
   <button mat-button (click)="handleClick(true)" color="warn">Ok</button>
 </div>

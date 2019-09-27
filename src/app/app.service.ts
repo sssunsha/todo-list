@@ -170,6 +170,17 @@ export class AppService implements OnDestroy{
 	   return this.currentWorkingOnTicketId;
    }
 
+   // set the ticket to done, and move the ticket to statistics page
+   doneTicketById(id: string): void {
+	   for (const t of this.tickets) {
+		   if (t.id === id){
+			   t.inPages = [EPageState.statistics];
+			   this.notifyTicketsChanged();
+			   return;
+		   }
+	   }
+   }
+
    private sortTicketByPriority(): void {
 	   this.tickets.sort((t1, t2) => {
 		if (t1.priority > t2.priority) {

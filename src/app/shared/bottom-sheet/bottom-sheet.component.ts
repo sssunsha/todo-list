@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Ticket } from 'src/app/app.model';
+import { Ticket, ETicktProgress } from 'src/app/app.model';
 import { MatBottomSheetRef} from '@angular/material/bottom-sheet';
 import {Inject} from '@angular/core';
 import {MAT_BOTTOM_SHEET_DATA} from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { BasicDialogComponent } from '../basic-dialog/basic-dialog.component';
+import { AppService } from '../../app.service';
 import {
   TICKETPRIORITYSELECTCONFIG,
   TICKETTYPESELECTCONFIG,
@@ -22,12 +25,16 @@ export class BottomSheetComponent implements OnInit {
   _TICKETEFFORTSELECTCONFIG = TICKETEFFORTSELECTCONFIG;
   _TICKETPROGRESSSELECTCONFIG = TICKETPROGRESSSELECTCONFIG;
   _PAGELIST = PAGELIST;
+  backupTicket: Ticket;
 
   constructor(
 	  private _bottomSheetRef: MatBottomSheetRef<BottomSheetComponent>,
+	  private dialog: MatDialog,
+	  private service: AppService,
 	  @Inject(MAT_BOTTOM_SHEET_DATA) private ticket: Ticket) { }
 
   ngOnInit() {
+	  this.backupTicket = Object.assign({}, this.ticket);
   }
 
   onOk(): void {
@@ -46,5 +53,26 @@ export class BottomSheetComponent implements OnInit {
 
   onRemoveRecord(): void {
     this.ticket.records.pop();
+  }
+
+  handleProgressChanged(): void {
+	  if (this.ticket.progress = ETicktProgress.finished) {
+		if(!this.ticket.timeCosts || this.ticket.timeCosts.length === 0) {
+			const dialogRef = this.dialog.open(BasicDialogComponent, {
+					width: '400px',
+					data: {
+					title: 'Forget fill timeCost?',
+					content: `Have you forget to fill the timeCost for ${this.ticket.summary} ?`,
+					isOnlyOk: true
+				}
+			});
+			this.ticket.progress = this.backupTicket.progress;
+			dialogRef.afterClosed().subscribe(isOk => {
+			});  
+		  } else {
+			  this.backupTicket = Object.assign({}, this.ticket);
+			  this.service.doneTicketById(this.ticket.id);
+		  }
+	  }
   }
 }
