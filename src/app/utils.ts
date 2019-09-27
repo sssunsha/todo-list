@@ -91,14 +91,28 @@ export class Helper {
 
 	// convert time in month, day, hour, minute and seconds
 	static timeCostFormat(timeCost: number): string {
-		let timeCostInS = timeCost / 1000;
-		let s = timeCostInS % 60;
-		let m = timeCostInS / 60 % 60;
-		let h = timeCostInS / 3600 % 24;
-		let d = timeCostInS / 86400 % 30;
-		let M = timeCostInS / 2592000;
-		let timeCostAfterFormatted = M ? `${M} month ` : ''
-			+ d ? `${d} day ` : '' + h ? `${h} hour ` : '' + m ? `${m} m ` : '' + s ? `${s} s` : ''
+		let timeCostInS = parseInt(timeCost / 1000, 10);
+		let s = parseInt(timeCostInS % 60, 10);
+		let m = parseInt(timeCostInS / 60 % 60, 10);
+		let h = parseInt(timeCostInS / 3600 % 24, 10);
+		let d = parseInt(timeCostInS / 86400 % 30, 10);
+		let M = parseInt(timeCostInS / 2592000, 10);
+		let timeCostAfterFormatted = '';
+		if (M > 0) {
+			timeCostAfterFormatted += `${M} month `;
+		}
+		if (d > 0) {
+			timeCostAfterFormatted += `${d} day `;
+		}
+		if (h > 0) {
+			timeCostAfterFormatted += `${h} hour `;
+		}
+		if (m > 0) {
+			timeCostAfterFormatted += `${m} min `;
+		}
+		if (s > 0) {
+			timeCostAfterFormatted += `${s} sec `;
+		}
 		return timeCostAfterFormatted;
 	}
 
