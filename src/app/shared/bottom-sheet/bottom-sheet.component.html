@@ -51,9 +51,19 @@
     </div>
     <div>
         <label>Records:</label>
-        <div *ngFor="let record of ticket.records; let i = index" class="record">
-            <input type="text" matInput [(ngModel)]="record">
-        </div>
+        <div class="record">
+			<input *ngIf="ticket.records && ticket.records.length > 0" type="text" matInput [(ngModel)]="ticket.records[0]">
+			<input *ngIf="ticket.records && ticket.records.length > 1" type="text" matInput [(ngModel)]="ticket.records[1]">
+			<input *ngIf="ticket.records && ticket.records.length > 2" type="text" matInput [(ngModel)]="ticket.records[2]">
+			<input *ngIf="ticket.records && ticket.records.length > 3" type="text" matInput [(ngModel)]="ticket.records[3]">
+			<input *ngIf="ticket.records && ticket.records.length > 4" type="text" matInput [(ngModel)]="ticket.records[4]">
+			<input *ngIf="ticket.records && ticket.records.length > 5" type="text" matInput [(ngModel)]="ticket.records[5]">
+			<input *ngIf="ticket.records && ticket.records.length > 6" type="text" matInput [(ngModel)]="ticket.records[6]">
+			<input *ngIf="ticket.records && ticket.records.length > 7" type="text" matInput [(ngModel)]="ticket.records[7]">
+			<input *ngIf="ticket.records && ticket.records.length > 8" type="text" matInput [(ngModel)]="ticket.records[8]">
+			<input *ngIf="ticket.records && ticket.records.length > 9" type="text" matInput [(ngModel)]="ticket.records[9]">
+		</div>
+		
     </div>
     <div class="bottom-sheet-actions">
         <mat-icon (click)="onAddRecord()">add_circle_outline</mat-icon>
