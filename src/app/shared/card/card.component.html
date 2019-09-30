@@ -21,6 +21,7 @@
         <button mat-menu-item [matMenuTriggerFor]="priority">Piority</button>
         <button mat-menu-item [matMenuTriggerFor]="alarm">Set alarm</button>
 		<button mat-menu-item [matMenuTriggerFor]="changeType">Change type</button>
+		<button mat-menu-item [matMenuTriggerFor]="changeCategory">Change category</button>
 		<button mat-menu-item (click)="handleTicketDelete()">Delete</button>
     </mat-menu>
 
@@ -68,5 +69,13 @@
         <button mat-menu-item [ngClass]="{'card-checked': this.ticket.ticketType === 'note'}" (click)="handleTicketTypeChanged('note')">Note</button>
         <button mat-menu-item [ngClass]="{'card-checked': this.ticket.ticketType === 'event'}" (click)="handleTicketTypeChanged('event')">Event</button>
         <button mat-menu-item [ngClass]="{'card-checked': this.ticket.ticketType === 'reminder'}" (click)="handleTicketTypeChanged('reminder')">Reminder</button>
+	</mat-menu>
+
+	<mat-menu #changeCategory="matMenu">
+        <button mat-menu-item [ngClass]="{'card-checked': this.ticket.category === 'work'}" (click)="handleTicketCategoryChanged('work')">Work</button>
+        <button mat-menu-item [ngClass]="{'card-checked': this.ticket.category === 'life'}" (click)="handleTicketCategoryChanged('life')">Life</button>
+        <button mat-menu-item [ngClass]="{'card-checked': this.ticket.category === 'study'}" (click)="handleTicketCategoryChanged('study')">Study</button>
+		<button mat-menu-item [ngClass]="{'card-checked': this.ticket.category === 'entertainment'}" (click)="handleTicketCategoryChanged('entertainment')">Entertainment</button>
+		<button mat-menu-item [ngClass]="{'card-checked': this.ticket.category === 'physical-training'}" (click)="handleTicketCategoryChanged('physical-training')">Physical training</button>
 	</mat-menu>
 </mat-card>

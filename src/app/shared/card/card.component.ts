@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Ticket, EPriority, EPageState, ETicketType, ETicketRecurrencyType } from '../../app.model';
+import { Ticket, EPriority, EPageState, ETicketType, ETicketRecurrencyType, ETicketCategory } from '../../app.model';
 import { AppService } from '../../app.service';
 import { Helper } from '../../utils';
 import { RecurrencyDialogComponent } from '../recurrency-dialog/recurrency-dialog.component';
@@ -45,6 +45,11 @@ export class CardComponent implements OnInit {
 			this.ticket.ticketType = type;
 		  }
 	  }
+	  this.service.notifyTicketsChanged();
+  }
+
+  handleTicketCategoryChanged(category: ETicketCategory): void {
+	  this.ticket.category = category;
 	  this.service.notifyTicketsChanged();
   }
 
