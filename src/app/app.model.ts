@@ -295,6 +295,7 @@ export interface Schedule {
 	customStyle?: string,
 	raw?: any,
 	ticketType?: ETicketType;
+	ticketCategory?: ETicketCategory;
   }
   
 

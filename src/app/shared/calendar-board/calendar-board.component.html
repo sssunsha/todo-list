@@ -12,6 +12,10 @@
 <ngx-tui-calendar #calendarBoard
 	id="calendar-board"
 	[defaultView]="type"
+	[month]="monthOption"
+	[week]="weekOption"
+	[scheduleView]="true"
+	[taskView]="true"
 	(dayNameClicked)="onDate($event)"
 	(timeClicked)="onTime($event)"
 	(scheduleClicked)="onSchedule($event)"
