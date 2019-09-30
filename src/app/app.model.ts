@@ -21,6 +21,14 @@ export enum ETicketCategory {
 	physicalTraining = 'physical-training'
 }
 
+export const TICKETCATEGORYSELECTCONFIG: Array<ISelectConfig> = [
+	{label: 'work', value: ETicketCategory.work, icon: 'work'},
+	{label: 'life', value: ETicketCategory.life, icon: 'restaurant'},
+	{label: 'study', value: ETicketCategory.study, icon: 'book'},
+	{label: 'entertainment', value: ETicketCategory.entertainment, icon: 'pets'},
+	{label: 'physicalTraining', value: ETicketCategory.physicalTraining, icon: 'directions_bike'},
+];
+
 export const PAGELIST = [
 	EPageState.inbox,
 	EPageState.today,

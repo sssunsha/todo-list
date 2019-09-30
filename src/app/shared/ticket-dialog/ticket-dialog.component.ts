@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { Ticket } from '../../app.model';
+import { Ticket, TICKETCATEGORYSELECTCONFIG } from '../../app.model';
 import { Helper } from '../../utils';
 import {
 	TICKETPRIORITYSELECTCONFIG,
@@ -22,6 +22,7 @@ export class TicketDialogComponent implements OnInit {
 	_TICKETTYPESELECTCONFIG = TICKETTYPESELECTCONFIG;
 	_TICKETEFFORTSELECTCONFIG = TICKETEFFORTSELECTCONFIG;
 	_TICKETPROGRESSSELECTCONFIG = TICKETPROGRESSSELECTCONFIG;
+	_TICKETCATEGORYSELECTCONFIG = TICKETCATEGORYSELECTCONFIG;
 	_PAGELIST = PAGELIST;
 
 	ticket: Ticket;

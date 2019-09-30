@@ -14,6 +14,13 @@
 		</mat-select>
 	</mat-form-field>
 	<mat-form-field>
+		<mat-select [(ngModel)]="ticket.category" placeholder="Ticket category">
+			<mat-option *ngFor="let item of _TICKETCATEGORYSELECTCONFIG" [value]="item.value">
+				{{item.label}}	
+			</mat-option>
+		</mat-select>
+	</mat-form-field>
+	<mat-form-field>
 		<mat-select [(ngModel)]="ticket.priority" placeholder="Ticket priority">
 			<mat-option *ngFor="let item of _TICKETPRIORITYSELECTCONFIG" [value]="item.value">
 				{{item.label}}

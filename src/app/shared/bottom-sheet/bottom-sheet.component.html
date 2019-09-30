@@ -15,6 +15,14 @@
                     {{item.label}}
                 </mat-option>
             </mat-select>
+		</div>
+		<div>
+            <label>Category:</label>
+            <mat-select [(ngModel)]="ticket.category">
+                <mat-option *ngFor="let item of _TICKETCATEGORYSELECTCONFIG" [value]="item.value">
+                    {{item.label}}
+                </mat-option>
+            </mat-select>
         </div>
         <div>
             <label>Belongs to:</label>

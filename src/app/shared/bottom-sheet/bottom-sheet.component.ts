@@ -6,6 +6,7 @@ import {MAT_BOTTOM_SHEET_DATA} from '@angular/material';
 import { MatDialog } from '@angular/material/dialog';
 import { BasicDialogComponent } from '../basic-dialog/basic-dialog.component';
 import { AppService } from '../../app.service';
+import { TICKETCATEGORYSELECTCONFIG } from '../../app.model';
 import {
   TICKETPRIORITYSELECTCONFIG,
   TICKETTYPESELECTCONFIG,
@@ -24,6 +25,7 @@ export class BottomSheetComponent implements OnInit {
   _TICKETTYPESELECTCONFIG = TICKETTYPESELECTCONFIG;
   _TICKETEFFORTSELECTCONFIG = TICKETEFFORTSELECTCONFIG;
   _TICKETPROGRESSSELECTCONFIG = TICKETPROGRESSSELECTCONFIG;
+  _TICKETCATEGORYSELECTCONFIG = TICKETCATEGORYSELECTCONFIG;
   _PAGELIST = PAGELIST;
   backupTicket: Ticket;
 
