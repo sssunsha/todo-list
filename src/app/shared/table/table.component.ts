@@ -27,6 +27,8 @@ export class TableComponent implements OnInit {
 	columnsToDisplay: Array<string>;
 	expandedElement: Array<any>;
 	bottomSheetRef: MatBottomSheetRef;
+	isAddNewTicketTimeCost: boolean;
+	newTicketTimeCost: object;
   constructor(
 	private _bottomSheet: MatBottomSheet,
 	private service: AppService,
@@ -34,6 +36,13 @@ export class TableComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+	  this.isAddNewTicketTimeCost = false;
+	  this.newTicketTimeCost = {
+		  fromDate: '',
+		  fromTime: '',
+		  toDate: '',
+		  toTime: '',
+	  };
 	  this.expandedElement = this.dataSource;
   }
 
@@ -91,5 +100,26 @@ export class TableComponent implements OnInit {
 		  ticket.progress = ETicktProgress.finished;
 		  this.service.doneTicketById(ticket.id);
 	  }
+  }
+
+  handleTicketTimeCostEdit(ticket: Ticket): void {
+	  if(this.isAddNewTicketTimeCost) {
+		  this.isAddNewTicketTimeCost = false;
+		  console.log(this.newTicketTimeCost);
+	  } else {
+		  this.isAddNewTicketTimeCost = true;
+		  // clear the data for newTicketTimeCost
+		  this.newTicketTimeCost = {
+			fromDate: '',
+			fromTime: '',
+			toDate: '',
+			toTime: '',
+		};
+	  }
+  }
+
+  getDate(timeStamp: number): string {
+	  const date = new Date(timeStamp);
+	  return date.toLocaleString();
   }
 }

@@ -41,8 +41,35 @@
                     <div><b>ID: </b> <label class="expand-text">{{element.id}}</label></div>
                     <div><b>last update: </b><label class="expand-text">{{element.modifiedAt}}</label></div>
                     <div><b>In pages: </b><label class="expand-text">{{element.inPages.join(' ; ')}}</label></div>
-                    <div><b>Time cost: </b><label class="expand-text">{{calculateTimeCost(element)}}</label></div>
-                </div>
+					<div><b>Time cost: </b><label class="expand-text">{{calculateTimeCost(element)}}</label>
+						<button mat-icon-button (click)="handleTicketTimeCostEdit(element)">
+							<mat-icon>edit</mat-icon>
+						</button>
+					</div>
+					<div *ngFor="let timeCost of element.timeCosts">
+						<span>{{getDate(timeCost.from)}}</span>
+						<span> ---> </span>
+						<span>{{getDate(timeCost.to)}}</span>
+					</div>
+				</div>
+				<div class="example-element-description" *ngIf="isAddNewTicketTimeCost">
+					<span class="title">From (Date):</span>
+					<p></p>
+					<input type="date" [(ngModel)]="newTicketTimeCost.fromDate">
+					<p></p>
+					<span class="title">From (Time):</span>
+					<p></p>
+					<input type="time" [(ngModel)]="newTicketTimeCost.fromTime">
+				</div>
+				<div class="example-element-description" *ngIf="isAddNewTicketTimeCost">
+					<span class="title">To (Date):</span>
+					<p></p>
+					<input type="date" [(ngModel)]="newTicketTimeCost.toDate">
+					<p></p>
+					<span class="title">To (Time):</span>
+					<p></p>
+					<input type="time" [(ngModel)]="newTicketTimeCost.toTime">
+				</div>
                 <div class="example-element-description">
 					<span class="title">Records:</span>
                     <div *ngFor="let record of element.records">
