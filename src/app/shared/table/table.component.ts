@@ -102,7 +102,7 @@ export class TableComponent implements OnInit {
 	  }
   }
 
-  handleTicketTimeCostEdit(ticket: Ticket): void {
+  handleWholeTicketTimeCostEdit(ticket: Ticket): void {
 	  if(this.isAddNewTicketTimeCost) {
 		  this.isAddNewTicketTimeCost = false;
 		  console.log(this.newTicketTimeCost);
@@ -119,7 +119,7 @@ export class TableComponent implements OnInit {
   }
 
   handleTicketCostTimeEdit(ticket, ITicketTimeCost): void {
-	  
+
   }
 
   getDate(timeStamp: number): string {

@@ -46,6 +46,7 @@ export class TicketDialogComponent implements OnInit {
 
   prepareForSaving(): void {
 	  // default in page is inbox
+	  this.ticket.id = Helper.generateMd5Hash(this.ticket.summary);
 	  this.ticket.inPages = [EPageState.inbox];
 	  this.ticket.createdAt = Helper.generateCreatedAt();
   }

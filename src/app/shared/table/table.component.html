@@ -42,7 +42,7 @@
                     <div><b>last update: </b><label class="expand-text">{{element.modifiedAt}}</label></div>
                     <div><b>In pages: </b><label class="expand-text">{{element.inPages.join(' ; ')}}</label></div>
 					<div><b>Time cost: </b><label class="expand-text">{{calculateTimeCost(element)}}</label>
-						<button mat-icon-button (click)="handleTicketTimeCostEdit(element)">
+						<button mat-icon-button (click)="handleWholeTicketTimeCostEdit(element)">
 							<mat-icon>edit</mat-icon>
 						</button>
 					</div>
