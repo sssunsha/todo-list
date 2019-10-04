@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
-import { Ticket, ETicktProgress } from '../../app.model';
+import { Ticket, ETicktProgress, ITicketTimeCost } from '../../app.model';
 import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import {BottomSheetComponent} from '../bottom-sheet/bottom-sheet.component';
 import { Helper } from 'src/app/utils';
@@ -116,6 +116,10 @@ export class TableComponent implements OnInit {
 			toTime: '',
 		};
 	  }
+  }
+
+  handleTicketCostTimeEdit(ticket, ITicketTimeCost): void {
+	  
   }
 
   getDate(timeStamp: number): string {

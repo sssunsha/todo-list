@@ -73,7 +73,10 @@
                 <div class="example-element-description">
 					<span class="title">Records:</span>
                     <div *ngFor="let record of element.records">
-                        <span>{{record}}</span>
+						<span>{{record}}</span>
+						<button mat-icon-button (click)="handleTicketCostTimeEdit(element, record)">
+							<mat-icon>edit</mat-icon>
+						</button>
                     </div>
 				</div>
 				<div class="example-element-description">
