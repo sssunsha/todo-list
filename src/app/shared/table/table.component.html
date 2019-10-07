@@ -80,10 +80,10 @@
 						<input matInput  type="time" [(ngModel)]="newTicketTimeCost.toTime">
 					</div>
 					<div class="ticket-timecost-edit ticket-timecost-save">
-						<button mat-icon-button color="warn" (click)="handleTicketTImeCostSave(true)">
+						<button mat-icon-button color="warn" (click)="handleTicketTImeCostSave(true, element)">
 							<mat-icon>done</mat-icon>
 						</button>
-						<button mat-icon-button (click)="handleTicketTImeCostSave(false)">
+						<button mat-icon-button (click)="handleTicketTImeCostSave(false, element)">
 							<mat-icon>cancel</mat-icon>
 						</button>
 					</div>

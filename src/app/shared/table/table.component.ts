@@ -1,12 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import {animate, state, style, transition, trigger} from '@angular/animations';
-import { Ticket, ETicktProgress, ITicketTimeCost } from '../../app.model';
+import { Ticket, ETicktProgress, ITicketTimeCost, ITicketTImeCostConfig } from '../../app.model';
 import { MatBottomSheet, MatBottomSheetRef } from '@angular/material/bottom-sheet';
 import {BottomSheetComponent} from '../bottom-sheet/bottom-sheet.component';
 import { Helper } from 'src/app/utils';
 import { AppService } from '../../app.service';
 import { MatDialog } from '@angular/material/dialog';
 import { BasicDialogComponent } from '../basic-dialog/basic-dialog.component';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-table',
@@ -37,7 +38,7 @@ export class TableComponent implements OnInit {
 	 * @memberof TableComponent
 	 */
 	inEditTicketTimeCostIndex: number;
-	newTicketTimeCost: object;
+	newTicketTimeCost: ITicketTImeCostConfig;
   constructor(
 	private _bottomSheet: MatBottomSheet,
 	private service: AppService,
@@ -46,12 +47,6 @@ export class TableComponent implements OnInit {
 
   ngOnInit() {
 	  this.inEditTicketTimeCostIndex = -1;
-	  this.newTicketTimeCost = {
-		  fromDate: '',
-		  fromTime: '',
-		  toDate: '',
-		  toTime: '',
-	  };
 	  this.expandedElement = this.dataSource;
   }
 
@@ -112,12 +107,19 @@ export class TableComponent implements OnInit {
   }
 
   handleTicketTimeCostAdd(ticket: Ticket): void {
+	  this.preareDefaultTicketTimeCost();
 	  this.inEditTicketTimeCostIndex = 9999;
   }
 
-  handleTicketTImeCostSave(isSave: boolean): void {
-	  if(isSave) {
-
+  handleTicketTImeCostSave(isSave: boolean, ticket: Ticket): void {
+	  if(isSave && this.newTicketTimeCost.fromDate && this.newTicketTimeCost.fromTime
+			&& this.newTicketTimeCost.toDate && this.newTicketTimeCost.toTime) {
+			if (this.inEditTicketTimeCostIndex === 9999) {
+				ticket.timeCosts.push(this.generateNewTicketTimeCost());
+			} else if (this.inEditTicketTimeCostIndex >= 0) {
+				ticket.timeCosts.splice(this.inEditTicketTimeCostIndex, 1, this.generateNewTicketTimeCost());
+			}
+			this.service.notifyTicketsChanged();
 	  }
 
 	  this.inEditTicketTimeCostIndex = -1;
@@ -127,6 +129,7 @@ export class TableComponent implements OnInit {
 	  let index = 0;
 	  for (const t of ticket.timeCosts) {
 		  if (t.from === cost.from && t.to === cost.to) {
+			  this.preareDefaultTicketTimeCost(new Date(cost.from), new Date(cost.to));
 			  this.inEditTicketTimeCostIndex = index;
 			  return;
 		  }
@@ -149,5 +152,27 @@ export class TableComponent implements OnInit {
   getDate(timeStamp: number): string {
 	  const date = new Date(timeStamp);
 	  return date.toLocaleString();
+  }
+
+  private preareDefaultTicketTimeCost(from: Date = new Date(), to: Date = new Date()): void {
+	  const fromDate = new DatePipe('en-US').transform(from, 'yyyy-MM-dd');
+	  const fromTime = new DatePipe('en-US').transform(from, 'HH:mm');
+	  const toDate = new DatePipe('en-US').transform(to, 'yyyy-MM-dd');
+	  const toTime = new DatePipe('en-US').transform(to, 'HH:mm');
+	  this.newTicketTimeCost = {
+		fromDate: fromDate,
+		toDate: toDate,
+		fromTime: fromTime,
+		toTime: toTime,
+	  };
+  }
+
+  private generateNewTicketTimeCost(): ITicketTimeCost {
+	  const newTicketTimeCost: ITicketTimeCost = {
+		  from: (new Date(`${this.newTicketTimeCost.fromDate} ${this.newTicketTimeCost.fromTime}`)).getTime(),
+		  to: (new Date(`${this.newTicketTimeCost.toDate} ${this.newTicketTimeCost.toTime}`)).getTime(),
+	  };
+
+	  return newTicketTimeCost;
   }
 }

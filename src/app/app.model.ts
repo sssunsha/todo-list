@@ -304,3 +304,10 @@ export interface Schedule {
 	  content: string;
 	  isOnlyOk?: boolean;
   }
+
+  export interface ITicketTImeCostConfig {
+	  fromDate: string;
+	  fromTime: string;
+	  toDate: string;
+	  toTime: string;
+  }
