@@ -47,9 +47,12 @@
 						</button>
 					</div>
 					<div *ngFor="let timeCost of element.timeCosts">
-						<span>{{getDate(timeCost.from)}}</span>
+						<span *ngIf="timeCost.from">{{getDate(timeCost.from)}}</span>
 						<span> ---> </span>
-						<span>{{getDate(timeCost.to)}}</span>
+						<span *ngIf="timeCost.to">{{getDate(timeCost.to)}}</span>
+						<button mat-icon-button (click)="handleTicketCostTimeEdit(element, timeCost)" *ngIf="!element.isWorkingOn">
+							<mat-icon>edit</mat-icon>
+						</button>
 					</div>
 				</div>
 				<div class="example-element-description" *ngIf="isAddNewTicketTimeCost">
@@ -74,9 +77,6 @@
 					<span class="title">Records:</span>
                     <div *ngFor="let record of element.records">
 						<span>{{record}}</span>
-						<button mat-icon-button (click)="handleTicketCostTimeEdit(element, record)">
-							<mat-icon>edit</mat-icon>
-						</button>
                     </div>
 				</div>
 				<div class="example-element-description">

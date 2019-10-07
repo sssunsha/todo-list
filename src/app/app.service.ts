@@ -242,6 +242,7 @@ export class AppService implements OnDestroy{
 					this.setTickets(ticketFileData.value);
 					this.cosFileVersion = ticketFileData.version;
 					this.modifiedAt = ticketFileData.modifiedAt;
+					this.parseDownloadTickets();
 					Helper.openSnackBar(this._snackBar, 'download ticket file finished');
 					// start alarm setup
 					this.alarmService.prepareAlarmConfigListFromTickets(this.tickets);
@@ -283,6 +284,7 @@ export class AppService implements OnDestroy{
 			this.setTickets(localBackupTicketsFileJson.value);
 			this.cosFileVersion = localBackupTicketsFileJson.version;
 			this.modifiedAt = localBackupTicketsFileJson.modifiedAt;
+			this.parseDownloadTickets();
 			Helper.openSnackBar(this._snackBar, 'retrieve backup ticket file finished');
 		}
 	}
@@ -300,5 +302,15 @@ export class AppService implements OnDestroy{
 		this.isNeedToClose = true;
 		this.startSync();
 		Helper.openSnackBar(this._snackBar, 'sync before leave ...');
+	}
+
+	// parse download tickets
+	parseDownloadTickets(): void {
+		this.tickets.forEach(t => {
+			if (t.isWorkingOn) {
+				this.currentWorkingOnTicketId = t.id;
+				return;
+			}
+		})
 	}
 }
