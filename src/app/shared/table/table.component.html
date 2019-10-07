@@ -42,23 +42,25 @@
                     <div><b>last update: </b><label class="expand-text">{{element.modifiedAt}}</label></div>
                     <div><b>In pages: </b><label class="expand-text">{{element.inPages.join(' ; ')}}</label></div>
 					<div><b>Time cost: </b><label class="expand-text">{{calculateTimeCost(element)}}</label>
-						<button mat-icon-button (click)="handleWholeTicketTimeCostEdit(element)">
-							<mat-icon>edit</mat-icon>
+						<button mat-icon-button (click)="handleTicketTimeCostAdd(element)" *ngIf="inEditTicketTimeCostIndex === -1 && !element.isWorkingOn">
+							<mat-icon>add_circle_outline</mat-icon>
 						</button>
 					</div>
 					<div *ngFor="let timeCost of element.timeCosts">
 						<span *ngIf="timeCost.from">{{getDate(timeCost.from)}}</span>
 						<span> ---> </span>
 						<span *ngIf="timeCost.to">{{getDate(timeCost.to)}}</span>
-						<button mat-icon-button (click)="handleTicketCostTimeEdit(element, timeCost)" *ngIf="!element.isWorkingOn">
+						<button mat-icon-button (click)="handleTicketCostTimeEdit(element, timeCost)" *ngIf="inEditTicketTimeCostIndex === -1 && !element.isWorkingOn">
 							<mat-icon>edit</mat-icon>
 						</button>
-						<button mat-icon-button (click)="handleTicketCostTimeDelete(element, timeCost)" *ngIf="!element.isWorkingOn">
+						<button mat-icon-button (click)="handleTicketCostTimeDelete(element, timeCost)" *ngIf="inEditTicketTimeCostIndex === -1 && !element.isWorkingOn">
 							<mat-icon>delete</mat-icon>
 						</button>
 					</div>
 				</div>
-				<div class="example-element-description" *ngIf="isAddNewTicketTimeCost">
+				<div class="example-element-description" *ngIf="inEditTicketTimeCostIndex !== -1">
+					<span *ngIf="inEditTicketTimeCostIndex === 9999">New timeCost:</span>
+					<span *ngIf="inEditTicketTimeCostIndex !== 9999">Edit timeCost in {{inEditTicketTimeCostIndex + 1}}:</span>
 					<div class="ticket-timecost-edit">
 						<span class="title">From (Date):</span>
 						<p></p>
@@ -76,6 +78,14 @@
 						<span class="title">To (Time):</span>
 						<p></p>
 						<input matInput  type="time" [(ngModel)]="newTicketTimeCost.toTime">
+					</div>
+					<div class="ticket-timecost-edit ticket-timecost-save">
+						<button mat-icon-button color="warn" (click)="handleTicketTImeCostSave(true)">
+							<mat-icon>done</mat-icon>
+						</button>
+						<button mat-icon-button (click)="handleTicketTImeCostSave(false)">
+							<mat-icon>cancel</mat-icon>
+						</button>
 					</div>
 				</div>
                 <div class="example-element-description" *ngIf="element.records && element.records.length > 0">

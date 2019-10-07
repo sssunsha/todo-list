@@ -27,7 +27,16 @@ export class TableComponent implements OnInit {
 	columnsToDisplay: Array<string>;
 	expandedElement: Array<any>;
 	bottomSheetRef: MatBottomSheetRef;
-	isAddNewTicketTimeCost: boolean;
+	/**
+	 * used to mark the edit timecost element in ticket timeCost
+	 * @var -1: no edit
+	 * @var 9999: new add
+	 * @var 0 ~ xxx: the index of the timeCost array index in edit
+	 *
+	 * @type {number}
+	 * @memberof TableComponent
+	 */
+	inEditTicketTimeCostIndex: number;
 	newTicketTimeCost: object;
   constructor(
 	private _bottomSheet: MatBottomSheet,
@@ -36,7 +45,7 @@ export class TableComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-	  this.isAddNewTicketTimeCost = false;
+	  this.inEditTicketTimeCostIndex = -1;
 	  this.newTicketTimeCost = {
 		  fromDate: '',
 		  fromTime: '',
@@ -102,24 +111,27 @@ export class TableComponent implements OnInit {
 	  }
   }
 
-  handleWholeTicketTimeCostEdit(ticket: Ticket): void {
-	  if(this.isAddNewTicketTimeCost) {
-		  this.isAddNewTicketTimeCost = false;
-		  console.log(this.newTicketTimeCost);
-	  } else {
-		  this.isAddNewTicketTimeCost = true;
-		  // clear the data for newTicketTimeCost
-		  this.newTicketTimeCost = {
-			fromDate: '',
-			fromTime: '',
-			toDate: '',
-			toTime: '',
-		};
+  handleTicketTimeCostAdd(ticket: Ticket): void {
+	  this.inEditTicketTimeCostIndex = 9999;
+  }
+
+  handleTicketTImeCostSave(isSave: boolean): void {
+	  if(isSave) {
+
 	  }
+
+	  this.inEditTicketTimeCostIndex = -1;
   }
 
   handleTicketCostTimeEdit(ticket:Ticket, cost:ITicketTimeCost): void {
-
+	  let index = 0;
+	  for (const t of ticket.timeCosts) {
+		  if (t.from === cost.from && t.to === cost.to) {
+			  this.inEditTicketTimeCostIndex = index;
+			  return;
+		  }
+		  index++;
+	  }
   }
 
   handleTicketCostTimeDelete(ticket:Ticket, cost:ITicketTimeCost): void {

@@ -71,6 +71,10 @@ tr.example-element-row:not(.example-expanded-row):active {
 		flex-direction: column;
 		justify-content: space-between;
 	}
+
+	.ticket-timecost-save {
+		justify-content: flex-start;
+	}
 }
 
 .example-element-description-attribution {
