@@ -58,14 +58,19 @@ tr.example-element-row:not(.example-expanded-row):active {
 .example-element-description {
     padding: 16px;
     display: flex;
-	flex-direction: column;
 	.title {
 		color: lightblue;
 		font-size: 16px;
 	}
     div {
         padding: 3px 0;
-    }
+	}
+	.ticket-timecost-edit {
+		margin: 0 10px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
 }
 
 .example-element-description-attribution {

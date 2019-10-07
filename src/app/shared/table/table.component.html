@@ -59,22 +59,24 @@
 					</div>
 				</div>
 				<div class="example-element-description" *ngIf="isAddNewTicketTimeCost">
-					<span class="title">From (Date):</span>
-					<p></p>
-					<input type="date" [(ngModel)]="newTicketTimeCost.fromDate">
-					<p></p>
-					<span class="title">From (Time):</span>
-					<p></p>
-					<input type="time" [(ngModel)]="newTicketTimeCost.fromTime">
-				</div>
-				<div class="example-element-description" *ngIf="isAddNewTicketTimeCost">
-					<span class="title">To (Date):</span>
-					<p></p>
-					<input type="date" [(ngModel)]="newTicketTimeCost.toDate">
-					<p></p>
-					<span class="title">To (Time):</span>
-					<p></p>
-					<input type="time" [(ngModel)]="newTicketTimeCost.toTime">
+					<div class="ticket-timecost-edit">
+						<span class="title">From (Date):</span>
+						<p></p>
+						<input matInput type="date" [(ngModel)]="newTicketTimeCost.fromDate">
+						<p></p>
+						<span class="title">From (Time):</span>
+						<p></p>
+						<input matInput type="time" [(ngModel)]="newTicketTimeCost.fromTime">
+					</div>
+					<div class="ticket-timecost-edit">
+						<span class="title">To (Date):</span>
+						<p></p>
+						<input matInput  type="date" [(ngModel)]="newTicketTimeCost.toDate">
+						<p></p>
+						<span class="title">To (Time):</span>
+						<p></p>
+						<input matInput  type="time" [(ngModel)]="newTicketTimeCost.toTime">
+					</div>
 				</div>
                 <div class="example-element-description" *ngIf="element.records && element.records.length > 0">
 					<span class="title">Records:</span>
