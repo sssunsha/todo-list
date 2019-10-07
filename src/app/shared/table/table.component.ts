@@ -118,9 +118,21 @@ export class TableComponent implements OnInit {
 	  }
   }
 
-  handleTicketCostTimeEdit(ticket, ITicketTimeCost): void {
+  handleTicketCostTimeEdit(ticket:Ticket, cost:ITicketTimeCost): void {
 
   }
+
+  handleTicketCostTimeDelete(ticket:Ticket, cost:ITicketTimeCost): void {
+	  let index = 0;
+	  ticket.timeCosts.forEach(tc => {
+		  if (tc.from === cost.from && tc.to === cost.to) {
+			  ticket.timeCosts.splice(index, 1);
+			  this.service.notifyTicketsChanged();
+			  return;
+		  }
+		  index++;
+	  })
+}
 
   getDate(timeStamp: number): string {
 	  const date = new Date(timeStamp);

@@ -53,6 +53,9 @@
 						<button mat-icon-button (click)="handleTicketCostTimeEdit(element, timeCost)" *ngIf="!element.isWorkingOn">
 							<mat-icon>edit</mat-icon>
 						</button>
+						<button mat-icon-button (click)="handleTicketCostTimeDelete(element, timeCost)" *ngIf="!element.isWorkingOn">
+							<mat-icon>delete</mat-icon>
+						</button>
 					</div>
 				</div>
 				<div class="example-element-description" *ngIf="isAddNewTicketTimeCost">
@@ -73,7 +76,7 @@
 					<p></p>
 					<input type="time" [(ngModel)]="newTicketTimeCost.toTime">
 				</div>
-                <div class="example-element-description">
+                <div class="example-element-description" *ngIf="element.records && element.records.length > 0">
 					<span class="title">Records:</span>
                     <div *ngFor="let record of element.records">
 						<span>{{record}}</span>
