@@ -1,0 +1,82 @@
+@import '../../../resource/base.scss';
+table {
+	width: 100%;
+    th {
+        font-size: 16px;
+        font-weight: bold;
+        padding: 0 20px;
+    }
+    .mat-column-ticketType {
+        width: 10px;
+        padding-left: 10px;
+        padding-right: 0;
+    }
+    .mat-column-summary,
+    .mat-column-description {
+        width: 35%;
+    }
+    td {
+		padding: 2px 10px;
+		cursor: pointer;
+    }
+}
+
+tr.example-detail-row {
+    height: 0;
+}
+
+tr.example-element-row:not(.example-expanded-row):hover {
+    background: #777;
+}
+
+tr.example-element-row:not(.example-expanded-row):active {
+    background: #efefef;
+}
+
+.example-element-row td {
+    border-bottom-width: 0;
+}
+
+.example-element-detail {
+    overflow: hidden;
+	display: flex;
+	justify-content: space-between;
+}
+
+.example-element-diagram {
+    border: 2px solid black;
+    padding: 8px;
+    font-weight: lighter;
+    margin: 8px 0;
+    display: flex;
+    flex-direction: column;
+    .expand-text {
+        color: lightblue;
+    }
+}
+
+.example-element-description {
+    padding: 16px;
+    display: flex;
+	.title {
+		color: lightblue;
+		font-size: 16px;
+	}
+    div {
+        padding: 3px 0;
+	}
+	.ticket-timecost-edit {
+		margin: 0 10px;
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+	}
+
+	.ticket-timecost-save {
+		justify-content: flex-start;
+	}
+}
+
+.example-element-description-attribution {
+    opacity: 0.5;
+}

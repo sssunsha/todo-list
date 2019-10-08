@@ -1,0 +1,33 @@
+<table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
+    <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
+        <th mat-header-cell *matHeaderCellDef>
+			<span *ngIf="isDisplayColumnItem(column)">{{column}}</span>
+			<span *ngIf="!isDisplayColumnItem(column)"></span>
+		</th>
+		
+		<td mat-cell *matCellDef="let element" 
+			[ngClass]="{
+						'high': element.priority === 'high',
+						'low': element.priority === 'low',
+						'intermediate': element.priority === 'intermediate'
+					}">
+			<!-- for status -->
+			<mat-icon *ngIf="column === 'status' && generateTicketStatus(element)">done</mat-icon>
+			<mat-icon *ngIf="column === 'status' && !generateTicketStatus(element)">cached</mat-icon>
+			
+			<!-- for effort -->
+			<app-star *ngIf="column === 'effort'" [effort]="element[column]"></app-star>
+			
+			<!-- for progress -->
+			<app-progress *ngIf="column === 'progress'" [progress]="element.progress"></app-progress>
+
+			<!-- for scheduled -->
+			<mat-icon *ngIf="column === 'scheduled' && generateTicketScheduled(element)">done</mat-icon>
+			<mat-icon *ngIf="column === 'scheduled' && !generateTicketScheduled(element)">close</mat-icon>
+			
+			<span *ngIf="isDisplayRowItemText(column)">{{generateTicketDataText(column, element[column]) | titlecase }}</span>			
+        </td>
+	</ng-container>
+	<tr mat-header-row *matHeaderRowDef="columnsToDisplay"></tr>
+    <tr mat-row *matRowDef="let element; columns: columnsToDisplay;" class="example-element-row"></tr>
+</table>

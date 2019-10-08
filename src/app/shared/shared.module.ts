@@ -14,6 +14,7 @@ import { OwlDateTimeModule, OwlNativeDateTimeModule } from 'ng-pick-datetime';
 import { CalendarBoardComponent } from './calendar-board/calendar-board.component';
 import { NgxTuiCalendarModule } from 'ngx-tui-calendar';
 import { BasicDialogComponent } from './basic-dialog/basic-dialog.component';
+import { StatisticsTableComponent } from './statistics-table/statistics-table.component';
 
 @NgModule({
 	imports: [
@@ -36,6 +37,7 @@ import { BasicDialogComponent } from './basic-dialog/basic-dialog.component';
 		RecurrencyDialogComponent,
 		CalendarBoardComponent,
 		BasicDialogComponent,
+		StatisticsTableComponent,
 	],
 	exports: [
 		TableComponent,
@@ -46,6 +48,7 @@ import { BasicDialogComponent } from './basic-dialog/basic-dialog.component';
 		TicketDialogComponent,
 		RecurrencyDialogComponent,
 		CalendarBoardComponent,
+		StatisticsTableComponent,
 	],
 	entryComponents: [
 		BottomSheetComponent,

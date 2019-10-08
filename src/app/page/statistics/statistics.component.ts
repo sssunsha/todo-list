@@ -1,9 +1,9 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Ticket, EPageState } from '../../app.model';
-import { DEFAULTPAGELISTCONFIG } from '../page.config';
 import { Helper } from '../../utils'
 import { AppService } from '../../app.service';
 import { Subscription } from 'rxjs';
+import { STATISTICSPAGELISTCONFIG } from '../page.config';
 
 @Component({
   selector: 'app-statistics',
@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
 })
 export class StatisticsComponent implements OnInit, OnDestroy {
 	ticketList: Array<Ticket>;
-	listConfig: Array<string> = DEFAULTPAGELISTCONFIG;
+	listConfig: Array<string> = STATISTICSPAGELISTCONFIG;
 	ticketsSubscription: Subscription;
 
   constructor(private service: AppService) { }
@@ -26,8 +26,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
 	this.ticketsSubscription.unsubscribe();
 }
 
-loadTickets() {
-	this.ticketList = Helper.filterTicketsForPage(this.service.getTickets(), EPageState.statistics);
-}
-
+	loadTickets() {
+		this.ticketList = this.service.getTickets();
+	}
 }
