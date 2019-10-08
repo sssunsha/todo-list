@@ -1,6 +1,6 @@
 import { Component, OnInit, DoCheck, OnDestroy } from '@angular/core';
 import { Ticket, EPageState } from '../../app.model';
-import { LISTCONFIG } from '../page.config';
+import { DEFAULTPAGELISTCONFIG } from '../page.config';
 import { Helper } from '../../utils'
 import { AppService } from '../../app.service';
 import { Subscription } from 'rxjs';
@@ -12,7 +12,7 @@ import { Subscription } from 'rxjs';
 })
 export class TodayComponent implements OnInit, OnDestroy {
 	ticketList: Array<Ticket>;
-	listConfig: Array<string> = LISTCONFIG;
+	listConfig: Array<string> = DEFAULTPAGELISTCONFIG;
 	ticketsSubscription: Subscription;
 
   constructor(private service: AppService) { }

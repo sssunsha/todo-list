@@ -1,4 +1,4 @@
-export const LISTCONFIG = [
+export const DEFAULTPAGELISTCONFIG = [
 	'ticketType',
 	'summary',
 	'description',
