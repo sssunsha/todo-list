@@ -7,6 +7,7 @@ import { Helper } from './utils';
 import * as FileSaver from 'file-saver';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import { AlarmService } from './alarm.service';
+import { PageEvent } from '@angular/material';
 
 
 
@@ -79,6 +80,16 @@ export class AppService implements OnDestroy{
 
    getTickets(): Array<Ticket> {
 	   return this.tickets;
+   }
+
+   getTicketsWithPagenation(pageEvent: PageEvent): Array<Ticket> {
+	   if(pageEvent) {
+		   console.log(pageEvent);
+		   return this.tickets;
+	   } else {
+		   console.log(pageEvent);
+		   return this.tickets;
+	   }
    }
 
    deleteTicketById(id: string): void {

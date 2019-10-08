@@ -4,6 +4,7 @@ import { Helper } from '../../utils'
 import { AppService } from '../../app.service';
 import { Subscription } from 'rxjs';
 import { STATISTICSPAGELISTCONFIG } from '../page.config';
+import { PageEvent } from '@angular/material';
 
 @Component({
   selector: 'app-statistics',
@@ -14,6 +15,8 @@ export class StatisticsComponent implements OnInit, OnDestroy {
 	ticketList: Array<Ticket>;
 	listConfig: Array<string> = STATISTICSPAGELISTCONFIG;
 	ticketsSubscription: Subscription;
+
+	pageEvent: PageEvent;
 
   constructor(private service: AppService) { }
 
@@ -27,6 +30,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
 }
 
 	loadTickets() {
-		this.ticketList = this.service.getTickets();
+		this.ticketList = this.service.getTicketsWithPagenation(this.pageEvent);
 	}
+
 }
