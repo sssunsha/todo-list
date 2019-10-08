@@ -42,7 +42,7 @@ export class StatisticsTableComponent {
 	}
 
 	generateTicketStatus(ticket: Ticket): boolean {
-		if (ticket.inPages === [EPageState.statistics]) {
+		if (ticket.inPages.length === 1 &&  ticket.inPages[0] === EPageState.statistics) {
 			return true;
 		} else {
 			return false;

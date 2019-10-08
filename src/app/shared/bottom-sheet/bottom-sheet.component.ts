@@ -58,7 +58,7 @@ export class BottomSheetComponent implements OnInit {
   }
 
   handleProgressChanged(): void {
-	  if (this.ticket.progress = ETicktProgress.finished) {
+	  if (this.ticket.progress === ETicktProgress.finished) {
 		if(!this.ticket.timeCosts || this.ticket.timeCosts.length === 0) {
 			const dialogRef = this.dialog.open(BasicDialogComponent, {
 					width: '400px',

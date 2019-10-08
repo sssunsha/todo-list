@@ -247,6 +247,7 @@ export const defaultTicket:Ticket = {
 	inPages: [],
 	isWorkingOn: false,
 	timeCosts: [],
+	progress: ETicktProgress.not_start,
 }
 
 export interface TicketFile {
