@@ -1,10 +1,11 @@
 <app-statistics-table
+	(sorting)= "handleColumnSorting($event)"
 	[dataSource]= "ticketList"
 	[columnsToDisplay]="listConfig">
 </app-statistics-table>
 <mat-paginator
 	[length]="ticketList.length"
-	(page)="pageEvent = $event"
+	(page)="handlePageChanged($event)"
 	[pageSize]="10"
 	[pageSizeOptions]="[10, 50, 100]">
 </mat-paginator>

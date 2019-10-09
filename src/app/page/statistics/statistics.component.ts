@@ -33,4 +33,12 @@ export class StatisticsComponent implements OnInit, OnDestroy {
 		this.ticketList = this.service.getTicketsWithPagenation(this.pageEvent);
 	}
 
+	handlePageChanged(event: PageEvent) {
+		console.log(event);
+	}
+
+	handleColumnSorting(event: string): void {
+		console.log(event);
+	}
+
 }

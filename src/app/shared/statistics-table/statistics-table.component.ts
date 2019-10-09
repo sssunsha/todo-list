@@ -1,10 +1,11 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { TableComponent } from '../table/table.component';
 import { MatBottomSheet } from '@angular/material/bottom-sheet';
 import { AppService } from '../../app.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Ticket, EPageState, ITicketTimeCost } from '../../app.model';
 import { Helper } from '../../utils';
+
 
 @Component({
   selector: 'app-statistics-table',
@@ -16,6 +17,8 @@ export class StatisticsTableComponent {
 	dataSource: Array<any>;
 	@Input()
 	columnsToDisplay: Array<string>;
+	@Output() 
+	sorting: EventEmitter<string>  = new EventEmitter<string>();
 
 
   constructor(
@@ -73,6 +76,10 @@ export class StatisticsTableComponent {
 		}
 
 		return Helper.timeCostFormat(totalTimeCost);
+	}
+
+	onSortingClicked(column: string) {
+		this.sorting.emit(column);
 	}
 	
 

@@ -1,7 +1,7 @@
 <table mat-table [dataSource]="dataSource" multiTemplateDataRows class="mat-elevation-z8">
     <ng-container matColumnDef="{{column}}" *ngFor="let column of columnsToDisplay">
         <th mat-header-cell *matHeaderCellDef>
-			<span *ngIf="isDisplayColumnItem(column)">{{column}}</span>
+			<span *ngIf="isDisplayColumnItem(column)" (click)="onSortingClicked(column)">{{column}}</span>
 			<span *ngIf="!isDisplayColumnItem(column)"></span>
 		</th>
 		
