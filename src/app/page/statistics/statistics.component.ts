@@ -15,9 +15,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
 	ticketList: Array<Ticket>;
 	listConfig: Array<string> = STATISTICSPAGELISTCONFIG;
 	ticketsSubscription: Subscription;
-
 	pageEvent: PageEvent;
-
   constructor(private service: AppService) { }
 
   ngOnInit() {
@@ -34,11 +32,11 @@ export class StatisticsComponent implements OnInit, OnDestroy {
 	}
 
 	handlePageChanged(event: PageEvent) {
-		console.log(event);
+		this.pageEvent = event;
+		this.loadTickets();
 	}
 
 	handleColumnSorting(event: string): void {
-		console.log(event);
 	}
 
 }

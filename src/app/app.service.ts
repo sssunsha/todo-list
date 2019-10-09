@@ -82,12 +82,14 @@ export class AppService implements OnDestroy{
 	   return this.tickets;
    }
 
+   getTicketsCount(): number {
+	   return this.tickets.length;
+   }
+
    getTicketsWithPagenation(pageEvent: PageEvent): Array<Ticket> {
 	   if(pageEvent) {
-		   console.log(pageEvent);
-		   return this.tickets;
+		   return this.tickets.slice(pageEvent.pageIndex*pageEvent.pageSize, pageEvent.pageIndex*pageEvent.pageSize+pageEvent.pageSize);
 	   } else {
-		   console.log(pageEvent);
 		   return this.tickets;
 	   }
    }

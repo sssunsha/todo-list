@@ -4,7 +4,7 @@
 	[columnsToDisplay]="listConfig">
 </app-statistics-table>
 <mat-paginator
-	[length]="ticketList.length"
+	[length]="service.getTicketsCount()"
 	(page)="handlePageChanged($event)"
 	[pageSize]="10"
 	[pageSizeOptions]="[10, 50, 100]">
