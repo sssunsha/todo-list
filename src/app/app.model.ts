@@ -248,7 +248,8 @@ export const defaultTicket:Ticket = {
 	isWorkingOn: false,
 	timeCosts: [],
 	progress: ETicktProgress.not_start,
-}
+	category: ETicketCategory.work,
+};
 
 export interface TicketFile {
 	version: number;

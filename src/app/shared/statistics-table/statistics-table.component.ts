@@ -64,7 +64,12 @@ export class StatisticsTableComponent {
 		switch(column) {
 			case 'timeCosts':
 				return this.calculateTicketTotalTimeCost(data as Array<ITicketTimeCost>);
+			case 'id':
+				return data.toString().slice(0, 6);
 			default:
+				if (data === undefined) {
+					return '';
+				}
 				return data.toString();
 		}
 	}

@@ -44,6 +44,9 @@ export class AppService implements OnDestroy{
   isNeedToClose = false;
   syncSubject: Subject<any> = new Subject<any>();
 
+  // for sorting
+  sortingColumnItems: Array<string> = [];
+
   constructor(
 	  private _snackBar: MatSnackBar,
 	  private alarmService: AlarmService) {
@@ -86,7 +89,26 @@ export class AppService implements OnDestroy{
 	   return this.tickets.length;
    }
 
-   getTicketsWithPagenation(pageEvent: PageEvent): Array<Ticket> {
+   getTicketsWithPagenation(pageEvent: PageEvent, sortingItem: string): Array<Ticket> {
+	   // for sorting
+	   if (sortingItem) {
+		   let isSortingASC = true;
+		   if(this.sortingColumnItems.includes(sortingItem)) {
+			   isSortingASC = false;
+			   this.sortingColumnItems.splice(this.sortingColumnItems.indexOf(sortingItem), 1);
+			} else {
+				this.sortingColumnItems.push(sortingItem);
+				isSortingASC = true;
+			}
+			this.tickets = this.tickets.sort((t1, t2) => {
+				if(this.generateColumnSortingData(t1, sortingItem) > this.generateColumnSortingData(t2, sortingItem)) {
+					return isSortingASC ? 1 : -1;
+				} else {
+					return isSortingASC ? -1 : 1;
+				}
+			});
+		}
+
 	   if(pageEvent) {
 		   return this.tickets.slice(pageEvent.pageIndex*pageEvent.pageSize, pageEvent.pageIndex*pageEvent.pageSize+pageEvent.pageSize);
 	   } else {
@@ -325,5 +347,42 @@ export class AppService implements OnDestroy{
 				return;
 			}
 		})
+	}
+
+// ticket sorting relative  functions
+	private generateColumnSortingData(t: Ticket, event: string): string | number {
+		switch(event) {
+			case 'scheduled':
+				return this.ticketTicketAlarmSorting(t.alarm);
+			case 'inPages':
+				return this.ticketInPagesSorting(t.inPages);
+			case 'timeCosts':
+				return this.ticketTimeCostSorting(t.timeCosts);
+			default:
+				return t[event];
+		}
+	}
+
+
+	private ticketInPagesSorting(inPages: Array<EPageState>): string {
+		return inPages.sort((p1, p2) => p1 <= p2 ? -1 : 1).toString();
+	}
+
+	private ticketTimeCostSorting(timeCosts: Array<ITicketTimeCost>): number {
+		let timeCostTotal = 0;
+		if (timeCosts && timeCosts.length > 0) {
+			for (const tc of timeCosts) {
+				timeCostTotal += tc.to - tc.from;
+			}
+		}
+		return timeCostTotal;
+	}
+
+	private ticketTicketAlarmSorting(alarm: ITicketRecurrency): number {
+		let at = 32503680000000; // 3000-01-01
+		if (alarm && alarm.at) {
+			at = alarm.at.getTime();
+		}
+		return at;
 	}
 }

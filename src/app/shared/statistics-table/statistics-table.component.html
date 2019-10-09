@@ -22,7 +22,7 @@
 			<app-progress *ngIf="column === 'progress'" [progress]="element.progress"></app-progress>
 
 			<!-- for scheduled -->
-			<mat-icon *ngIf="column === 'scheduled' && generateTicketScheduled(element)">done</mat-icon>
+			<span *ngIf="column === 'scheduled' && generateTicketScheduled(element)">{{element.alarm.at.toLocaleString()}}</span>
 			<mat-icon *ngIf="column === 'scheduled' && !generateTicketScheduled(element)">close</mat-icon>
 			
 			<span *ngIf="isDisplayRowItemText(column)">{{generateTicketDataText(column, element[column]) | titlecase }}</span>			
