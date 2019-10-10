@@ -38,6 +38,19 @@ export const PAGELIST = [
 	EPageState.work,
 	EPageState.life,
 	EPageState.others,
+	EPageState.statistics,
+]
+
+export const TICKETINPAGESELECTCONFIG: Array<ISelectConfig> = [
+	{label: 'inbox', value: EPageState.inbox},
+	{label: 'today', value: EPageState.today},
+	{label: 'week', value: EPageState.this_week},
+	{label: 'month', value: EPageState.this_month},
+	{label: 'future', value: EPageState.future},
+	{label: 'work', value: EPageState.work},
+	{label: 'life', value: EPageState.life},
+	{label: 'others', value: EPageState.others},
+	{label: 'statistics', value: EPageState.statistics},
 ]
 
 export interface ISelectConfig {
@@ -159,6 +172,13 @@ export class Ticket {
 		this.isWorkingOn = data.isWorkingOn;
 		this.category = data.category;
 	}
+}
+
+export interface ITicketFilter {
+	priority?: EPriority | 'ALL';
+	category?: ETicketCategory | 'ALL';
+	ticketType?: ETicketType | 'ALL';
+	inPage?: EPageState | 'ALL';
 }
 
 export enum ETicketRecurrencyType {
@@ -312,4 +332,9 @@ export interface Schedule {
 	  fromTime: string;
 	  toDate: string;
 	  toTime: string;
+  }
+
+  export interface ITicketsWithPagenationResponse {
+	  tickets: Array<Ticket>;
+	  length: number;
   }

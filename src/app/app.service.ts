@@ -1,5 +1,5 @@
 import { Injectable, OnDestroy } from '@angular/core';
-import { EPageState, Ticket, TicketFile, ITicketRecurrency, ETicketType, ITicketTimeCost } from './app.model';
+import { EPageState, Ticket, TicketFile, ITicketRecurrency, ETicketType, ITicketTimeCost, ITicketFilter, ITicketsWithPagenationResponse } from './app.model';
 import * as COS from 'cos-js-sdk-v5';
 import { cosConfig, appConfig } from './shared/app.config';
 import { Observable, Subject, Subscription } from 'rxjs';
@@ -89,7 +89,24 @@ export class AppService implements OnDestroy{
 	   return this.tickets.length;
    }
 
-   getTicketsWithPagenation(pageEvent: PageEvent, sortingItem: string): Array<Ticket> {
+   getTicketsWithPagenation(pageEvent: PageEvent, ticketFilter:ITicketFilter, sortingItem: string): ITicketsWithPagenationResponse {
+	   // for filter
+	   let ticketList = this.tickets.filter(t => {
+		   let filterResult = true;
+		   if( ticketFilter && ticketFilter.category &&  ticketFilter.category !== t.category) {
+			   filterResult =false;
+		   }
+		   if( ticketFilter && ticketFilter.ticketType &&  ticketFilter.ticketType !== t.ticketType) {
+				filterResult =false;
+			}
+			if( ticketFilter && ticketFilter.priority &&  ticketFilter.priority !== t.priority) {
+				filterResult =false;
+			}
+			if( ticketFilter && ticketFilter.inPage &&  !t.inPages.includes(ticketFilter.inPage)) {
+				filterResult =false;
+			}
+			return filterResult;
+	   });
 	   // for sorting
 	   if (sortingItem) {
 		   let isSortingASC = true;
@@ -100,7 +117,7 @@ export class AppService implements OnDestroy{
 				this.sortingColumnItems.push(sortingItem);
 				isSortingASC = true;
 			}
-			this.tickets = this.tickets.sort((t1, t2) => {
+			ticketList = ticketList.sort((t1, t2) => {
 				if(this.generateColumnSortingData(t1, sortingItem) > this.generateColumnSortingData(t2, sortingItem)) {
 					return isSortingASC ? 1 : -1;
 				} else {
@@ -110,9 +127,15 @@ export class AppService implements OnDestroy{
 		}
 
 	   if(pageEvent) {
-		   return this.tickets.slice(pageEvent.pageIndex*pageEvent.pageSize, pageEvent.pageIndex*pageEvent.pageSize+pageEvent.pageSize);
+		   return {
+			   tickets: ticketList.slice(pageEvent.pageIndex*pageEvent.pageSize, pageEvent.pageIndex*pageEvent.pageSize+pageEvent.pageSize),
+			   length: ticketList.length,
+		   };
 	   } else {
-		   return this.tickets;
+		   return {
+			   tickets: ticketList,
+			   length: ticketList.length,  
+		   };
 	   }
    }
 

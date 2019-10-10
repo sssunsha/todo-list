@@ -1,10 +1,57 @@
+<div class="statistics-header">
+	<!-- filter for ticket type -->
+	<div>
+		<mat-form-field>
+			<mat-label>Type</mat-label>
+			<mat-select [(ngModel)]="ticketFilter.ticketType" (selectionChange)="handelFilterChanged()">
+				<mat-option *ngFor="let item of _TICKETTYPESELECTCONFIG" [value]="item.value">
+				{{item.label}}
+				</mat-option>
+			</mat-select>
+		</mat-form-field>
+	</div>
+	<!-- filter for ticket category -->
+	<div>
+		<mat-form-field>
+			<mat-label>Category</mat-label>
+			<mat-select [(ngModel)]="ticketFilter.category" (selectionChange)="handelFilterChanged()">
+				<mat-option *ngFor="let item of _TICKETCATEGORYSELECTCONFIG" [value]="item.value">
+				{{item.label}}
+				</mat-option>
+			</mat-select>
+		</mat-form-field>
+	</div>
+	<!-- filter for ticket priority -->
+	<div>
+		<mat-form-field>
+			<mat-label>Priority</mat-label>
+			<mat-select [(ngModel)]="ticketFilter.priority" (selectionChange)="handelFilterChanged()">
+				<mat-option *ngFor="let item of _TICKETPRIORITYSELECTCONFIG" [value]="item.value">
+				{{item.label}}
+				</mat-option>
+			</mat-select>
+		</mat-form-field>
+	</div>
+	<!-- filter for ticket inPages -->
+	<div>
+		<mat-form-field>
+			<mat-label>InPages</mat-label>
+			<mat-select [(ngModel)]="ticketFilter.inPage" (selectionChange)="handelFilterChanged()">
+				<mat-option *ngFor="let item of _TICKETINPAGESELECTCONFIG" [value]="item.value">
+				{{item.label}}
+				</mat-option>
+			</mat-select>
+		</mat-form-field>
+	</div>
+	<!-- filter with date -->
+</div>
 <app-statistics-table
 	(sorting)= "handleColumnSorting($event)"
 	[dataSource]= "ticketList"
 	[columnsToDisplay]="listConfig">
 </app-statistics-table>
 <mat-paginator
-	[length]="service.getTicketsCount()"
+	[length]="ticketListLength"
 	(page)="handlePageChanged($event)"
 	[pageSize]="10"
 	[pageSizeOptions]="[10, 50, 100]">
